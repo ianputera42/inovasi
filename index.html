@@ -37,7 +37,7 @@
         <header class="gradient-bg text-white py-6">
             <div class="max-w-7xl mx-auto px-4">
                 <h1 class="text-3xl font-bold text-center">📚 Dashboard Pembuat Modul Ajar</h1>
-                <p class="text-center mt-2 text-blue-100">Buat modul ajar berkualitas dengan bantuan AI</p>
+                <p class="text-center mt-2 text-blue-100">Buat modul ajar berkualitas dengan bantuan AI sesuai kurikulum Deep Learning</p>
             </div>
         </header>
 
@@ -47,7 +47,7 @@
                 <div class="bg-white rounded-xl card-shadow p-6">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
                         <span class="bg-blue-100 p-2 rounded-lg mr-3">📝</span>
-                        Data Identifikasi
+                        Data Identifikasi Modul Ajar
                     </h2>
                     
                     <form id="modulForm" class="space-y-4">
@@ -174,11 +174,21 @@
                                 <option value="Flipped Classroom">Flipped Classroom</option>
                                 <option value="STEAM">STEAM</option>
                                 <option value="Differentiated Instruction">Differentiated Instruction</option>
+                                <option value="Think Pair Share">Think Pair Share</option>
+                                <option value="Jigsaw">Jigsaw</option>
+                                <option value="Mind Mapping">Mind Mapping</option>
+                                <option value="Role Playing">Role Playing</option>
+                                <option value="Demonstrasi">Demonstrasi</option>
+                                <option value="Ceramah Interaktif">Ceramah Interaktif</option>
+                                <option value="Diskusi Kelompok">Diskusi Kelompok</option>
+                                <option value="Simulasi">Simulasi</option>
+                                <option value="Studi Kasus">Studi Kasus</option>
+                                <option value="Pembelajaran Berbasis Game">Pembelajaran Berbasis Game</option>
                             </select>
                         </div>
 
                         <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition duration-300 flex items-center justify-center">
-                            <span id="btnText">🚀 Buat Modul Ajar</span>
+                            <span id="btnText">🚀 Buat Modul Ajar dengan ChatGPT</span>
                             <div id="loadingSpinner" class="hidden ml-2 w-5 h-5 border-2 border-white border-t-transparent rounded-full loading"></div>
                         </button>
                     </form>
@@ -188,14 +198,14 @@
                 <div class="bg-white rounded-xl card-shadow p-6">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
                         <span class="bg-green-100 p-2 rounded-lg mr-3">📋</span>
-                        Hasil Modul Ajar
+                        Hasil Modul Ajar dari ChatGPT
                     </h2>
                     
                     <div id="outputArea" class="min-h-96">
                         <div class="text-center text-gray-500 py-12">
-                            <div class="text-6xl mb-4">📚</div>
-                            <p class="text-lg">Isi form di sebelah kiri untuk mulai membuat modul ajar</p>
-                            <p class="text-sm mt-2">AI akan membantu Anda membuat modul pembelajaran yang lengkap dan berkualitas</p>
+                            <div class="text-6xl mb-4">🤖</div>
+                            <p class="text-lg">Isi semua data di sebelah kiri untuk mulai membuat modul ajar</p>
+                            <p class="text-sm mt-2">ChatGPT akan membantu Anda membuat modul pembelajaran lengkap sesuai kurikulum Deep Learning</p>
                         </div>
                     </div>
                 </div>
@@ -217,7 +227,6 @@
                 kelas: document.getElementById('kelas').value,
                 topik: document.getElementById('topik').value,
                 alokasi: document.getElementById('alokasi').value,
-
                 sarana: document.getElementById('sarana').value,
                 capaian: document.getElementById('capaian').value,
                 tujuan: document.getElementById('tujuan').value,
@@ -230,52 +239,94 @@
             const dimensiChecked = Array.from(document.querySelectorAll('input[name="dimensi"]:checked'))
                 .map(cb => cb.nextElementSibling.textContent);
 
-            // Validasi form
-            if (!formData.topik || !formData.capaian || !formData.tujuan) {
-                alert('Mohon isi minimal Topik, Capaian Pembelajaran, dan Tujuan Pembelajaran');
+            // Validasi form - pastikan field penting terisi
+            if (!formData.topik || !formData.capaian || !formData.tujuan || !formData.model) {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                modal.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg max-w-md mx-4">
+                        <h3 class="text-lg font-bold text-red-600 mb-3">⚠️ Data Belum Lengkap</h3>
+                        <p class="text-gray-700 mb-4">Mohon isi minimal field berikut:</p>
+                        <ul class="list-disc list-inside text-sm text-gray-600 mb-4">
+                            <li>Topik/Elemen</li>
+                            <li>Capaian Pembelajaran</li>
+                            <li>Tujuan Pembelajaran</li>
+                            <li>Model Pembelajaran</li>
+                        </ul>
+                        <button onclick="this.parentElement.parentElement.remove()" class="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700">
+                            Tutup
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
                 return;
             }
 
             // Tampilkan loading
             showLoading();
 
-            // Simulasi proses AI (dalam implementasi nyata, ini akan memanggil API ChatGPT)
+            // Simulasi proses ChatGPT (dalam implementasi nyata, ini akan memanggil API ChatGPT)
             setTimeout(() => {
                 generateModulAjar(formData, dimensiChecked);
                 hideLoading();
-            }, 3000);
+            }, 4000);
         });
 
         function showLoading() {
-            document.getElementById('btnText').textContent = 'Sedang Membuat...';
+            document.getElementById('btnText').textContent = 'ChatGPT Sedang Bekerja...';
             document.getElementById('loadingSpinner').classList.remove('hidden');
             
             const outputArea = document.getElementById('outputArea');
             outputArea.innerHTML = `
                 <div class="text-center py-12">
                     <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full loading mx-auto mb-4"></div>
-                    <p class="text-lg text-gray-600">AI sedang menganalisis data Anda...</p>
-                    <p class="text-sm text-gray-500 mt-2">Mohon tunggu sebentar</p>
+                    <p class="text-lg text-gray-600">🤖 ChatGPT sedang menganalisis data Anda...</p>
+                    <p class="text-sm text-gray-500 mt-2">Membuat modul ajar sesuai kurikulum Deep Learning</p>
+                    <div class="mt-4 text-xs text-gray-400">
+                        <p>• Menganalisis capaian pembelajaran</p>
+                        <p>• Merancang strategi pembelajaran</p>
+                        <p>• Menyusun asesmen yang tepat</p>
+                    </div>
                 </div>
             `;
         }
 
         function hideLoading() {
-            document.getElementById('btnText').textContent = '🚀 Buat Modul Ajar';
+            document.getElementById('btnText').textContent = '🚀 Buat Modul Ajar dengan ChatGPT';
             document.getElementById('loadingSpinner').classList.add('hidden');
         }
 
         function generateModulAjar(data, dimensi) {
             const outputArea = document.getElementById('outputArea');
             
+            // Buat prompt yang akan dikirim ke ChatGPT
+            const chatGPTPrompt = `Buatkan modul ajar lengkap dengan data berikut:
+- Topik: ${data.topik}
+- Mata Pelajaran: ${data.mapel}
+- Kelas: ${data.kelas}
+- Capaian Pembelajaran: ${data.capaian}
+- Tujuan Pembelajaran: ${data.tujuan}
+- Model Pembelajaran: ${data.model}
+- Dimensi Profil Lulusan: ${dimensi.join(', ')}
+- Alokasi Waktu: ${data.alokasi}
+- Sumber Belajar: ${data.sumber}
+
+Buatkan modul ajar yang mencakup:
+1. Pertanyaan pemantik yang kontekstual
+2. Langkah pembelajaran detail (pendahuluan, inti, penutup) sesuai kurikulum Deep Learning
+3. Asesmen diagnostik, formatif, dan sumatif
+4. Refleksi pembelajaran
+5. Diferensiasi pembelajaran
+6. Remedial dan pengayaan
+
+Format dalam bentuk modul ajar yang siap pakai untuk guru.`;
+
             const modulContent = `
                 <div class="fade-in space-y-6">
                     <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                        <h3 class="font-bold text-blue-800 mb-2">📝 Prompt yang Dikirim ke ChatGPT:</h3>
-                        <div class="text-sm text-blue-700 bg-white p-3 rounded border">
-                            "Berdasarkan data berikut: Topik: ${data.topik}, Capaian Pembelajaran: ${data.capaian}, Tujuan Pembelajaran: ${data.tujuan}, Model: ${data.model}. 
-                            
-                            Buatkan: 1) Pertanyaan pemantik yang kontekstual, 2) Strategi pembelajaran (RPP) dengan kegiatan awal, inti, dan penutup sesuai deep learning, 3) Asesmen diagnostik, formatif, dan sumatif, 4) Satukan menjadi modul ajar lengkap yang siap pakai."
+                        <h3 class="font-bold text-blue-800 mb-2">🤖 Prompt yang Dikirim ke ChatGPT:</h3>
+                        <div class="text-sm text-blue-700 bg-white p-3 rounded border max-h-32 overflow-y-auto">
+                            "${chatGPTPrompt}"
                         </div>
                     </div>
 
@@ -285,54 +336,86 @@
                             MODUL AJAR - ${data.topik.toUpperCase()}
                         </h3>
                         
-                        <div class="grid md:grid-cols-2 gap-4 mb-6 text-sm">
-                            <div><strong>Penyusun:</strong> ${data.penyusun}</div>
-                            <div><strong>Satuan Pendidikan:</strong> ${data.satuan}</div>
+                        <div class="grid md:grid-cols-2 gap-4 mb-6 text-sm bg-white p-4 rounded">
+                            <div><strong>Penyusun:</strong> ${data.penyusun || 'Tidak diisi'}</div>
+                            <div><strong>Satuan Pendidikan:</strong> ${data.satuan || 'Tidak diisi'}</div>
                             <div><strong>Mata Pelajaran:</strong> ${data.mapel}</div>
                             <div><strong>Kelas/Fase:</strong> ${data.kelas}</div>
                             <div><strong>Alokasi Waktu:</strong> ${data.alokasi}</div>
+                            <div><strong>Model Pembelajaran:</strong> ${data.model}</div>
                         </div>
                     </div>
 
                     <div class="bg-yellow-50 p-4 rounded-lg">
                         <h4 class="font-bold text-yellow-800 mb-3">🤔 Pertanyaan Pemantik</h4>
-                        <ul class="list-disc list-inside text-yellow-700 space-y-1">
-                            <li>Pernahkah kalian melihat bentuk parabola dalam kehidupan sehari-hari?</li>
-                            <li>Mengapa lintasan bola yang dilempar membentuk kurva tertentu?</li>
-                            <li>Bagaimana cara menentukan titik tertinggi dari lintasan tersebut?</li>
-                        </ul>
+                        <div class="bg-white p-3 rounded">
+                            <ul class="list-disc list-inside text-yellow-700 space-y-2">
+                                <li>Apa yang kalian ketahui tentang ${data.topik.toLowerCase()} dalam kehidupan sehari-hari?</li>
+                                <li>Bagaimana ${data.topik.toLowerCase()} dapat membantu menyelesaikan masalah nyata?</li>
+                                <li>Mengapa penting bagi kita untuk memahami konsep ${data.topik.toLowerCase()}?</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="bg-purple-50 p-4 rounded-lg">
-                        <h4 class="font-bold text-purple-800 mb-3">📚 Strategi Pembelajaran (RPP)</h4>
+                        <h4 class="font-bold text-purple-800 mb-3">📚 Langkah Pembelajaran (Deep Learning)</h4>
                         
                         <div class="space-y-4">
-                            <div class="bg-white p-3 rounded border-l-4 border-green-500">
-                                <h5 class="font-semibold text-green-700">Kegiatan Awal (15 menit)</h5>
-                                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                                    <li>Apersepsi dengan menunjukkan video lintasan bola basket</li>
-                                    <li>Menyampaikan tujuan pembelajaran</li>
-                                    <li>Motivasi dengan mengaitkan materi dengan kehidupan nyata</li>
+                            <div class="bg-white p-4 rounded border-l-4 border-green-500">
+                                <h5 class="font-semibold text-green-700 mb-2">🚀 Kegiatan Pendahuluan (15 menit)</h5>
+                                <ul class="list-disc list-inside text-sm space-y-1">
+                                    <li>Apersepsi: Mengaitkan materi dengan pengalaman siswa</li>
+                                    <li>Menyampaikan tujuan pembelajaran dan manfaatnya</li>
+                                    <li>Motivasi melalui pertanyaan pemantik</li>
+                                    <li>Asesmen diagnostik singkat untuk mengukur pengetahuan awal</li>
                                 </ul>
                             </div>
                             
-                            <div class="bg-white p-3 rounded border-l-4 border-blue-500">
-                                <h5 class="font-semibold text-blue-700">Kegiatan Inti (60 menit)</h5>
-                                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                                    <li><strong>Mengamati:</strong> Siswa mengamati berbagai bentuk parabola</li>
-                                    <li><strong>Menanya:</strong> Siswa merumuskan pertanyaan tentang fungsi kuadrat</li>
-                                    <li><strong>Mengumpulkan informasi:</strong> Diskusi kelompok tentang karakteristik fungsi kuadrat</li>
-                                    <li><strong>Mengasosiasi:</strong> Menganalisis hubungan koefisien dengan bentuk grafik</li>
-                                    <li><strong>Mengkomunikasikan:</strong> Presentasi hasil diskusi kelompok</li>
-                                </ul>
+                            <div class="bg-white p-4 rounded border-l-4 border-blue-500">
+                                <h5 class="font-semibold text-blue-700 mb-2">🎯 Kegiatan Inti (60 menit) - ${data.model}</h5>
+                                <div class="space-y-3">
+                                    <div class="pl-4">
+                                        <h6 class="font-medium text-blue-600">Fase 1: Orientasi Masalah (15 menit)</h6>
+                                        <ul class="list-disc list-inside text-sm mt-1">
+                                            <li>Siswa mengamati fenomena/masalah terkait ${data.topik}</li>
+                                            <li>Identifikasi masalah yang akan dipecahkan</li>
+                                            <li>Pembentukan kelompok heterogen (4-5 siswa)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pl-4">
+                                        <h6 class="font-medium text-blue-600">Fase 2: Mengorganisasi Siswa (15 menit)</h6>
+                                        <ul class="list-disc list-inside text-sm mt-1">
+                                            <li>Siswa merumuskan hipotesis atau dugaan sementara</li>
+                                            <li>Pembagian tugas dalam kelompok</li>
+                                            <li>Menentukan strategi pemecahan masalah</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pl-4">
+                                        <h6 class="font-medium text-blue-600">Fase 3: Investigasi (20 menit)</h6>
+                                        <ul class="list-disc list-inside text-sm mt-1">
+                                            <li>Siswa mengumpulkan informasi dari berbagai sumber</li>
+                                            <li>Melakukan eksperimen atau analisis data</li>
+                                            <li>Guru membimbing dan memfasilitasi proses investigasi</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pl-4">
+                                        <h6 class="font-medium text-blue-600">Fase 4: Presentasi Hasil (10 menit)</h6>
+                                        <ul class="list-disc list-inside text-sm mt-1">
+                                            <li>Setiap kelompok mempresentasikan hasil investigasi</li>
+                                            <li>Diskusi dan tanya jawab antar kelompok</li>
+                                            <li>Guru memberikan umpan balik konstruktif</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             
-                            <div class="bg-white p-3 rounded border-l-4 border-red-500">
-                                <h5 class="font-semibold text-red-700">Kegiatan Penutup (15 menit)</h5>
-                                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                                    <li>Refleksi pembelajaran bersama siswa</li>
-                                    <li>Menyimpulkan materi yang telah dipelajari</li>
-                                    <li>Memberikan tugas untuk pertemuan berikutnya</li>
+                            <div class="bg-white p-4 rounded border-l-4 border-red-500">
+                                <h5 class="font-semibold text-red-700 mb-2">🎯 Kegiatan Penutup (15 menit)</h5>
+                                <ul class="list-disc list-inside text-sm space-y-1">
+                                    <li>Refleksi pembelajaran: Apa yang telah dipelajari?</li>
+                                    <li>Kesimpulan bersama tentang konsep ${data.topik}</li>
+                                    <li>Asesmen formatif untuk mengukur pemahaman</li>
+                                    <li>Preview materi pertemuan berikutnya</li>
                                 </ul>
                             </div>
                         </div>
@@ -342,19 +425,55 @@
                         <h4 class="font-bold text-orange-800 mb-3">📊 Asesmen Pembelajaran</h4>
                         
                         <div class="grid md:grid-cols-3 gap-4">
-                            <div class="bg-white p-3 rounded">
-                                <h5 class="font-semibold text-orange-700 mb-2">Diagnostik</h5>
-                                <p class="text-sm">Pre-test untuk mengukur pengetahuan awal siswa tentang fungsi linear dan aljabar dasar</p>
+                            <div class="bg-white p-4 rounded">
+                                <h5 class="font-semibold text-orange-700 mb-2">🔍 Diagnostik</h5>
+                                <p class="text-sm mb-2">Mengukur pengetahuan awal siswa:</p>
+                                <ul class="text-xs list-disc list-inside">
+                                    <li>Pre-test konsep dasar</li>
+                                    <li>Mind mapping awal</li>
+                                    <li>Kuis singkat 5 soal</li>
+                                </ul>
                             </div>
                             
-                            <div class="bg-white p-3 rounded">
-                                <h5 class="font-semibold text-orange-700 mb-2">Formatif</h5>
-                                <p class="text-sm">Observasi selama diskusi kelompok, kuis singkat, dan tanya jawab interaktif</p>
+                            <div class="bg-white p-4 rounded">
+                                <h5 class="font-semibold text-orange-700 mb-2">📈 Formatif</h5>
+                                <p class="text-sm mb-2">Selama proses pembelajaran:</p>
+                                <ul class="text-xs list-disc list-inside">
+                                    <li>Observasi aktivitas kelompok</li>
+                                    <li>Tanya jawab interaktif</li>
+                                    <li>Exit ticket</li>
+                                    <li>Peer assessment</li>
+                                </ul>
                             </div>
                             
+                            <div class="bg-white p-4 rounded">
+                                <h5 class="font-semibold text-orange-700 mb-2">📋 Sumatif</h5>
+                                <p class="text-sm mb-2">Evaluasi akhir pembelajaran:</p>
+                                <ul class="text-xs list-disc list-inside">
+                                    <li>Tes tertulis (70%)</li>
+                                    <li>Proyek kelompok (20%)</li>
+                                    <li>Presentasi (10%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-indigo-800 mb-3">🎨 Diferensiasi Pembelajaran</h4>
+                        <div class="grid md:grid-cols-2 gap-4">
                             <div class="bg-white p-3 rounded">
-                                <h5 class="font-semibold text-orange-700 mb-2">Sumatif</h5>
-                                <p class="text-sm">Tes tertulis dan proyek membuat model parabola dari benda-benda di sekitar</p>
+                                <h5 class="font-semibold text-indigo-700 mb-2">Konten</h5>
+                                <ul class="text-sm list-disc list-inside">
+                                    <li>Materi dengan tingkat kompleksitas berbeda</li>
+                                    <li>Sumber belajar beragam (visual, audio, kinestetik)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-3 rounded">
+                                <h5 class="font-semibold text-indigo-700 mb-2">Proses</h5>
+                                <ul class="text-sm list-disc list-inside">
+                                    <li>Kelompok heterogen dan homogen</li>
+                                    <li>Scaffolding sesuai kebutuhan siswa</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -362,22 +481,26 @@
                     <div class="bg-gray-50 p-4 rounded-lg">
                         <h4 class="font-bold text-gray-800 mb-3">📋 Informasi Tambahan</h4>
                         <div class="grid md:grid-cols-2 gap-4 text-sm">
-                            <div>
+                            <div class="bg-white p-3 rounded">
                                 <strong>Dimensi Profil Lulusan:</strong>
                                 <ul class="list-disc list-inside mt-1">
-                                    ${dimensi.map(d => `<li>${d}</li>`).join('')}
+                                    ${dimensi.length > 0 ? dimensi.map(d => `<li>${d}</li>`).join('') : '<li>Tidak ada yang dipilih</li>'}
                                 </ul>
                             </div>
-                            <div>
-                                <strong>Model Pembelajaran:</strong> ${data.model}<br>
-                                <strong>Sumber Belajar:</strong> ${data.sumber}
+                            <div class="bg-white p-3 rounded">
+                                <strong>Lintas Bidang:</strong> ${data.lintas || 'Tidak diisi'}<br>
+                                <strong>Sarana:</strong> ${data.sarana || 'Tidak diisi'}<br>
+                                <strong>Sumber Belajar:</strong> ${data.sumber || 'Tidak diisi'}
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-green-100 p-4 rounded-lg text-center">
-                        <p class="text-green-800 font-semibold">✅ Modul Ajar Berhasil Dibuat!</p>
-                        <p class="text-green-700 text-sm mt-1">Modul ini siap digunakan untuk pembelajaran di kelas</p>
+                        <p class="text-green-800 font-semibold">✅ Modul Ajar Berhasil Dibuat oleh ChatGPT!</p>
+                        <p class="text-green-700 text-sm mt-1">Modul ini siap digunakan untuk pembelajaran sesuai kurikulum Deep Learning</p>
+                        <div class="mt-3 text-xs text-green-600">
+                            <p>💡 Tip: Sesuaikan dengan karakteristik siswa dan kondisi sekolah Anda</p>
+                        </div>
                     </div>
                 </div>
             `;
@@ -385,5 +508,5 @@
             outputArea.innerHTML = modulContent;
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ff3510452ca3ee',t:'MTc2MDY5NzkzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ff62fab3fefe11',t:'MTc2MDY5OTgxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
