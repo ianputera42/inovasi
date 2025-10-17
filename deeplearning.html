@@ -191,7 +191,7 @@
                                 <label for="pendekatan" class="block text-sm font-medium text-gray-700 mb-2">Pendekatan Pembelajaran</label>
                                 <select id="pendekatan" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                                     <option value="">Pilih Pendekatan Pembelajaran</option>
-                                    <option value="Deep Learning : Mindful, Meaningful, Joyful">Deep Learning : Mindful, Meaningful, Joyful</option>
+                                    <option value="Deep Learning">Deep Learning</option>
                                     <option value="Mindful Learning">Mindful Learning</option>
                                     <option value="Meaningful Learning">Meaningful Learning</option>
                                     <option value="Joyful Learning">Joyful Learning</option>
@@ -393,6 +393,9 @@
         function generateModulAjar(data, dimensi, diferensiasiKonten, diferensiasiProses, diferensiasiProduk) {
             const outputArea = document.getElementById('outputArea');
             
+            // Analisis data untuk membuat konten yang spesifik
+            const analisisData = analyzeUserData(data, dimensi, diferensiasiKonten, diferensiasiProses, diferensiasiProduk);
+            
             // Buat prompt yang akan dikirim ke ChatGPT
             const chatGPTPrompt = `Buatkan modul ajar lengkap dan mendalam dengan data berikut:
 
@@ -416,8 +419,8 @@ STRATEGI DIFERENSIASI:
 - Diferensiasi Proses: ${diferensiasiProses.join(', ')}
 - Diferensiasi Produk: ${diferensiasiProduk.join(', ')}
 
-Berdasarkan identitas modul dan strategi diferensiasi, Buatkan modul ajar yang mencakup:
-1. Pertanyaan pemantik yang kontekstual dan menantang pemikiran siswa
+Buatkan modul ajar yang mencakup:
+1. Pertanyaan pemantik yang kontekstual dan menantang
 2. Langkah pembelajaran detail dengan pendekatan ${data.pendekatan}
 3. Implementasi strategi diferensiasi yang spesifik
 4. Asesmen diagnostik, formatif, dan sumatif yang komprehensif
@@ -426,7 +429,275 @@ Berdasarkan identitas modul dan strategi diferensiasi, Buatkan modul ajar yang m
 7. Program remedial dan pengayaan yang terstruktur
 8. Rubrik penilaian yang jelas dan terukur
 
-Format dalam bentuk modul ajar yang siap pakai, lengkap, dan sesuai kurikulum terbaru yaitu deep learning.`;
+Format dalam bentuk modul ajar yang siap pakai, lengkap, dan sesuai kurikulum terbaru.`;
+
+        // Fungsi untuk menganalisis data user dan membuat konten yang spesifik
+        function analyzeUserData(data, dimensi, diferensiasiKonten, diferensiasiProses, diferensiasiProduk) {
+            const analisis = {
+                pendekatanSpesifik: generatePendekatanContent(data.pendekatan),
+                pertanyaanPemantik: generatePertanyaanPemantik(data.topik, data.mapel, data.pendekatan),
+                langkahPembelajaran: generateLangkahPembelajaran(data.model, data.pendekatan, data.alokasi),
+                asesmenSpesifik: generateAsesmenSpesifik(data.topik, data.mapel, data.pendekatan),
+                diferensiasiImplementasi: generateDiferensiasiImplementasi(diferensiasiKonten, diferensiasiProses, diferensiasiProduk, data.topik),
+                digitalImplementasi: generateDigitalImplementasi(data.digital, data.model, data.pendekatan),
+                dimensiImplementasi: generateDimensiImplementasi(dimensi, data.topik, data.mapel),
+                remedialPengayaan: generateRemedialPengayaan(data.topik, data.mapel, data.pendekatan)
+            };
+            return analisis;
+        }
+
+        function generatePendekatanContent(pendekatan) {
+            const pendekatanMap = {
+                'Deep Learning': {
+                    deskripsi: 'Pembelajaran mendalam yang menekankan pemahaman konseptual, transfer pengetahuan, dan aplikasi dalam konteks nyata',
+                    karakteristik: ['Pemahaman mendalam vs hafalan', 'Koneksi antar konsep', 'Aplikasi dalam kehidupan nyata', 'Refleksi dan metakognisi']
+                },
+                'Mindful Learning': {
+                    deskripsi: 'Pembelajaran yang menekankan kesadaran penuh, perhatian terfokus, dan keterlibatan aktif siswa',
+                    karakteristik: ['Kesadaran penuh dalam belajar', 'Perhatian terfokus', 'Refleksi diri', 'Regulasi emosi']
+                },
+                'Meaningful Learning': {
+                    deskripsi: 'Pembelajaran bermakna yang mengaitkan pengetahuan baru dengan pengalaman dan pengetahuan sebelumnya',
+                    karakteristik: ['Relevansi dengan kehidupan', 'Koneksi dengan prior knowledge', 'Konteks autentik', 'Makna personal']
+                },
+                'Joyful Learning': {
+                    deskripsi: 'Pembelajaran yang menyenangkan, memotivasi, dan menciptakan suasana positif untuk belajar',
+                    karakteristik: ['Suasana positif', 'Motivasi intrinsik', 'Kegembiraan dalam belajar', 'Kreativitas dan inovasi']
+                }
+            };
+            return pendekatanMap[pendekatan] || pendekatanMap['Deep Learning'];
+        }
+
+        function generatePertanyaanPemantik(topik, mapel, pendekatan) {
+            const pertanyaanBase = {
+                'Deep Learning': [
+                    `Mengapa konsep ${topik} penting untuk dipahami secara mendalam dalam ${mapel}?`,
+                    `Bagaimana ${topik} terhubung dengan konsep lain yang telah kita pelajari?`,
+                    `Apa yang terjadi jika kita tidak memahami ${topik} dengan baik?`,
+                    `Bagaimana ${topik} dapat membantu kita memecahkan masalah kompleks?`
+                ],
+                'Mindful Learning': [
+                    `Apa yang kalian rasakan ketika pertama kali mendengar tentang ${topik}?`,
+                    `Bagaimana kalian dapat fokus sepenuhnya saat mempelajari ${topik}?`,
+                    `Apa tantangan yang mungkin kalian hadapi dalam memahami ${topik}?`,
+                    `Bagaimana kalian dapat mengatur emosi saat menghadapi kesulitan dalam ${topik}?`
+                ],
+                'Meaningful Learning': [
+                    `Kapan kalian pernah mengalami atau melihat ${topik} dalam kehidupan sehari-hari?`,
+                    `Bagaimana ${topik} dapat membantu kalian di masa depan?`,
+                    `Apa hubungan ${topik} dengan hobi atau minat kalian?`,
+                    `Mengapa ${topik} relevan untuk dipelajari saat ini?`
+                ],
+                'Joyful Learning': [
+                    `Apa hal menarik yang ingin kalian ketahui tentang ${topik}?`,
+                    `Bagaimana kita bisa membuat pembelajaran ${topik} menjadi menyenangkan?`,
+                    `Apa permainan atau aktivitas yang bisa kita lakukan untuk memahami ${topik}?`,
+                    `Bagaimana kalian ingin mengekspresikan pemahaman tentang ${topik}?`
+                ]
+            };
+            return pertanyaanBase[pendekatan] || pertanyaanBase['Deep Learning'];
+        }
+
+        function generateLangkahPembelajaran(model, pendekatan, alokasi) {
+            // Parse alokasi waktu
+            const waktuMatch = alokasi.match(/(\d+)/g);
+            const totalMenit = waktuMatch ? parseInt(waktuMatch[0]) * parseInt(waktuMatch[1] || 45) : 90;
+            
+            const pembagianWaktu = {
+                pendahuluan: Math.round(totalMenit * 0.15),
+                inti: Math.round(totalMenit * 0.70),
+                penutup: Math.round(totalMenit * 0.15)
+            };
+
+            const langkahSpesifik = {
+                'Problem Based Learning': {
+                    fase1: 'Orientasi pada Masalah',
+                    fase2: 'Mengorganisasi Siswa untuk Belajar',
+                    fase3: 'Membimbing Penyelidikan Individual/Kelompok',
+                    fase4: 'Mengembangkan dan Menyajikan Hasil Karya',
+                    fase5: 'Menganalisis dan Mengevaluasi Proses Pemecahan Masalah'
+                },
+                'Project Based Learning': {
+                    fase1: 'Penentuan Pertanyaan Mendasar',
+                    fase2: 'Mendesain Perencanaan Proyek',
+                    fase3: 'Menyusun Jadwal',
+                    fase4: 'Memonitor Siswa dan Kemajuan Proyek',
+                    fase5: 'Menguji Hasil dan Mengevaluasi Pengalaman'
+                },
+                'Discovery Learning': {
+                    fase1: 'Stimulation (Pemberian Rangsangan)',
+                    fase2: 'Problem Statement (Identifikasi Masalah)',
+                    fase3: 'Data Collection (Pengumpulan Data)',
+                    fase4: 'Data Processing (Pengolahan Data)',
+                    fase5: 'Verification (Pembuktian) dan Generalization (Kesimpulan)'
+                }
+            };
+
+            return {
+                pembagianWaktu,
+                langkahSpesifik: langkahSpesifik[model] || langkahSpesifik['Problem Based Learning']
+            };
+        }
+
+        function generateAsesmenSpesifik(topik, mapel, pendekatan) {
+            const asesmenMap = {
+                'Deep Learning': {
+                    diagnostik: ['Concept mapping awal', 'Analisis miskonsepsi', 'Tes pemahaman konseptual'],
+                    formatif: ['Peer explanation', 'Think-aloud protocol', 'Reflective journal', 'Concept connection'],
+                    sumatif: ['Transfer task', 'Authentic assessment', 'Portfolio reflection', 'Concept integration test']
+                },
+                'Mindful Learning': {
+                    diagnostik: ['Self-awareness checklist', 'Learning style inventory', 'Emotional readiness scale'],
+                    formatif: ['Mindfulness check-in', 'Attention monitoring', 'Reflection pause', 'Emotional regulation log'],
+                    sumatif: ['Mindful presentation', 'Self-regulated learning portfolio', 'Metacognitive reflection essay']
+                },
+                'Meaningful Learning': {
+                    diagnostik: ['Prior knowledge activation', 'Personal connection survey', 'Relevance assessment'],
+                    formatif: ['Real-world application task', 'Personal meaning journal', 'Connection web', 'Relevance rating'],
+                    sumatif: ['Authentic problem solving', 'Personal project presentation', 'Life application portfolio']
+                },
+                'Joyful Learning': {
+                    diagnostik: ['Interest inventory', 'Learning preference survey', 'Motivation assessment'],
+                    formatif: ['Fun factor feedback', 'Engagement meter', 'Creative expression check', 'Joy journal'],
+                    sumatif: ['Creative showcase', 'Gamified assessment', 'Celebration of learning portfolio']
+                }
+            };
+            return asesmenMap[pendekatan] || asesmenMap['Deep Learning'];
+        }
+
+        function generateDiferensiasiImplementasi(konten, proses, produk, topik) {
+            const implementasi = {
+                konten: [],
+                proses: [],
+                produk: []
+            };
+
+            // Diferensiasi Konten
+            if (konten.includes('Tingkat kesulitan bertingkat')) {
+                implementasi.konten.push(`Materi ${topik} disajikan dalam 3 level: dasar (konsep fundamental), menengah (aplikasi), dan lanjut (analisis mendalam)`);
+            }
+            if (konten.includes('Sesuai gaya belajar')) {
+                implementasi.konten.push('Penyajian materi melalui visual (diagram, infografis), auditori (penjelasan verbal, diskusi), dan kinestetik (manipulatif, eksperimen)');
+            }
+            if (konten.includes('Berdasarkan minat siswa')) {
+                implementasi.konten.push(`Contoh dan kasus ${topik} disesuaikan dengan minat siswa (olahraga, musik, teknologi, seni)`);
+            }
+
+            // Diferensiasi Proses
+            if (proses.includes('Kelompok fleksibel')) {
+                implementasi.proses.push('Pembentukan kelompok berdasarkan kemampuan, minat, atau gaya belajar yang dapat berubah sesuai kebutuhan');
+            }
+            if (proses.includes('Scaffolding bertingkat')) {
+                implementasi.proses.push('Bantuan pembelajaran bertingkat: guided practice → collaborative practice → independent practice');
+            }
+            if (proses.includes('Waktu belajar fleksibel')) {
+                implementasi.proses.push('Siswa dapat mengatur tempo belajar dengan checkpoint dan milestone yang jelas');
+            }
+
+            // Diferensiasi Produk
+            if (produk.includes('Pilihan tugas beragam')) {
+                implementasi.produk.push('Siswa dapat memilih format tugas: esai, presentasi, poster, video, model, atau demonstrasi');
+            }
+            if (produk.includes('Format presentasi variatif')) {
+                implementasi.produk.push('Presentasi dapat berupa: oral presentation, digital storytelling, infografis, atau performance');
+            }
+            if (produk.includes('Rubrik penilaian fleksibel')) {
+                implementasi.produk.push('Rubrik disesuaikan dengan format produk yang dipilih siswa dengan standar kualitas yang sama');
+            }
+
+            return implementasi;
+        }
+
+        function generateDigitalImplementasi(digital, model, pendekatan) {
+            if (!digital) return null;
+
+            const platformAnalysis = {
+                'Google Classroom': 'Platform LMS untuk distribusi materi, pengumpulan tugas, dan komunikasi',
+                'Kahoot': 'Gamifikasi untuk asesmen formatif dan review materi',
+                'Padlet': 'Kolaborasi digital untuk brainstorming dan sharing ide',
+                'Canva': 'Kreativitas digital untuk membuat presentasi dan infografis',
+                'YouTube': 'Sumber video pembelajaran dan platform untuk project presentation',
+                'Mentimeter': 'Interactive polling dan real-time feedback',
+                'Flipgrid': 'Video discussion dan peer feedback',
+                'Quizizz': 'Self-paced assessment dengan elemen gamifikasi'
+            };
+
+            const implementasiSpesifik = [];
+            const platforms = digital.split(',').map(p => p.trim());
+            
+            platforms.forEach(platform => {
+                Object.keys(platformAnalysis).forEach(key => {
+                    if (platform.toLowerCase().includes(key.toLowerCase())) {
+                        implementasiSpesifik.push(`${key}: ${platformAnalysis[key]}`);
+                    }
+                });
+            });
+
+            return {
+                platforms: implementasiSpesifik,
+                integrasi: `Teknologi digital diintegrasikan dalam ${model} dengan pendekatan ${pendekatan} untuk meningkatkan engagement dan efektivitas pembelajaran`
+            };
+        }
+
+        function generateDimensiImplementasi(dimensi, topik, mapel) {
+            const dimensiImplementasi = {};
+            
+            dimensi.forEach(d => {
+                switch(d) {
+                    case 'Keimanan dan Ketakwaan':
+                        dimensiImplementasi[d] = `Mengaitkan konsep ${topik} dengan keagungan ciptaan Tuhan dan nilai-nilai spiritual`;
+                        break;
+                    case 'Kewargaan':
+                        dimensiImplementasi[d] = `Membahas peran ${topik} dalam pembangunan bangsa dan tanggung jawab sebagai warga negara`;
+                        break;
+                    case 'Penalaran Kritis':
+                        dimensiImplementasi[d] = `Menganalisis, mengevaluasi, dan mensintesis informasi terkait ${topik} secara logis`;
+                        break;
+                    case 'Kreativitas':
+                        dimensiImplementasi[d] = `Mengembangkan solusi inovatif dan ide-ide kreatif dalam penerapan ${topik}`;
+                        break;
+                    case 'Kolaborasi':
+                        dimensiImplementasi[d] = `Bekerja sama dalam kelompok untuk memecahkan masalah terkait ${topik}`;
+                        break;
+                    case 'Kemandirian':
+                        dimensiImplementasi[d] = `Mengembangkan kemampuan belajar mandiri dan self-regulation dalam mempelajari ${topik}`;
+                        break;
+                    case 'Kesehatan':
+                        dimensiImplementasi[d] = `Memahami dampak ${topik} terhadap kesehatan fisik dan mental`;
+                        break;
+                    case 'Komunikasi':
+                        dimensiImplementasi[d] = `Mengkomunikasikan pemahaman ${topik} dengan jelas dan efektif`;
+                        break;
+                }
+            });
+            
+            return dimensiImplementasi;
+        }
+
+        function generateRemedialPengayaan(topik, mapel, pendekatan) {
+            return {
+                remedial: {
+                    identifikasi: `Siswa yang belum mencapai KKM dalam pemahaman konsep ${topik}`,
+                    strategi: [
+                        'Pembelajaran individual dengan pendampingan intensif',
+                        'Penggunaan media pembelajaran yang lebih konkret',
+                        'Pemberian contoh-contoh sederhana dan bertahap',
+                        'Peer tutoring dengan siswa yang sudah tuntas'
+                    ],
+                    asesmen: 'Tes ulang dengan soal yang setara namun berbeda konteks'
+                },
+                pengayaan: {
+                    identifikasi: `Siswa yang sudah mencapai KKM dan menunjukkan minat tinggi pada ${topik}`,
+                    strategi: [
+                        'Proyek penelitian mini terkait aplikasi lanjut',
+                        'Menjadi tutor sebaya untuk teman yang membutuhkan',
+                        'Eksplorasi topik lanjutan atau lintas bidang',
+                        'Presentasi hasil eksplorasi kepada kelas'
+                    ],
+                    asesmen: 'Portfolio proyek pengayaan dan presentasi hasil eksplorasi'
+                }
+            };
+        }
 
             const modulContent = `
                 <div class="fade-in space-y-6">
@@ -455,79 +726,97 @@ Format dalam bentuk modul ajar yang siap pakai, lengkap, dan sesuai kurikulum te
                         </div>
                     </div>
 
+                    <div class="bg-teal-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-teal-800 mb-3">🎯 Analisis Pendekatan ${data.pendekatan}</h4>
+                        <div class="bg-white p-4 rounded">
+                            <p class="text-sm text-teal-700 mb-3"><strong>Deskripsi:</strong> ${analisisData.pendekatanSpesifik.deskripsi}</p>
+                            <p class="text-sm text-teal-700 mb-2"><strong>Karakteristik Utama:</strong></p>
+                            <ul class="list-disc list-inside text-sm text-teal-600">
+                                ${analisisData.pendekatanSpesifik.karakteristik.map(k => `<li>${k}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="bg-yellow-50 p-4 rounded-lg">
-                        <h4 class="font-bold text-yellow-800 mb-3">🤔 Pertanyaan Pemantik</h4>
+                        <h4 class="font-bold text-yellow-800 mb-3">🤔 Pertanyaan Pemantik (Sesuai ${data.pendekatan})</h4>
                         <div class="bg-white p-3 rounded">
                             <ul class="list-disc list-inside text-yellow-700 space-y-2">
-                                <li>Apa yang kalian ketahui tentang ${data.topik.toLowerCase()} dalam kehidupan sehari-hari?</li>
-                                <li>Bagaimana ${data.topik.toLowerCase()} dapat membantu menyelesaikan masalah nyata?</li>
-                                <li>Mengapa penting bagi kita untuk memahami konsep ${data.topik.toLowerCase()}?</li>
+                                ${analisisData.pertanyaanPemantik.map(p => `<li>${p}</li>`).join('')}
                             </ul>
                         </div>
                     </div>
 
                     <div class="bg-purple-50 p-4 rounded-lg">
-                        <h4 class="font-bold text-purple-800 mb-3">📚 Langkah Pembelajaran (Deep Learning)</h4>
+                        <h4 class="font-bold text-purple-800 mb-3">📚 Langkah Pembelajaran (${data.model} - ${data.pendekatan})</h4>
+                        
+                        <div class="mb-4 bg-white p-3 rounded">
+                            <h5 class="font-semibold text-purple-700 mb-2">⏰ Pembagian Waktu (Total: ${analisisData.langkahPembelajaran.pembagianWaktu.pendahuluan + analisisData.langkahPembelajaran.pembagianWaktu.inti + analisisData.langkahPembelajaran.pembagianWaktu.penutup} menit)</h5>
+                            <div class="grid grid-cols-3 gap-2 text-sm">
+                                <div class="text-center bg-green-100 p-2 rounded">Pendahuluan: ${analisisData.langkahPembelajaran.pembagianWaktu.pendahuluan} menit</div>
+                                <div class="text-center bg-blue-100 p-2 rounded">Inti: ${analisisData.langkahPembelajaran.pembagianWaktu.inti} menit</div>
+                                <div class="text-center bg-red-100 p-2 rounded">Penutup: ${analisisData.langkahPembelajaran.pembagianWaktu.penutup} menit</div>
+                            </div>
+                        </div>
                         
                         <div class="space-y-4">
                             <div class="bg-white p-4 rounded border-l-4 border-green-500">
-                                <h5 class="font-semibold text-green-700 mb-2">🚀 Kegiatan Pendahuluan (15 menit)</h5>
+                                <h5 class="font-semibold text-green-700 mb-2">🚀 Kegiatan Pendahuluan (${analisisData.langkahPembelajaran.pembagianWaktu.pendahuluan} menit)</h5>
                                 <ul class="list-disc list-inside text-sm space-y-1">
-                                    <li>Apersepsi: Mengaitkan materi dengan pengalaman siswa</li>
+                                    <li>Apersepsi: Mengaitkan materi dengan pengalaman siswa sesuai ${data.pendekatan}</li>
                                     <li>Menyampaikan tujuan pembelajaran dan manfaatnya</li>
-                                    <li>Motivasi melalui pertanyaan pemantik</li>
-                                    <li>Asesmen diagnostik singkat untuk mengukur pengetahuan awal</li>
+                                    <li>Motivasi melalui pertanyaan pemantik yang spesifik</li>
+                                    <li>Asesmen diagnostik: ${analisisData.asesmenSpesifik.diagnostik.join(', ')}</li>
                                 </ul>
                             </div>
                             
                             <div class="bg-white p-4 rounded border-l-4 border-blue-500">
-                                <h5 class="font-semibold text-blue-700 mb-2">🎯 Kegiatan Inti (60 menit) - ${data.model} dengan ${data.pendekatan}</h5>
+                                <h5 class="font-semibold text-blue-700 mb-2">🎯 Kegiatan Inti (${analisisData.langkahPembelajaran.pembagianWaktu.inti} menit) - ${data.model}</h5>
                                 <div class="space-y-3">
                                     <div class="pl-4">
-                                        <h6 class="font-medium text-blue-600">Fase 1: Orientasi Masalah (15 menit)</h6>
+                                        <h6 class="font-medium text-blue-600">Fase 1: ${analisisData.langkahPembelajaran.langkahSpesifik.fase1} (${Math.round(analisisData.langkahPembelajaran.pembagianWaktu.inti * 0.25)} menit)</h6>
                                         <ul class="list-disc list-inside text-sm mt-1">
                                             <li>Siswa mengamati fenomena/masalah terkait ${data.topik}</li>
                                             <li>Identifikasi masalah yang akan dipecahkan</li>
-                                            <li>Pembentukan kelompok heterogen (4-5 siswa)</li>
+                                            <li>Pembentukan kelompok sesuai strategi diferensiasi</li>
                                             ${data.digital ? `<li>Menggunakan ${data.digital} untuk eksplorasi awal</li>` : ''}
                                         </ul>
                                     </div>
                                     <div class="pl-4">
-                                        <h6 class="font-medium text-blue-600">Fase 2: Mengorganisasi Siswa (15 menit)</h6>
+                                        <h6 class="font-medium text-blue-600">Fase 2: ${analisisData.langkahPembelajaran.langkahSpesifik.fase2} (${Math.round(analisisData.langkahPembelajaran.pembagianWaktu.inti * 0.25)} menit)</h6>
                                         <ul class="list-disc list-inside text-sm mt-1">
                                             <li>Siswa merumuskan hipotesis atau dugaan sementara</li>
                                             <li>Pembagian tugas dalam kelompok</li>
                                             <li>Menentukan strategi pemecahan masalah</li>
-                                            <li>Implementasi diferensiasi: ${diferensiasiProses.join(', ') || 'Kelompok fleksibel'}</li>
+                                            <li>Implementasi diferensiasi proses: ${analisisData.diferensiasiImplementasi.proses.join('; ') || 'Kelompok fleksibel'}</li>
                                         </ul>
                                     </div>
                                     <div class="pl-4">
-                                        <h6 class="font-medium text-blue-600">Fase 3: Investigasi (20 menit)</h6>
+                                        <h6 class="font-medium text-blue-600">Fase 3: ${analisisData.langkahPembelajaran.langkahSpesifik.fase3} (${Math.round(analisisData.langkahPembelajaran.pembagianWaktu.inti * 0.3)} menit)</h6>
                                         <ul class="list-disc list-inside text-sm mt-1">
                                             <li>Siswa mengumpulkan informasi dari berbagai sumber</li>
                                             <li>Melakukan eksperimen atau analisis data</li>
                                             <li>Guru membimbing dan memfasilitasi proses investigasi</li>
-                                            <li>Diferensiasi konten: ${diferensiasiKonten.join(', ') || 'Materi bertingkat'}</li>
+                                            <li>Diferensiasi konten: ${analisisData.diferensiasiImplementasi.konten.join('; ') || 'Materi bertingkat'}</li>
                                         </ul>
                                     </div>
                                     <div class="pl-4">
-                                        <h6 class="font-medium text-blue-600">Fase 4: Presentasi Hasil (10 menit)</h6>
+                                        <h6 class="font-medium text-blue-600">Fase 4: ${analisisData.langkahPembelajaran.langkahSpesifik.fase4} (${Math.round(analisisData.langkahPembelajaran.pembagianWaktu.inti * 0.2)} menit)</h6>
                                         <ul class="list-disc list-inside text-sm mt-1">
                                             <li>Setiap kelompok mempresentasikan hasil investigasi</li>
                                             <li>Diskusi dan tanya jawab antar kelompok</li>
                                             <li>Guru memberikan umpan balik konstruktif</li>
-                                            <li>Diferensiasi produk: ${diferensiasiProduk.join(', ') || 'Format presentasi variatif'}</li>
+                                            <li>Diferensiasi produk: ${analisisData.diferensiasiImplementasi.produk.join('; ') || 'Format presentasi variatif'}</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="bg-white p-4 rounded border-l-4 border-red-500">
-                                <h5 class="font-semibold text-red-700 mb-2">🎯 Kegiatan Penutup (15 menit)</h5>
+                                <h5 class="font-semibold text-red-700 mb-2">🎯 Kegiatan Penutup (${analisisData.langkahPembelajaran.pembagianWaktu.penutup} menit)</h5>
                                 <ul class="list-disc list-inside text-sm space-y-1">
-                                    <li>Refleksi pembelajaran: Apa yang telah dipelajari?</li>
+                                    <li>Refleksi pembelajaran sesuai ${data.pendekatan}: Apa yang telah dipelajari?</li>
                                     <li>Kesimpulan bersama tentang konsep ${data.topik}</li>
-                                    <li>Asesmen formatif untuk mengukur pemahaman</li>
+                                    <li>Asesmen formatif: ${analisisData.asesmenSpesifik.formatif.join(', ')}</li>
                                     <li>Preview materi pertemuan berikutnya</li>
                                 </ul>
                             </div>
@@ -535,16 +824,14 @@ Format dalam bentuk modul ajar yang siap pakai, lengkap, dan sesuai kurikulum te
                     </div>
 
                     <div class="bg-orange-50 p-4 rounded-lg">
-                        <h4 class="font-bold text-orange-800 mb-3">📊 Asesmen Pembelajaran</h4>
+                        <h4 class="font-bold text-orange-800 mb-3">📊 Asesmen Pembelajaran (Sesuai ${data.pendekatan})</h4>
                         
                         <div class="grid md:grid-cols-3 gap-4">
                             <div class="bg-white p-4 rounded">
                                 <h5 class="font-semibold text-orange-700 mb-2">🔍 Diagnostik</h5>
-                                <p class="text-sm mb-2">Mengukur pengetahuan awal siswa:</p>
+                                <p class="text-sm mb-2">Mengukur kesiapan dan pengetahuan awal:</p>
                                 <ul class="text-xs list-disc list-inside">
-                                    <li>Pre-test konsep dasar</li>
-                                    <li>Mind mapping awal</li>
-                                    <li>Kuis singkat 5 soal</li>
+                                    ${analisisData.asesmenSpesifik.diagnostik.map(item => `<li>${item}</li>`).join('')}
                                 </ul>
                             </div>
                             
@@ -552,10 +839,7 @@ Format dalam bentuk modul ajar yang siap pakai, lengkap, dan sesuai kurikulum te
                                 <h5 class="font-semibold text-orange-700 mb-2">📈 Formatif</h5>
                                 <p class="text-sm mb-2">Selama proses pembelajaran:</p>
                                 <ul class="text-xs list-disc list-inside">
-                                    <li>Observasi aktivitas kelompok</li>
-                                    <li>Tanya jawab interaktif</li>
-                                    <li>Exit ticket</li>
-                                    <li>Peer assessment</li>
+                                    ${analisisData.asesmenSpesifik.formatif.map(item => `<li>${item}</li>`).join('')}
                                 </ul>
                             </div>
                             
@@ -563,9 +847,7 @@ Format dalam bentuk modul ajar yang siap pakai, lengkap, dan sesuai kurikulum te
                                 <h5 class="font-semibold text-orange-700 mb-2">📋 Sumatif</h5>
                                 <p class="text-sm mb-2">Evaluasi akhir pembelajaran:</p>
                                 <ul class="text-xs list-disc list-inside">
-                                    <li>Tes tertulis (70%)</li>
-                                    <li>Proyek kelompok (20%)</li>
-                                    <li>Presentasi (10%)</li>
+                                    ${analisisData.asesmenSpesifik.sumatif.map(item => `<li>${item}</li>`).join('')}
                                 </ul>
                             </div>
                         </div>
@@ -604,23 +886,62 @@ Format dalam bentuk modul ajar yang siap pakai, lengkap, dan sesuai kurikulum te
                         </div>
                     </div>
 
-                    ${data.digital ? `
+                    ${analisisData.digitalImplementasi ? `
                     <div class="bg-cyan-50 p-4 rounded-lg">
                         <h4 class="font-bold text-cyan-800 mb-3">💻 Pemanfaatan Teknologi Digital</h4>
                         <div class="bg-white p-3 rounded">
                             <p class="text-sm text-cyan-700 mb-2"><strong>Platform/Aplikasi yang Digunakan:</strong></p>
-                            <p class="text-sm">${data.digital}</p>
-                            <div class="mt-3 text-xs text-cyan-600">
-                                <p><strong>Implementasi:</strong></p>
-                                <ul class="list-disc list-inside mt-1">
-                                    <li>Digunakan untuk meningkatkan engagement siswa</li>
-                                    <li>Memfasilitasi pembelajaran interaktif dan kolaboratif</li>
-                                    <li>Mendukung asesmen real-time dan feedback</li>
-                                </ul>
+                            <div class="text-sm mb-3">
+                                ${analisisData.digitalImplementasi.platforms.length > 0 ? 
+                                    analisisData.digitalImplementasi.platforms.map(p => `<div class="mb-1">• ${p}</div>`).join('') :
+                                    `<div>${data.digital}</div>`
+                                }
+                            </div>
+                            <div class="text-xs text-cyan-600">
+                                <p><strong>Integrasi dalam Pembelajaran:</strong></p>
+                                <p class="mt-1">${analisisData.digitalImplementasi.integrasi}</p>
                             </div>
                         </div>
                     </div>
                     ` : ''}
+
+                    ${Object.keys(analisisData.dimensiImplementasi).length > 0 ? `
+                    <div class="bg-pink-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-pink-800 mb-3">🌟 Implementasi Dimensi Profil Pelajar Pancasila</h4>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            ${Object.entries(analisisData.dimensiImplementasi).map(([dimensi, implementasi]) => `
+                                <div class="bg-white p-3 rounded">
+                                    <h5 class="font-semibold text-pink-700 text-sm mb-1">${dimensi}</h5>
+                                    <p class="text-xs text-pink-600">${implementasi}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <div class="bg-emerald-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-emerald-800 mb-3">🔄 Program Remedial dan Pengayaan</h4>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded">
+                                <h5 class="font-semibold text-emerald-700 mb-2">📚 Program Remedial</h5>
+                                <p class="text-sm text-emerald-600 mb-2"><strong>Target:</strong> ${analisisData.remedialPengayaan.remedial.identifikasi}</p>
+                                <p class="text-sm text-emerald-600 mb-2"><strong>Strategi:</strong></p>
+                                <ul class="text-xs list-disc list-inside text-emerald-600">
+                                    ${analisisData.remedialPengayaan.remedial.strategi.map(s => `<li>${s}</li>`).join('')}
+                                </ul>
+                                <p class="text-xs text-emerald-600 mt-2"><strong>Asesmen:</strong> ${analisisData.remedialPengayaan.remedial.asesmen}</p>
+                            </div>
+                            <div class="bg-white p-4 rounded">
+                                <h5 class="font-semibold text-emerald-700 mb-2">🚀 Program Pengayaan</h5>
+                                <p class="text-sm text-emerald-600 mb-2"><strong>Target:</strong> ${analisisData.remedialPengayaan.pengayaan.identifikasi}</p>
+                                <p class="text-sm text-emerald-600 mb-2"><strong>Strategi:</strong></p>
+                                <ul class="text-xs list-disc list-inside text-emerald-600">
+                                    ${analisisData.remedialPengayaan.pengayaan.strategi.map(s => `<li>${s}</li>`).join('')}
+                                </ul>
+                                <p class="text-xs text-emerald-600 mt-2"><strong>Asesmen:</strong> ${analisisData.remedialPengayaan.pengayaan.asesmen}</p>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="bg-gray-50 p-4 rounded-lg">
                         <h4 class="font-bold text-gray-800 mb-3">📋 Informasi Tambahan</h4>
@@ -641,10 +962,28 @@ Format dalam bentuk modul ajar yang siap pakai, lengkap, dan sesuai kurikulum te
 
                     <div class="bg-green-100 p-4 rounded-lg text-center">
                         <p class="text-green-800 font-semibold">✅ Modul Ajar Berhasil Dibuat oleh ChatGPT!</p>
-                        <p class="text-green-700 text-sm mt-1">Modul ini siap digunakan untuk pembelajaran sesuai kurikulum Deep Learning</p>
-                        <div class="mt-3 text-xs text-green-600">
-                            <p>💡 Tip: Sesuaikan dengan karakteristik siswa dan kondisi sekolah Anda</p>
+                        <p class="text-green-700 text-sm mt-1">Modul pembelajaran ${data.topik} dengan pendekatan ${data.pendekatan} telah disesuaikan dengan semua kriteria yang Anda pilih</p>
+                        <div class="mt-3 text-xs text-green-600 grid md:grid-cols-2 gap-2 text-left">
+                            <div>
+                                <p><strong>✓ Analisis Lengkap:</strong></p>
+                                <ul class="list-disc list-inside ml-2">
+                                    <li>Pendekatan pembelajaran spesifik</li>
+                                    <li>Pertanyaan pemantik kontekstual</li>
+                                    <li>Langkah pembelajaran terstruktur</li>
+                                    <li>Asesmen sesuai pendekatan</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p><strong>✓ Implementasi Diferensiasi:</strong></p>
+                                <ul class="list-disc list-inside ml-2">
+                                    <li>Konten: ${diferensiasiKonten.length} strategi</li>
+                                    <li>Proses: ${diferensiasiProses.length} strategi</li>
+                                    <li>Produk: ${diferensiasiProduk.length} strategi</li>
+                                    <li>Program remedial & pengayaan</li>
+                                </ul>
+                            </div>
                         </div>
+                        <p class="text-xs text-green-600 mt-3">💡 Tip: Modul ini telah disesuaikan dengan data yang Anda masukkan dan siap digunakan!</p>
                     </div>
                 </div>
             `;
@@ -652,5 +991,5 @@ Format dalam bentuk modul ajar yang siap pakai, lengkap, dan sesuai kurikulum te
             outputArea.innerHTML = modulContent;
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ff9fb72311fe8a',t:'MTc2MDcwMjMwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ffd189b734fd29',t:'MTc2MDcwNDM0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
