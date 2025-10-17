@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pembuat Modul Ajar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .loading {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-full">
+    <div class="min-h-full">
+        <!-- Header -->
+        <header class="gradient-bg text-white py-6">
+            <div class="max-w-7xl mx-auto px-4">
+                <h1 class="text-3xl font-bold text-center">📚 Dashboard Pembuat Modul Ajar</h1>
+                <p class="text-center mt-2 text-blue-100">Buat modul ajar berkualitas dengan bantuan AI sesuai kurikulum Deep Learning</p>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 py-8">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Form Input -->
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <span class="bg-blue-100 p-2 rounded-lg mr-3">📝</span>
+                        Data Identifikasi Modul Ajar
+                    </h2>
+                    
+                    <form id="modulForm" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="penyusun" class="block text-sm font-medium text-gray-700 mb-2">Penyusun</label>
+                                <input type="text" id="penyusun" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Nama guru penyusun">
+                            </div>
+                            <div>
+                                <label for="satuan" class="block text-sm font-medium text-gray-700 mb-2">Satuan Pendidikan</label>
+                                <input type="text" id="satuan" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Nama sekolah">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="tahun" class="block text-sm font-medium text-gray-700 mb-2">Tahun Pelajaran</label>
+                                <input type="text" id="tahun" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="2024/2025">
+                            </div>
+                            <div>
+                                <label for="semester" class="block text-sm font-medium text-gray-700 mb-2">Semester</label>
+                                <select id="semester" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Pilih Semester</option>
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="kelas" class="block text-sm font-medium text-gray-700 mb-2">Kelas/Fase</label>
+                                <input type="text" id="kelas" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="X / Fase E">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="mapel" class="block text-sm font-medium text-gray-700 mb-2">Mata Pelajaran</label>
+                                <input type="text" id="mapel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Matematika">
+                            </div>
+                            <div>
+                                <label for="topik" class="block text-sm font-medium text-gray-700 mb-2">Topik/Elemen</label>
+                                <input type="text" id="topik" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Fungsi Kuadrat">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="alokasi" class="block text-sm font-medium text-gray-700 mb-2">Alokasi Waktu</label>
+                            <input type="text" id="alokasi" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="2 x 45 menit">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Dimensi Profil Lulusan</label>
+                            <div class="grid md:grid-cols-2 gap-2">
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" name="dimensi" value="keimanan" class="rounded text-blue-600">
+                                    <span class="text-sm">Keimanan dan Ketakwaan</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" name="dimensi" value="kewargaan" class="rounded text-blue-600">
+                                    <span class="text-sm">Kewargaan</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" name="dimensi" value="penalaran" class="rounded text-blue-600">
+                                    <span class="text-sm">Penalaran Kritis</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" name="dimensi" value="kreativitas" class="rounded text-blue-600">
+                                    <span class="text-sm">Kreativitas</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" name="dimensi" value="kolaborasi" class="rounded text-blue-600">
+                                    <span class="text-sm">Kolaborasi</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" name="dimensi" value="kemandirian" class="rounded text-blue-600">
+                                    <span class="text-sm">Kemandirian</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" name="dimensi" value="kesehatan" class="rounded text-blue-600">
+                                    <span class="text-sm">Kesehatan</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" name="dimensi" value="komunikasi" class="rounded text-blue-600">
+                                    <span class="text-sm">Komunikasi</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="sarana" class="block text-sm font-medium text-gray-700 mb-2">Sarana dan Prasarana</label>
+                            <textarea id="sarana" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Laptop, proyektor, papan tulis, buku paket..."></textarea>
+                        </div>
+
+                        <div>
+                            <label for="capaian" class="block text-sm font-medium text-gray-700 mb-2">Capaian Pembelajaran</label>
+                            <textarea id="capaian" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Peserta didik mampu memahami dan menerapkan konsep..."></textarea>
+                        </div>
+
+                        <div>
+                            <label for="tujuan" class="block text-sm font-medium text-gray-700 mb-2">Tujuan Pembelajaran</label>
+                            <textarea id="tujuan" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Setelah mengikuti pembelajaran, peserta didik dapat..."></textarea>
+                        </div>
+
+                        <div>
+                            <label for="lintas" class="block text-sm font-medium text-gray-700 mb-2">Lintas Bidang Disiplin Ilmu</label>
+                            <input type="text" id="lintas" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Fisika, Ekonomi, Seni...">
+                        </div>
+
+                        <div>
+                            <label for="sumber" class="block text-sm font-medium text-gray-700 mb-2">Sumber Belajar</label>
+                            <textarea id="sumber" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Buku paket, internet, video pembelajaran..."></textarea>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="model" class="block text-sm font-medium text-gray-700 mb-2">Model Pembelajaran</label>
+                                <select id="model" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Pilih Model Pembelajaran</option>
+                                    <option value="Problem Based Learning">Problem Based Learning (PBL)</option>
+                                    <option value="Project Based Learning">Project Based Learning</option>
+                                    <option value="Discovery Learning">Discovery Learning</option>
+                                    <option value="Inquiry Learning">Inquiry Learning</option>
+                                    <option value="Cooperative Learning">Cooperative Learning</option>
+                                    <option value="Contextual Teaching Learning">Contextual Teaching Learning</option>
+                                    <option value="Blended Learning">Blended Learning</option>
+                                    <option value="Flipped Classroom">Flipped Classroom</option>
+                                    <option value="STEAM">STEAM</option>
+                                    <option value="Differentiated Instruction">Differentiated Instruction</option>
+                                    <option value="Think Pair Share">Think Pair Share</option>
+                                    <option value="Jigsaw">Jigsaw</option>
+                                    <option value="Mind Mapping">Mind Mapping</option>
+                                    <option value="Role Playing">Role Playing</option>
+                                    <option value="Demonstrasi">Demonstrasi</option>
+                                    <option value="Ceramah Interaktif">Ceramah Interaktif</option>
+                                    <option value="Diskusi Kelompok">Diskusi Kelompok</option>
+                                    <option value="Simulasi">Simulasi</option>
+                                    <option value="Studi Kasus">Studi Kasus</option>
+                                    <option value="Pembelajaran Berbasis Game">Pembelajaran Berbasis Game</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="pendekatan" class="block text-sm font-medium text-gray-700 mb-2">Pendekatan Pembelajaran</label>
+                                <select id="pendekatan" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Pilih Pendekatan Pembelajaran</option>
+                                    <option value="Deep Learning : Mindful, Meaningful, Joyful">Deep Learning : Mindful, Meaningful, Joyful</option>
+                                    <option value="Mindful Learning">Mindful Learning</option>
+                                    <option value="Meaningful Learning">Meaningful Learning</option>
+                                    <option value="Joyful Learning">Joyful Learning</option>
+                                    <option value="Scientific Approach">Scientific Approach</option>
+                                    <option value="Constructivist Approach">Constructivist Approach</option>
+                                    <option value="Humanistic Approach">Humanistic Approach</option>
+                                    <option value="Behaviorist Approach">Behaviorist Approach</option>
+                                    <option value="Cognitive Approach">Cognitive Approach</option>
+                                    <option value="Social Learning Approach">Social Learning Approach</option>
+                                    <option value="Experiential Learning">Experiential Learning</option>
+                                    <option value="Collaborative Learning">Collaborative Learning</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Strategi Pembelajaran Berdiferensiasi</label>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <h6 class="font-medium text-gray-700 mb-2">Diferensiasi Konten</h6>
+                                    <div class="space-y-1">
+                                        <label class="flex items-center space-x-2">
+                                            <input type="checkbox" name="diferensiasi_konten" value="tingkat_kesulitan" class="rounded text-blue-600">
+                                            <span class="text-sm">Tingkat kesulitan bertingkat</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2">
+                                            <input type="checkbox" name="diferensiasi_konten" value="gaya_belajar" class="rounded text-blue-600">
+                                            <span class="text-sm">Sesuai gaya belajar</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2">
+                                            <input type="checkbox" name="diferensiasi_konten" value="minat_siswa" class="rounded text-blue-600">
+                                            <span class="text-sm">Berdasarkan minat siswa</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <h6 class="font-medium text-gray-700 mb-2">Diferensiasi Proses</h6>
+                                    <div class="space-y-1">
+                                        <label class="flex items-center space-x-2">
+                                            <input type="checkbox" name="diferensiasi_proses" value="kelompok_fleksibel" class="rounded text-blue-600">
+                                            <span class="text-sm">Kelompok fleksibel</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2">
+                                            <input type="checkbox" name="diferensiasi_proses" value="scaffolding" class="rounded text-blue-600">
+                                            <span class="text-sm">Scaffolding bertingkat</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2">
+                                            <input type="checkbox" name="diferensiasi_proses" value="waktu_belajar" class="rounded text-blue-600">
+                                            <span class="text-sm">Waktu belajar fleksibel</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <h6 class="font-medium text-gray-700 mb-2">Diferensiasi Produk</h6>
+                                    <div class="space-y-1">
+                                        <label class="flex items-center space-x-2">
+                                            <input type="checkbox" name="diferensiasi_produk" value="pilihan_tugas" class="rounded text-blue-600">
+                                            <span class="text-sm">Pilihan tugas beragam</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2">
+                                            <input type="checkbox" name="diferensiasi_produk" value="format_presentasi" class="rounded text-blue-600">
+                                            <span class="text-sm">Format presentasi variatif</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2">
+                                            <input type="checkbox" name="diferensiasi_produk" value="rubrik_fleksibel" class="rounded text-blue-600">
+                                            <span class="text-sm">Rubrik penilaian fleksibel</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="digital" class="block text-sm font-medium text-gray-700 mb-2">Pemanfaatan Digital</label>
+                            <textarea id="digital" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Contoh: Google Classroom, Kahoot, Canva, YouTube, Padlet, Mentimeter, dll..."></textarea>
+                            <p class="text-xs text-gray-500 mt-1">Isi jika menggunakan platform digital, aplikasi, atau media online dalam pembelajaran</p>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition duration-300 flex items-center justify-center">
+                            <span id="btnText">🚀 Buat Modul Ajar dengan ChatGPT</span>
+                            <div id="loadingSpinner" class="hidden ml-2 w-5 h-5 border-2 border-white border-t-transparent rounded-full loading"></div>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Hasil Output -->
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <span class="bg-green-100 p-2 rounded-lg mr-3">📋</span>
+                        Hasil Modul Ajar dari ChatGPT
+                    </h2>
+                    
+                    <div id="outputArea" class="min-h-96">
+                        <div class="text-center text-gray-500 py-12">
+                            <div class="text-6xl mb-4">🤖</div>
+                            <p class="text-lg">Isi semua data di sebelah kiri untuk mulai membuat modul ajar</p>
+                            <p class="text-sm mt-2">ChatGPT akan membantu Anda membuat modul pembelajaran lengkap sesuai kurikulum Deep Learning</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('modulForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Ambil semua data form
+            const formData = {
+                penyusun: document.getElementById('penyusun').value,
+                satuan: document.getElementById('satuan').value,
+                tahun: document.getElementById('tahun').value,
+                semester: document.getElementById('semester').value,
+                mapel: document.getElementById('mapel').value,
+                kelas: document.getElementById('kelas').value,
+                topik: document.getElementById('topik').value,
+                alokasi: document.getElementById('alokasi').value,
+                sarana: document.getElementById('sarana').value,
+                capaian: document.getElementById('capaian').value,
+                tujuan: document.getElementById('tujuan').value,
+                lintas: document.getElementById('lintas').value,
+                sumber: document.getElementById('sumber').value,
+                model: document.getElementById('model').value,
+                pendekatan: document.getElementById('pendekatan').value,
+                digital: document.getElementById('digital').value
+            };
+
+            // Ambil dimensi yang dipilih
+            const dimensiChecked = Array.from(document.querySelectorAll('input[name="dimensi"]:checked'))
+                .map(cb => cb.nextElementSibling.textContent);
+
+            // Ambil strategi diferensiasi yang dipilih
+            const diferensiasiKonten = Array.from(document.querySelectorAll('input[name="diferensiasi_konten"]:checked'))
+                .map(cb => cb.nextElementSibling.textContent);
+            const diferensiasiProses = Array.from(document.querySelectorAll('input[name="diferensiasi_proses"]:checked'))
+                .map(cb => cb.nextElementSibling.textContent);
+            const diferensiasiProduk = Array.from(document.querySelectorAll('input[name="diferensiasi_produk"]:checked'))
+                .map(cb => cb.nextElementSibling.textContent);
+
+            // Validasi form - pastikan field penting terisi
+            if (!formData.topik || !formData.capaian || !formData.tujuan || !formData.model || !formData.pendekatan) {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                modal.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg max-w-md mx-4">
+                        <h3 class="text-lg font-bold text-red-600 mb-3">⚠️ Data Belum Lengkap</h3>
+                        <p class="text-gray-700 mb-4">Mohon isi minimal field berikut:</p>
+                        <ul class="list-disc list-inside text-sm text-gray-600 mb-4">
+                            <li>Topik/Elemen</li>
+                            <li>Capaian Pembelajaran</li>
+                            <li>Tujuan Pembelajaran</li>
+                            <li>Model Pembelajaran</li>
+                            <li>Pendekatan Pembelajaran</li>
+                        </ul>
+                        <button onclick="this.parentElement.parentElement.remove()" class="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700">
+                            Tutup
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                return;
+            }
+
+            // Tampilkan loading
+            showLoading();
+
+            // Simulasi proses ChatGPT (dalam implementasi nyata, ini akan memanggil API ChatGPT)
+            setTimeout(() => {
+                generateModulAjar(formData, dimensiChecked, diferensiasiKonten, diferensiasiProses, diferensiasiProduk);
+                hideLoading();
+            }, 4000);
+        });
+
+        function showLoading() {
+            document.getElementById('btnText').textContent = 'ChatGPT Sedang Bekerja...';
+            document.getElementById('loadingSpinner').classList.remove('hidden');
+            
+            const outputArea = document.getElementById('outputArea');
+            outputArea.innerHTML = `
+                <div class="text-center py-12">
+                    <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full loading mx-auto mb-4"></div>
+                    <p class="text-lg text-gray-600">🤖 ChatGPT sedang menganalisis data Anda...</p>
+                    <p class="text-sm text-gray-500 mt-2">Membuat modul ajar sesuai kurikulum Deep Learning</p>
+                    <div class="mt-4 text-xs text-gray-400">
+                        <p>• Menganalisis capaian pembelajaran</p>
+                        <p>• Merancang strategi pembelajaran</p>
+                        <p>• Menyusun asesmen yang tepat</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function hideLoading() {
+            document.getElementById('btnText').textContent = '🚀 Buat Modul Ajar dengan ChatGPT';
+            document.getElementById('loadingSpinner').classList.add('hidden');
+        }
+
+        function generateModulAjar(data, dimensi, diferensiasiKonten, diferensiasiProses, diferensiasiProduk) {
+            const outputArea = document.getElementById('outputArea');
+            
+            // Buat prompt yang akan dikirim ke ChatGPT
+            const chatGPTPrompt = `Buatkan modul ajar lengkap dan mendalam dengan data berikut:
+
+IDENTITAS MODUL:
+- Topik: ${data.topik}
+- Mata Pelajaran: ${data.mapel}
+- Kelas: ${data.kelas}
+- Capaian Pembelajaran: ${data.capaian}
+- Tujuan Pembelajaran: ${data.tujuan}
+- Model Pembelajaran: ${data.model}
+- Pendekatan Pembelajaran: ${data.pendekatan}
+- Dimensi Profil Lulusan: ${dimensi.join(', ')}
+- Alokasi Waktu: ${data.alokasi}
+- Sumber Belajar: ${data.sumber}
+- Lintas Bidang Disiplin: ${data.lintas}
+- Sarana Prasarana: ${data.sarana}
+- Pemanfaatan Digital: ${data.digital}
+
+STRATEGI DIFERENSIASI:
+- Diferensiasi Konten: ${diferensiasiKonten.join(', ')}
+- Diferensiasi Proses: ${diferensiasiProses.join(', ')}
+- Diferensiasi Produk: ${diferensiasiProduk.join(', ')}
+
+Berdasarkan identitas modul dan strategi diferensiasi, Buatkan modul ajar yang mencakup:
+1. Pertanyaan pemantik yang kontekstual dan menantang pemikiran siswa
+2. Langkah pembelajaran detail dengan pendekatan ${data.pendekatan}
+3. Implementasi strategi diferensiasi yang spesifik
+4. Asesmen diagnostik, formatif, dan sumatif yang komprehensif
+5. Pemanfaatan teknologi digital secara optimal
+6. Refleksi pembelajaran yang mendalam
+7. Program remedial dan pengayaan yang terstruktur
+8. Rubrik penilaian yang jelas dan terukur
+
+Format dalam bentuk modul ajar yang siap pakai, lengkap, dan sesuai kurikulum terbaru yaitu deep learning.`;
+
+            const modulContent = `
+                <div class="fade-in space-y-6">
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                        <h3 class="font-bold text-blue-800 mb-2">🤖 Prompt yang Dikirim ke ChatGPT:</h3>
+                        <div class="text-sm text-blue-700 bg-white p-3 rounded border max-h-32 overflow-y-auto">
+                            "${chatGPTPrompt}"
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-green-500 text-white p-2 rounded-full mr-3">✨</span>
+                            MODUL AJAR - ${data.topik.toUpperCase()}
+                        </h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-4 mb-6 text-sm bg-white p-4 rounded">
+                            <div><strong>Penyusun:</strong> ${data.penyusun || 'Tidak diisi'}</div>
+                            <div><strong>Satuan Pendidikan:</strong> ${data.satuan || 'Tidak diisi'}</div>
+                            <div><strong>Mata Pelajaran:</strong> ${data.mapel}</div>
+                            <div><strong>Kelas/Fase:</strong> ${data.kelas}</div>
+                            <div><strong>Alokasi Waktu:</strong> ${data.alokasi}</div>
+                            <div><strong>Model Pembelajaran:</strong> ${data.model}</div>
+                            <div><strong>Pendekatan:</strong> ${data.pendekatan}</div>
+                            <div><strong>Pemanfaatan Digital:</strong> ${data.digital || 'Tidak ada'}</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-yellow-800 mb-3">🤔 Pertanyaan Pemantik</h4>
+                        <div class="bg-white p-3 rounded">
+                            <ul class="list-disc list-inside text-yellow-700 space-y-2">
+                                <li>Apa yang kalian ketahui tentang ${data.topik.toLowerCase()} dalam kehidupan sehari-hari?</li>
+                                <li>Bagaimana ${data.topik.toLowerCase()} dapat membantu menyelesaikan masalah nyata?</li>
+                                <li>Mengapa penting bagi kita untuk memahami konsep ${data.topik.toLowerCase()}?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-purple-800 mb-3">📚 Langkah Pembelajaran (Deep Learning)</h4>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded border-l-4 border-green-500">
+                                <h5 class="font-semibold text-green-700 mb-2">🚀 Kegiatan Pendahuluan (15 menit)</h5>
+                                <ul class="list-disc list-inside text-sm space-y-1">
+                                    <li>Apersepsi: Mengaitkan materi dengan pengalaman siswa</li>
+                                    <li>Menyampaikan tujuan pembelajaran dan manfaatnya</li>
+                                    <li>Motivasi melalui pertanyaan pemantik</li>
+                                    <li>Asesmen diagnostik singkat untuk mengukur pengetahuan awal</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded border-l-4 border-blue-500">
+                                <h5 class="font-semibold text-blue-700 mb-2">🎯 Kegiatan Inti (60 menit) - ${data.model} dengan ${data.pendekatan}</h5>
+                                <div class="space-y-3">
+                                    <div class="pl-4">
+                                        <h6 class="font-medium text-blue-600">Fase 1: Orientasi Masalah (15 menit)</h6>
+                                        <ul class="list-disc list-inside text-sm mt-1">
+                                            <li>Siswa mengamati fenomena/masalah terkait ${data.topik}</li>
+                                            <li>Identifikasi masalah yang akan dipecahkan</li>
+                                            <li>Pembentukan kelompok heterogen (4-5 siswa)</li>
+                                            ${data.digital ? `<li>Menggunakan ${data.digital} untuk eksplorasi awal</li>` : ''}
+                                        </ul>
+                                    </div>
+                                    <div class="pl-4">
+                                        <h6 class="font-medium text-blue-600">Fase 2: Mengorganisasi Siswa (15 menit)</h6>
+                                        <ul class="list-disc list-inside text-sm mt-1">
+                                            <li>Siswa merumuskan hipotesis atau dugaan sementara</li>
+                                            <li>Pembagian tugas dalam kelompok</li>
+                                            <li>Menentukan strategi pemecahan masalah</li>
+                                            <li>Implementasi diferensiasi: ${diferensiasiProses.join(', ') || 'Kelompok fleksibel'}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pl-4">
+                                        <h6 class="font-medium text-blue-600">Fase 3: Investigasi (20 menit)</h6>
+                                        <ul class="list-disc list-inside text-sm mt-1">
+                                            <li>Siswa mengumpulkan informasi dari berbagai sumber</li>
+                                            <li>Melakukan eksperimen atau analisis data</li>
+                                            <li>Guru membimbing dan memfasilitasi proses investigasi</li>
+                                            <li>Diferensiasi konten: ${diferensiasiKonten.join(', ') || 'Materi bertingkat'}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pl-4">
+                                        <h6 class="font-medium text-blue-600">Fase 4: Presentasi Hasil (10 menit)</h6>
+                                        <ul class="list-disc list-inside text-sm mt-1">
+                                            <li>Setiap kelompok mempresentasikan hasil investigasi</li>
+                                            <li>Diskusi dan tanya jawab antar kelompok</li>
+                                            <li>Guru memberikan umpan balik konstruktif</li>
+                                            <li>Diferensiasi produk: ${diferensiasiProduk.join(', ') || 'Format presentasi variatif'}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded border-l-4 border-red-500">
+                                <h5 class="font-semibold text-red-700 mb-2">🎯 Kegiatan Penutup (15 menit)</h5>
+                                <ul class="list-disc list-inside text-sm space-y-1">
+                                    <li>Refleksi pembelajaran: Apa yang telah dipelajari?</li>
+                                    <li>Kesimpulan bersama tentang konsep ${data.topik}</li>
+                                    <li>Asesmen formatif untuk mengukur pemahaman</li>
+                                    <li>Preview materi pertemuan berikutnya</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-orange-800 mb-3">📊 Asesmen Pembelajaran</h4>
+                        
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-white p-4 rounded">
+                                <h5 class="font-semibold text-orange-700 mb-2">🔍 Diagnostik</h5>
+                                <p class="text-sm mb-2">Mengukur pengetahuan awal siswa:</p>
+                                <ul class="text-xs list-disc list-inside">
+                                    <li>Pre-test konsep dasar</li>
+                                    <li>Mind mapping awal</li>
+                                    <li>Kuis singkat 5 soal</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded">
+                                <h5 class="font-semibold text-orange-700 mb-2">📈 Formatif</h5>
+                                <p class="text-sm mb-2">Selama proses pembelajaran:</p>
+                                <ul class="text-xs list-disc list-inside">
+                                    <li>Observasi aktivitas kelompok</li>
+                                    <li>Tanya jawab interaktif</li>
+                                    <li>Exit ticket</li>
+                                    <li>Peer assessment</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded">
+                                <h5 class="font-semibold text-orange-700 mb-2">📋 Sumatif</h5>
+                                <p class="text-sm mb-2">Evaluasi akhir pembelajaran:</p>
+                                <ul class="text-xs list-disc list-inside">
+                                    <li>Tes tertulis (70%)</li>
+                                    <li>Proyek kelompok (20%)</li>
+                                    <li>Presentasi (10%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-indigo-800 mb-3">🎨 Strategi Pembelajaran Berdiferensiasi</h4>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-white p-3 rounded">
+                                <h5 class="font-semibold text-indigo-700 mb-2">Diferensiasi Konten</h5>
+                                <ul class="text-sm list-disc list-inside">
+                                    ${diferensiasiKonten.length > 0 ? 
+                                        diferensiasiKonten.map(item => `<li>${item}</li>`).join('') : 
+                                        '<li>Materi dengan tingkat kompleksitas berbeda</li><li>Sumber belajar beragam</li>'
+                                    }
+                                </ul>
+                            </div>
+                            <div class="bg-white p-3 rounded">
+                                <h5 class="font-semibold text-indigo-700 mb-2">Diferensiasi Proses</h5>
+                                <ul class="text-sm list-disc list-inside">
+                                    ${diferensiasiProses.length > 0 ? 
+                                        diferensiasiProses.map(item => `<li>${item}</li>`).join('') : 
+                                        '<li>Kelompok heterogen dan homogen</li><li>Scaffolding sesuai kebutuhan</li>'
+                                    }
+                                </ul>
+                            </div>
+                            <div class="bg-white p-3 rounded">
+                                <h5 class="font-semibold text-indigo-700 mb-2">Diferensiasi Produk</h5>
+                                <ul class="text-sm list-disc list-inside">
+                                    ${diferensiasiProduk.length > 0 ? 
+                                        diferensiasiProduk.map(item => `<li>${item}</li>`).join('') : 
+                                        '<li>Format tugas beragam</li><li>Rubrik penilaian fleksibel</li>'
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${data.digital ? `
+                    <div class="bg-cyan-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-cyan-800 mb-3">💻 Pemanfaatan Teknologi Digital</h4>
+                        <div class="bg-white p-3 rounded">
+                            <p class="text-sm text-cyan-700 mb-2"><strong>Platform/Aplikasi yang Digunakan:</strong></p>
+                            <p class="text-sm">${data.digital}</p>
+                            <div class="mt-3 text-xs text-cyan-600">
+                                <p><strong>Implementasi:</strong></p>
+                                <ul class="list-disc list-inside mt-1">
+                                    <li>Digunakan untuk meningkatkan engagement siswa</li>
+                                    <li>Memfasilitasi pembelajaran interaktif dan kolaboratif</li>
+                                    <li>Mendukung asesmen real-time dan feedback</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-gray-800 mb-3">📋 Informasi Tambahan</h4>
+                        <div class="grid md:grid-cols-2 gap-4 text-sm">
+                            <div class="bg-white p-3 rounded">
+                                <strong>Dimensi Profil Lulusan:</strong>
+                                <ul class="list-disc list-inside mt-1">
+                                    ${dimensi.length > 0 ? dimensi.map(d => `<li>${d}</li>`).join('') : '<li>Tidak ada yang dipilih</li>'}
+                                </ul>
+                            </div>
+                            <div class="bg-white p-3 rounded">
+                                <strong>Lintas Bidang:</strong> ${data.lintas || 'Tidak diisi'}<br>
+                                <strong>Sarana:</strong> ${data.sarana || 'Tidak diisi'}<br>
+                                <strong>Sumber Belajar:</strong> ${data.sumber || 'Tidak diisi'}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-100 p-4 rounded-lg text-center">
+                        <p class="text-green-800 font-semibold">✅ Modul Ajar Berhasil Dibuat oleh ChatGPT!</p>
+                        <p class="text-green-700 text-sm mt-1">Modul ini siap digunakan untuk pembelajaran sesuai kurikulum Deep Learning</p>
+                        <div class="mt-3 text-xs text-green-600">
+                            <p>💡 Tip: Sesuaikan dengan karakteristik siswa dan kondisi sekolah Anda</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            outputArea.innerHTML = modulContent;
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ff9fb72311fe8a',t:'MTc2MDcwMjMwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
