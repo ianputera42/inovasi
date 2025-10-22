@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesin Pembuat Modul Ajar - Edisi Guru Inovasi</title>
+    <title>Mesin Penyusun Modul Ajar AI - Edisi Guru Inovasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -328,8 +328,8 @@
             <div class="max-w-7xl mx-auto px-4 relative z-10">
                 <div class="text-center">
                     <div class="ai-brain mb-6">🧠</div>
-                    <h1 class="text-5xl font-bold mb-4 typing-animation">Dashboard Pembuat Modul Ajar AI v8.0</h1>
-                    <p class="text-2xl text-blue-100 mb-6">Revolutionary Edition - Powered by Advanced ChatGPT & Deep Learning</p>
+                    <h1 class="text-5xl font-bold mb-4 typing-animation">Mesin Pembuat Modul Ajar AI</h1>
+                    <p class="text-2xl text-blue-100 mb-6">Edisi Guru Inovasi - Powered by Advanced ChatGPT & Deep Learning</p>
                     
                     <!-- Revolutionary Features Highlight -->
                     <div class="revolutionary-feature glassmorphism max-w-4xl mx-auto mb-8">
@@ -1075,11 +1075,13 @@
                 
                 <div class="border-t border-gray-700 pt-8 text-center">
                     <p class="text-gray-400 mb-4 text-lg">
-                        © 2024 Dashboard Pembuat Modul Ajar AI v8.0 Revolutionary Edition. 
+                        <strong>© 2024 Dashboard Pembuat Modul Ajar AI v8.0 Revolutionary Edition</strong><br>
                         Dibuat dengan ❤️ dan 🧠 AI untuk kemajuan pendidikan Indonesia.
                     </p>
                     <p class="text-gray-500 text-sm mb-6">
-                        Hak Cipta Dilindungi | Semua fitur dirancang untuk membantu guru Indonesia menciptakan pembelajaran berkualitas dunia
+                        <strong>Hak Cipta Dilindungi Undang-Undang</strong> | Semua fitur dirancang untuk membantu guru Indonesia menciptakan pembelajaran berkualitas dunia<br>
+                        Dokumen yang dihasilkan dapat diedit dan disesuaikan dengan kondisi siswa dan sekolah masing-masing<br>
+                        <em>Powered by Advanced AI Technology & Deep Learning Neural Networks</em>
                     </p>
                     <div class="flex justify-center space-x-8 text-sm text-gray-400 flex-wrap">
                         <span class="flex items-center glassmorphism px-4 py-2 rounded-full mb-2">
@@ -2306,21 +2308,455 @@
             showAdvancedNotification('📤 Fitur sharing akan tersedia dalam update berikutnya!', 'info');
         }
 
-        // Enhanced download functions (simplified for demo)
+        // Enhanced download functions with real functionality
         function downloadAsWord() {
-            showAdvancedNotification('📄 Download Word akan tersedia setelah modul di-generate!', 'info');
+            if (!currentFormData.penyusun) {
+                showAdvancedNotification('⚠️ Mohon generate modul ajar terlebih dahulu!', 'warning');
+                return;
+            }
+            
+            const modulAjar = createRevolutionaryModulAjar(currentFormData);
+            const wordContent = generateWordDocument(modulAjar);
+            
+            const blob = new Blob([wordContent], {
+                type: 'application/msword'
+            });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Modul_Ajar_${modulAjar.identitas.mapel}_${modulAjar.identitas.topik.replace(/\s+/g, '_')}.doc`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showAdvancedNotification('📄 Modul ajar berhasil diunduh dalam format Word!', 'success');
         }
 
         function downloadAsPDF() {
-            showAdvancedNotification('📑 Download PDF akan tersedia setelah modul di-generate!', 'info');
+            if (!currentFormData.penyusun) {
+                showAdvancedNotification('⚠️ Mohon generate modul ajar terlebih dahulu!', 'warning');
+                return;
+            }
+            
+            // Create a clean version for PDF
+            const printWindow = window.open('', '_blank');
+            const modulAjar = createRevolutionaryModulAjar(currentFormData);
+            const pdfContent = generatePDFDocument(modulAjar);
+            
+            printWindow.document.write(pdfContent);
+            printWindow.document.close();
+            printWindow.focus();
+            
+            setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+            }, 1000);
+            
+            showAdvancedNotification('📑 Modul ajar siap untuk disimpan sebagai PDF!', 'success');
         }
 
         function copyToClipboard() {
-            showAdvancedNotification('📋 Copy to clipboard akan tersedia setelah modul di-generate!', 'info');
+            if (!currentFormData.penyusun) {
+                showAdvancedNotification('⚠️ Mohon generate modul ajar terlebih dahulu!', 'warning');
+                return;
+            }
+            
+            const modulAjar = createRevolutionaryModulAjar(currentFormData);
+            const textContent = generateTextDocument(modulAjar);
+            
+            navigator.clipboard.writeText(textContent).then(() => {
+                showAdvancedNotification('📋 Modul ajar berhasil disalin ke clipboard!', 'success');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = textContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showAdvancedNotification('📋 Modul ajar berhasil disalin ke clipboard!', 'success');
+            });
+        }
+
+        function generateWordDocument(modulAjar) {
+            return `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Modul Ajar - ${modulAjar.identitas.mapel}</title>
+    <style>
+        body { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; margin: 1in; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .title { font-size: 16pt; font-weight: bold; margin-bottom: 10px; }
+        .subtitle { font-size: 14pt; margin-bottom: 20px; }
+        .section { margin-bottom: 25px; }
+        .section-title { font-size: 14pt; font-weight: bold; margin-bottom: 15px; color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 5px; }
+        .identity-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .identity-table td { padding: 8px; border: 1px solid #ccc; }
+        .identity-table .label { font-weight: bold; width: 200px; background-color: #f8f9fa; }
+        .learning-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .learning-table th, .learning-table td { padding: 12px; border: 1px solid #333; text-align: left; vertical-align: top; }
+        .learning-table th { background-color: #2563eb; color: white; font-weight: bold; text-align: center; }
+        .learning-table .time-col { width: 15%; text-align: center; font-weight: bold; }
+        .learning-table .activity-col { width: 85%; }
+        .rubric-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .rubric-table th, .rubric-table td { padding: 10px; border: 1px solid #333; text-align: center; vertical-align: top; }
+        .rubric-table th { background-color: #059669; color: white; font-weight: bold; }
+        .rubric-table .criteria-col { width: 20%; text-align: left; font-weight: bold; }
+        .list-item { margin-bottom: 8px; }
+        .list-item::before { content: "• "; font-weight: bold; }
+        .question-item { margin-bottom: 10px; padding: 10px; background-color: #f0f9ff; border-left: 4px solid #2563eb; }
+        .reflection-item { margin-bottom: 10px; padding: 10px; background-color: #fef3c7; border-left: 4px solid #f59e0b; }
+        .page-break { page-break-before: always; }
+        .footer { margin-top: 50px; text-align: center; font-size: 10pt; color: #666; border-top: 1px solid #ccc; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">MODUL AJAR</div>
+        <div class="subtitle">${modulAjar.identitas.mapel.toUpperCase()}</div>
+        <div class="subtitle">${modulAjar.identitas.topik}</div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">IDENTITAS MODUL AJAR</div>
+        <table class="identity-table">
+            <tr><td class="label">Penyusun</td><td>${modulAjar.identitas.penyusun}</td></tr>
+            <tr><td class="label">Satuan Pendidikan</td><td>${modulAjar.identitas.satuan}</td></tr>
+            <tr><td class="label">Kelas/Fase</td><td>${modulAjar.identitas.kelas}</td></tr>
+            <tr><td class="label">Mata Pelajaran</td><td>${modulAjar.identitas.mapel}</td></tr>
+            <tr><td class="label">Topik/Elemen</td><td>${modulAjar.identitas.topik}</td></tr>
+            <tr><td class="label">Alokasi Waktu</td><td>${modulAjar.identitas.alokasi}</td></tr>
+            <tr><td class="label">Tahun Pelajaran</td><td>${modulAjar.identitas.tahun}</td></tr>
+            <tr><td class="label">Semester</td><td>Semester ${modulAjar.identitas.semester}</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">CAPAIAN PEMBELAJARAN</div>
+        <p>${modulAjar.identitas.capaian}</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">TUJUAN PEMBELAJARAN</div>
+        <p>${modulAjar.identitas.tujuan}</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">PERTANYAAN PEMANTIK</div>
+        ${modulAjar.pertanyaanPemantik.map((question, index) => `
+            <div class="question-item">${index + 1}. ${question}</div>
+        `).join('')}
+    </div>
+
+    <div class="page-break"></div>
+    <div class="section">
+        <div class="section-title">LANGKAH-LANGKAH PEMBELAJARAN</div>
+        <table class="learning-table">
+            <thead>
+                <tr>
+                    <th>TAHAP PEMBELAJARAN</th>
+                    <th class="time-col">WAKTU</th>
+                    <th class="activity-col">KEGIATAN PEMBELAJARAN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="${modulAjar.langkahPembelajaran.pendahuluan.kegiatan.length}" style="background-color: #dbeafe; font-weight: bold; text-align: center; vertical-align: middle;">PENDAHULUAN</td>
+                    <td class="time-col">${modulAjar.langkahPembelajaran.pendahuluan.waktu}</td>
+                    <td class="activity-col">
+                        ${modulAjar.langkahPembelajaran.pendahuluan.kegiatan.map(kegiatan => `
+                            <div class="list-item">${kegiatan.replace(/🎯|📋|🧠|🎪|📢|🗺️/g, '').trim()}</div>
+                        `).join('')}
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="${Math.ceil(modulAjar.langkahPembelajaran.inti.kegiatan.length / 3)}" style="background-color: #dcfce7; font-weight: bold; text-align: center; vertical-align: middle;">KEGIATAN INTI</td>
+                    <td class="time-col">${modulAjar.langkahPembelajaran.inti.waktu}</td>
+                    <td class="activity-col">
+                        ${modulAjar.langkahPembelajaran.inti.kegiatan.map(kegiatan => {
+                            if (kegiatan.startsWith('🔍') || kegiatan.startsWith('🧪') || kegiatan.startsWith('🎨')) {
+                                return `<div style="font-weight: bold; margin: 15px 0 10px 0; color: #059669;">${kegiatan.replace(/🔍|🧪|🎨/g, '').trim()}</div>`;
+                            } else if (kegiatan === '') {
+                                return '<div style="margin: 10px 0;"></div>';
+                            } else {
+                                return `<div class="list-item">${kegiatan.replace(/•/g, '').trim()}</div>`;
+                            }
+                        }).join('')}
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="${modulAjar.langkahPembelajaran.penutup.kegiatan.length}" style="background-color: #fef3c7; font-weight: bold; text-align: center; vertical-align: middle;">PENUTUP</td>
+                    <td class="time-col">${modulAjar.langkahPembelajaran.penutup.waktu}</td>
+                    <td class="activity-col">
+                        ${modulAjar.langkahPembelajaran.penutup.kegiatan.map(kegiatan => `
+                            <div class="list-item">${kegiatan.replace(/📝|🎯|📚|📅|🤲/g, '').trim()}</div>
+                        `).join('')}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-break"></div>
+    <div class="section">
+        <div class="section-title">ASESMEN PEMBELAJARAN</div>
+        
+        <h4 style="color: #2563eb; margin-bottom: 10px;">Asesmen Formatif:</h4>
+        ${modulAjar.asesmen.formatif.map(item => `<div class="list-item">${item.replace(/📊|❓|📝|🎯|👥/g, '').trim()}</div>`).join('')}
+        
+        <h4 style="color: #059669; margin: 20px 0 10px 0;">Asesmen Sumatif:</h4>
+        ${modulAjar.asesmen.sumatif.map(item => `<div class="list-item">${item.replace(/📋|🎨|🗣️|📱|🔬/g, '').trim()}</div>`).join('')}
+        
+        <h4 style="color: #7c3aed; margin: 20px 0 10px 0;">Asesmen Autentik:</h4>
+        ${modulAjar.asesmen.autentik.map(item => `<div class="list-item">${item.replace(/🌍|📊|🎭|📝|🤝/g, '').trim()}</div>`).join('')}
+    </div>
+
+    <div class="section">
+        <div class="section-title">RUBRIK PENILAIAN</div>
+        <table class="rubric-table">
+            <thead>
+                <tr>
+                    <th class="criteria-col">KRITERIA</th>
+                    <th>SANGAT BAIK (4)</th>
+                    <th>BAIK (3)</th>
+                    <th>CUKUP (2)</th>
+                    <th>PERLU BIMBINGAN (1)</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${modulAjar.rubrikPenilaian.aspek.map(aspek => `
+                    <tr>
+                        <td class="criteria-col">${aspek.kriteria}</td>
+                        <td>${aspek.sangat_baik}</td>
+                        <td>${aspek.baik}</td>
+                        <td>${aspek.cukup}</td>
+                        <td>${aspek.perlu_bimbingan}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-break"></div>
+    <div class="section">
+        <div class="section-title">STRATEGI PEMBELAJARAN BERDIFERENSIASI</div>
+        
+        <h4 style="color: #2563eb; margin-bottom: 10px;">Diferensiasi Konten:</h4>
+        ${modulAjar.diferensiasi.konten.map(item => `<div class="list-item">${item.replace(/📚|🎨|🌐|🔍/g, '').trim()}</div>`).join('')}
+        
+        <h4 style="color: #059669; margin: 20px 0 10px 0;">Diferensiasi Proses:</h4>
+        ${modulAjar.diferensiasi.proses.map(item => `<div class="list-item">${item.replace(/👥|⏰|🎯|🤝/g, '').trim()}</div>`).join('')}
+        
+        <h4 style="color: #7c3aed; margin: 20px 0 10px 0;">Diferensiasi Produk:</h4>
+        ${modulAjar.diferensiasi.produk.map(item => `<div class="list-item">${item.replace(/🎨|📊|🎪|📱/g, '').trim()}</div>`).join('')}
+    </div>
+
+    <div class="section">
+        <div class="section-title">PROGRAM REMEDIAL DAN PENGAYAAN</div>
+        
+        <h4 style="color: #ea580c; margin-bottom: 10px;">Program Remedial:</h4>
+        ${modulAjar.remedialPengayaan.remedial.map(item => `<div class="list-item">${item.replace(/🔄|👥|📱|🎯|🤝/g, '').trim()}</div>`).join('')}
+        
+        <h4 style="color: #059669; margin: 20px 0 10px 0;">Program Pengayaan:</h4>
+        ${modulAjar.remedialPengayaan.pengayaan.map(item => `<div class="list-item">${item.replace(/🚀|🌟|📚|🏆|💡/g, '').trim()}</div>`).join('')}
+    </div>
+
+    <div class="section">
+        <div class="section-title">REFLEKSI GURU</div>
+        ${modulAjar.refleksiGuru.map((refleksi, index) => `
+            <div class="reflection-item">${index + 1}. ${refleksi.replace(/📊|🎯|🔧|⏰|💡|🤝|📱/g, '').trim()}</div>
+        `).join('')}
+    </div>
+
+    <div class="section">
+        <div class="section-title">LAMPIRAN</div>
+        ${modulAjar.lampiran.map(lampiran => `<div class="list-item">${lampiran.replace(/📋|📊|🎨|📱|📚|🎯|📝/g, '').trim()}</div>`).join('')}
+    </div>
+
+    <div class="footer">
+        <p><strong>© 2024 Dashboard Pembuat Modul Ajar AI v8.0 Revolutionary Edition</strong></p>
+        <p>Dibuat dengan teknologi AI Super Intelligence untuk kemajuan pendidikan Indonesia</p>
+        <p>Dokumen ini dapat diedit dan disesuaikan dengan kondisi siswa dan sekolah masing-masing</p>
+    </div>
+</body>
+</html>`;
+        }
+
+        function generatePDFDocument(modulAjar) {
+            return `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Modul Ajar - ${modulAjar.identitas.mapel}</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .page-break { page-break-before: always; }
+        }
+        body { font-family: 'Times New Roman', serif; font-size: 11pt; line-height: 1.4; margin: 20px; }
+        .header { text-align: center; margin-bottom: 25px; }
+        .title { font-size: 18pt; font-weight: bold; margin-bottom: 8px; }
+        .subtitle { font-size: 14pt; margin-bottom: 15px; }
+        .section { margin-bottom: 20px; }
+        .section-title { font-size: 13pt; font-weight: bold; margin-bottom: 12px; color: #1e40af; border-bottom: 2px solid #1e40af; padding-bottom: 3px; }
+        .identity-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        .identity-table td { padding: 6px; border: 1px solid #666; font-size: 10pt; }
+        .identity-table .label { font-weight: bold; width: 180px; background-color: #f3f4f6; }
+        .learning-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        .learning-table th, .learning-table td { padding: 8px; border: 1px solid #333; text-align: left; vertical-align: top; font-size: 10pt; }
+        .learning-table th { background-color: #1e40af; color: white; font-weight: bold; text-align: center; }
+        .learning-table .time-col { width: 12%; text-align: center; font-weight: bold; }
+        .learning-table .stage-col { width: 18%; text-align: center; font-weight: bold; }
+        .learning-table .activity-col { width: 70%; }
+        .rubric-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        .rubric-table th, .rubric-table td { padding: 6px; border: 1px solid #333; text-align: center; vertical-align: top; font-size: 9pt; }
+        .rubric-table th { background-color: #059669; color: white; font-weight: bold; }
+        .rubric-table .criteria-col { width: 18%; text-align: left; font-weight: bold; }
+        .list-item { margin-bottom: 5px; font-size: 10pt; }
+        .list-item::before { content: "• "; font-weight: bold; }
+        .question-item { margin-bottom: 8px; padding: 8px; background-color: #eff6ff; border-left: 3px solid #1e40af; font-size: 10pt; }
+        .reflection-item { margin-bottom: 8px; padding: 8px; background-color: #fefce8; border-left: 3px solid #eab308; font-size: 10pt; }
+        .footer { margin-top: 30px; text-align: center; font-size: 9pt; color: #666; border-top: 1px solid #ccc; padding-top: 15px; }
+    </style>
+</head>
+<body>
+    ${generateWordDocument(modulAjar).replace(/<head>[\s\S]*?<\/head>/, '').replace(/<\/html>/, '').replace(/<html>/, '')}
+</body>
+</html>`;
+        }
+
+        function generateTextDocument(modulAjar) {
+            return `
+MODUL AJAR
+${modulAjar.identitas.mapel.toUpperCase()}
+${modulAjar.identitas.topik}
+
+=====================================
+IDENTITAS MODUL AJAR
+=====================================
+
+Penyusun           : ${modulAjar.identitas.penyusun}
+Satuan Pendidikan  : ${modulAjar.identitas.satuan}
+Kelas/Fase         : ${modulAjar.identitas.kelas}
+Mata Pelajaran     : ${modulAjar.identitas.mapel}
+Topik/Elemen       : ${modulAjar.identitas.topik}
+Alokasi Waktu      : ${modulAjar.identitas.alokasi}
+Tahun Pelajaran    : ${modulAjar.identitas.tahun}
+Semester           : Semester ${modulAjar.identitas.semester}
+
+=====================================
+CAPAIAN PEMBELAJARAN
+=====================================
+
+${modulAjar.identitas.capaian}
+
+=====================================
+TUJUAN PEMBELAJARAN
+=====================================
+
+${modulAjar.identitas.tujuan}
+
+=====================================
+PERTANYAAN PEMANTIK
+=====================================
+
+${modulAjar.pertanyaanPemantik.map((question, index) => `${index + 1}. ${question}`).join('\n')}
+
+=====================================
+LANGKAH-LANGKAH PEMBELAJARAN
+=====================================
+
+PENDAHULUAN (${modulAjar.langkahPembelajaran.pendahuluan.waktu})
+${modulAjar.langkahPembelajaran.pendahuluan.kegiatan.map(kegiatan => `• ${kegiatan.replace(/🎯|📋|🧠|🎪|📢|🗺️/g, '').trim()}`).join('\n')}
+
+KEGIATAN INTI (${modulAjar.langkahPembelajaran.inti.waktu})
+${modulAjar.langkahPembelajaran.inti.kegiatan.map(kegiatan => {
+    if (kegiatan.startsWith('🔍') || kegiatan.startsWith('🧪') || kegiatan.startsWith('🎨')) {
+        return `\n${kegiatan.replace(/🔍|🧪|🎨/g, '').trim()}\n`;
+    } else if (kegiatan === '') {
+        return '';
+    } else {
+        return `• ${kegiatan.replace(/•/g, '').trim()}`;
+    }
+}).join('\n')}
+
+PENUTUP (${modulAjar.langkahPembelajaran.penutup.waktu})
+${modulAjar.langkahPembelajaran.penutup.kegiatan.map(kegiatan => `• ${kegiatan.replace(/📝|🎯|📚|📅|🤲/g, '').trim()}`).join('\n')}
+
+=====================================
+ASESMEN PEMBELAJARAN
+=====================================
+
+ASESMEN FORMATIF:
+${modulAjar.asesmen.formatif.map(item => `• ${item.replace(/📊|❓|📝|🎯|👥/g, '').trim()}`).join('\n')}
+
+ASESMEN SUMATIF:
+${modulAjar.asesmen.sumatif.map(item => `• ${item.replace(/📋|🎨|🗣️|📱|🔬/g, '').trim()}`).join('\n')}
+
+ASESMEN AUTENTIK:
+${modulAjar.asesmen.autentik.map(item => `• ${item.replace(/🌍|📊|🎭|📝|🤝/g, '').trim()}`).join('\n')}
+
+=====================================
+RUBRIK PENILAIAN
+=====================================
+
+${modulAjar.rubrikPenilaian.aspek.map(aspek => `
+KRITERIA: ${aspek.kriteria}
+- Sangat Baik (4): ${aspek.sangat_baik}
+- Baik (3): ${aspek.baik}
+- Cukup (2): ${aspek.cukup}
+- Perlu Bimbingan (1): ${aspek.perlu_bimbingan}
+`).join('\n')}
+
+=====================================
+STRATEGI PEMBELAJARAN BERDIFERENSIASI
+=====================================
+
+DIFERENSIASI KONTEN:
+${modulAjar.diferensiasi.konten.map(item => `• ${item.replace(/📚|🎨|🌐|🔍/g, '').trim()}`).join('\n')}
+
+DIFERENSIASI PROSES:
+${modulAjar.diferensiasi.proses.map(item => `• ${item.replace(/👥|⏰|🎯|🤝/g, '').trim()}`).join('\n')}
+
+DIFERENSIASI PRODUK:
+${modulAjar.diferensiasi.produk.map(item => `• ${item.replace(/🎨|📊|🎪|📱/g, '').trim()}`).join('\n')}
+
+=====================================
+PROGRAM REMEDIAL DAN PENGAYAAN
+=====================================
+
+PROGRAM REMEDIAL:
+${modulAjar.remedialPengayaan.remedial.map(item => `• ${item.replace(/🔄|👥|📱|🎯|🤝/g, '').trim()}`).join('\n')}
+
+PROGRAM PENGAYAAN:
+${modulAjar.remedialPengayaan.pengayaan.map(item => `• ${item.replace(/🚀|🌟|📚|🏆|💡/g, '').trim()}`).join('\n')}
+
+=====================================
+REFLEKSI GURU
+=====================================
+
+${modulAjar.refleksiGuru.map((refleksi, index) => `${index + 1}. ${refleksi.replace(/📊|🎯|🔧|⏰|💡|🤝|📱/g, '').trim()}`).join('\n')}
+
+=====================================
+LAMPIRAN
+=====================================
+
+${modulAjar.lampiran.map(lampiran => `• ${lampiran.replace(/📋|📊|🎨|📱|📚|🎯|📝/g, '').trim()}`).join('\n')}
+
+=====================================
+© 2024 Dashboard Pembuat Modul Ajar AI v8.0 Revolutionary Edition
+Dibuat dengan teknologi AI Super Intelligence untuk kemajuan pendidikan Indonesia
+Dokumen ini dapat diedit dan disesuaikan dengan kondisi siswa dan sekolah masing-masing
+=====================================
+`;
         }
 
         // Initialize the application
         updateAdvancedProgress();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99283f334766b2df',t:'MTc2MTEyODI2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'992855268251f875',t:'MTc2MTEyOTE2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
