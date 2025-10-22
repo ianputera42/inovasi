@@ -8,135 +8,423 @@
     <style>
         body {
             box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
         }
         
-        .card-hover {
-            transition: all 0.3s ease;
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.15"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.15"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.15"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
         }
         
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.98);
+        }
+        
+        .neon-border {
+            position: relative;
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                       linear-gradient(45deg, #667eea, #764ba2, #f093fb) border-box;
+        }
+        
+        .floating-animation {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
         
         .fade-in {
-            animation: fadeIn 0.6s ease-out;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
         }
         
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        .pulse-glow {
+            animation: pulseGlow 3s ease-in-out infinite;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(102, 126, 234, 0.6);
+            }
+        }
+        
+        .modern-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modern-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .modern-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modern-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .modern-button:hover::before {
+            left: 100%;
+        }
+        
+        .modern-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .dimension-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .dimension-card:hover {
+            transform: translateY(-5px) rotateY(5deg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .modern-select {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            backdrop-filter: blur(10px);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+        
+        .modern-checkbox {
+            appearance: none;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 2px solid #667eea;
+            border-radius: 0.25rem;
+            background: rgba(255, 255, 255, 0.9);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .modern-checkbox:checked {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: #667eea;
+        }
+        
+        .modern-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            margin: 2rem 0;
+        }
+        
+        .loading-shimmer {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(102, 126, 234, 0.2);
+            z-index: 1000;
+        }
+        
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .glass-card {
+                margin: 0.5rem;
+                padding: 1rem;
+            }
+            
+            .dimension-card:hover {
+                transform: translateY(-3px);
+            }
         }
     </style>
 </head>
-<body class="min-h-full bg-gray-50">
-    <header class="gradient-bg text-white shadow-lg">
-        <div class="container mx-auto px-6 py-8">
+<body class="min-h-full bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+    <header class="gradient-bg text-white shadow-2xl relative overflow-hidden">
+        <div class="container mx-auto px-6 py-12 relative z-10">
             <div class="text-center">
-                <h1 class="text-4xl font-bold mb-2">🧠 Dashboard Pembuat Modul Ajar AI</h1>
-                <p class="text-xl opacity-90">v13.0 Enhanced - Edisi Guru Inovasi</p>
-                <div class="flex items-center justify-center mt-3 space-x-4">
-                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">🤖 AI Powered</span>
-                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">📚 Kurikulum deep learning</span>
-                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">🎯 Kontekstual</span>
-                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">⚡ Cepat & Mudah</span>
+                <div class="floating-animation">
+                    <h1 class="text-5xl md:text-6xl font-black mb-4 tracking-tight">
+                        <span class="inline-block">🧠</span> 
+                        <span class="gradient-text bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-purple-100">
+                            Dashboard Pembuat Modul Ajar AI
+                        </span>
+                    </h1>
+                </div>
+                <p class="text-2xl font-light mb-6 opacity-95">v13.0 Enhanced - Edisi Guru Inovasi</p>
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
+                    <span class="glass-card px-4 py-2 rounded-full text-sm font-medium backdrop-blur-md bg-white/20 border border-white/30 pulse-glow">
+                        🤖 AI Powered
+                    </span>
+                    <span class="glass-card px-4 py-2 rounded-full text-sm font-medium backdrop-blur-md bg-white/20 border border-white/30">
+                        📚 Kurikulum Merdeka
+                    </span>
+                    <span class="glass-card px-4 py-2 rounded-full text-sm font-medium backdrop-blur-md bg-white/20 border border-white/30">
+                        🎯 Kontekstual
+                    </span>
+                    <span class="glass-card px-4 py-2 rounded-full text-sm font-medium backdrop-blur-md bg-white/20 border border-white/30">
+                        ⚡ Cepat & Mudah
+                    </span>
+                </div>
+                <div class="text-lg opacity-80 max-w-2xl mx-auto">
+                    Revolusi pembelajaran dengan kecerdasan buatan untuk menciptakan modul ajar yang bermakna dan kontekstual
                 </div>
             </div>
+        </div>
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+            <div class="absolute top-32 right-20 w-32 h-32 bg-purple-300/20 rounded-full blur-2xl"></div>
+            <div class="absolute bottom-20 left-1/4 w-24 h-24 bg-blue-300/20 rounded-full blur-xl"></div>
         </div>
     </header>
 
     <main class="container mx-auto px-6 py-8">
         <!-- Profil Lulusan Deep Learning Section -->
-        <section class="mb-12 fade-in">
-            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                    🎯 Profil Lulusan Deep Learning (8 Dimensi)
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl border-l-4 border-blue-500">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">🙏</span>
-                            <h3 class="font-semibold text-blue-800">Keimanan & Ketakwaan</h3>
+        <section class="mb-16 fade-in">
+            <div class="glass-card rounded-3xl p-10 neon-border">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-black gradient-text mb-4">
+                        🎯 Profil Lulusan Deep Learning
+                    </h2>
+                    <p class="text-xl text-gray-600 font-light">(8 Dimensi Revolusioner)</p>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="dimension-card p-6 rounded-2xl group">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
+                                🙏
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-blue-800 text-lg">Keimanan & Ketakwaan</h3>
+                                <p class="text-sm text-blue-600 font-medium">Spiritual Digital Era</p>
+                            </div>
                         </div>
-                        <p class="text-sm text-blue-600">Spiritual Digital Era</p>
                     </div>
-                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-xl border-l-4 border-green-500">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">🌍</span>
-                            <h3 class="font-semibold text-green-800">Kewargaan Digital</h3>
+                    <div class="dimension-card p-6 rounded-2xl group">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
+                                🌍
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-green-800 text-lg">Kewargaan Digital</h3>
+                                <p class="text-sm text-green-600 font-medium">Citizenship 4.0</p>
+                            </div>
                         </div>
-                        <p class="text-sm text-green-600">Citizenship 4.0</p>
                     </div>
-                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-xl border-l-4 border-purple-500">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">🧠</span>
-                            <h3 class="font-semibold text-purple-800">Penalaran Kritis</h3>
+                    <div class="dimension-card p-6 rounded-2xl group">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
+                                🧠
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-purple-800 text-lg">Penalaran Kritis</h3>
+                                <p class="text-sm text-purple-600 font-medium">Critical Thinking</p>
+                            </div>
                         </div>
-                        <p class="text-sm text-purple-600">Critical Thinking</p>
                     </div>
-                    <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-4 rounded-xl border-l-4 border-pink-500">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">🎨</span>
-                            <h3 class="font-semibold text-pink-800">Kreativitas & Inovasi</h3>
+                    <div class="dimension-card p-6 rounded-2xl group">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
+                                🎨
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-pink-800 text-lg">Kreativitas & Inovasi</h3>
+                                <p class="text-sm text-pink-600 font-medium">Innovation 4.0</p>
+                            </div>
                         </div>
-                        <p class="text-sm text-pink-600">Innovation 4.0</p>
                     </div>
-                    <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-4 rounded-xl border-l-4 border-indigo-500">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">🤝</span>
-                            <h3 class="font-semibold text-indigo-800">Kolaborasi Global</h3>
+                    <div class="dimension-card p-6 rounded-2xl group">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
+                                🤝
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-indigo-800 text-lg">Kolaborasi Global</h3>
+                                <p class="text-sm text-indigo-600 font-medium">Global Teamwork</p>
+                            </div>
                         </div>
-                        <p class="text-sm text-indigo-600">Global Teamwork</p>
                     </div>
-                    <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 rounded-xl border-l-4 border-yellow-500">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">💪</span>
-                            <h3 class="font-semibold text-yellow-800">Kemandirian Belajar</h3>
+                    <div class="dimension-card p-6 rounded-2xl group">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
+                                💪
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-yellow-800 text-lg">Kemandirian Belajar</h3>
+                                <p class="text-sm text-yellow-600 font-medium">Self-Directed Learning</p>
+                            </div>
                         </div>
-                        <p class="text-sm text-yellow-600">Self-Directed Learning</p>
                     </div>
-                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-4 rounded-xl border-l-4 border-red-500">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">🏃</span>
-                            <h3 class="font-semibold text-red-800">Kesehatan Holistik</h3>
+                    <div class="dimension-card p-6 rounded-2xl group">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
+                                🏃
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-red-800 text-lg">Kesehatan Holistik</h3>
+                                <p class="text-sm text-red-600 font-medium">Holistic Wellness</p>
+                            </div>
                         </div>
-                        <p class="text-sm text-red-600">Holistic Wellness</p>
                     </div>
-                    <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-4 rounded-xl border-l-4 border-teal-500">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">💬</span>
-                            <h3 class="font-semibold text-teal-800">Komunikasi Efektif</h3>
+                    <div class="dimension-card p-6 rounded-2xl group">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
+                                💬
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-teal-800 text-lg">Komunikasi Efektif</h3>
+                                <p class="text-sm text-teal-600 font-medium">Multi-Modal Communication</p>
+                            </div>
                         </div>
-                        <p class="text-sm text-teal-600">Multi-Modal Communication</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Form Input Section -->
-        <section class="mb-12 fade-in">
-            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                    📝 Input Data Pembelajaran Enhanced
-                </h2>
+        <section class="mb-16 fade-in">
+            <div class="glass-card rounded-3xl p-10 neon-border">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-black gradient-text mb-4">
+                        📝 Input Data Pembelajaran Enhanced
+                    </h2>
+                    <p class="text-xl text-gray-600 font-light">Konfigurasi AI untuk Modul Ajar Revolusioner</p>
+                    <div class="section-divider"></div>
+                </div>
                 <form id="modulForm" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="mataPelajaran" class="block text-sm font-medium text-gray-700 mb-2">Mata Pelajaran</label>
-                            <select id="mataPelajaran" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <label for="mataPelajaran" class="block text-lg font-semibold text-gray-800 mb-3">Mata Pelajaran</label>
+                            <select id="mataPelajaran" class="modern-select modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium">
                                 <option value="">Pilih Mata Pelajaran</option>
                                 <optgroup label="📚 Mata Pelajaran Umum (SD/SMP/SMA)">
                                     <option value="Matematika">Matematika</option>
@@ -197,8 +485,8 @@
                             </select>
                         </div>
                         <div>
-                            <label for="kelas" class="block text-sm font-medium text-gray-700 mb-2">Kelas</label>
-                            <select id="kelas" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <label for="kelas" class="block text-lg font-semibold text-gray-800 mb-3">Kelas</label>
+                            <select id="kelas" class="modern-select modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium">
                                 <option value="">Pilih Kelas/Fase</option>
                                 <optgroup label="🎒 Sekolah Dasar (SD)">
                                     <option value="I">Kelas I (Fase A)</option>
@@ -234,13 +522,13 @@
                     </div>
 
                     <div>
-                        <label for="topik" class="block text-sm font-medium text-gray-700 mb-2">Topik/Materi Pembelajaran</label>
-                        <input type="text" id="topik" placeholder="Contoh: Fungsi Kuadrat, Sistem Pencernaan, Teks Persuasi" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <label for="topik" class="block text-lg font-semibold text-gray-800 mb-3">Topik/Materi Pembelajaran</label>
+                        <input type="text" id="topik" placeholder="Contoh: Fungsi Kuadrat, Sistem Pencernaan, Teks Persuasi" class="modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg">
                     </div>
 
                     <div>
-                        <label for="metodePembelajaran" class="block text-sm font-medium text-gray-700 mb-2">Metode Pembelajaran</label>
-                        <select id="metodePembelajaran" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <label for="metodePembelajaran" class="block text-lg font-semibold text-gray-800 mb-3">Metode Pembelajaran</label>
+                        <select id="metodePembelajaran" class="modern-select modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium">
                             <option value="">Pilih Metode Pembelajaran</option>
                             <option value="Ceramah Interaktif">Ceramah Interaktif</option>
                             <option value="Diskusi Kelompok">Diskusi Kelompok</option>
@@ -261,8 +549,8 @@
                     </div>
 
                     <div>
-                        <label for="modelPembelajaran" class="block text-sm font-medium text-gray-700 mb-2">Model Pembelajaran</label>
-                        <select id="modelPembelajaran" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <label for="modelPembelajaran" class="block text-lg font-semibold text-gray-800 mb-3">Model Pembelajaran</label>
+                        <select id="modelPembelajaran" class="modern-select modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium">
                             <option value="">Pilih Model Pembelajaran</option>
                             <option value="Problem Based Learning">Problem Based Learning (PBL)</option>
                             <option value="Project Based Learning">Project Based Learning</option>
@@ -288,49 +576,49 @@
                     </div>
 
                     <div>
-                        <label for="tujuanPembelajaran" class="block text-sm font-medium text-gray-700 mb-2">Tujuan Pembelajaran Spesifik</label>
-                        <textarea id="tujuanPembelajaran" rows="3" placeholder="Contoh: Siswa mampu menganalisis fungsi kuadrat untuk optimalisasi keuntungan UMKM, menerapkan konsep dalam konteks ekonomi lokal..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                        <label for="tujuanPembelajaran" class="block text-lg font-semibold text-gray-800 mb-3">Tujuan Pembelajaran Spesifik</label>
+                        <textarea id="tujuanPembelajaran" rows="4" placeholder="Contoh: Siswa mampu menganalisis fungsi kuadrat untuk optimalisasi keuntungan UMKM, menerapkan konsep dalam konteks ekonomi lokal..." class="modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg resize-none"></textarea>
                     </div>
 
                     <div>
-                        <label for="lintasBidang" class="block text-sm font-medium text-gray-700 mb-2">Lintas Bidang Disiplin Ilmu</label>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="lintasBidang" value="Ekonomi" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm">Ekonomi</span>
+                        <label for="lintasBidang" class="block text-lg font-semibold text-gray-800 mb-4">Lintas Bidang Disiplin Ilmu</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Ekonomi" class="modern-checkbox">
+                                <span class="text-base font-medium">Ekonomi</span>
                             </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="lintasBidang" value="Teknologi" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm">Teknologi</span>
+                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Teknologi" class="modern-checkbox">
+                                <span class="text-base font-medium">Teknologi</span>
                             </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="lintasBidang" value="Lingkungan" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm">Lingkungan</span>
+                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Lingkungan" class="modern-checkbox">
+                                <span class="text-base font-medium">Lingkungan</span>
                             </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="lintasBidang" value="Sosial Budaya" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm">Sosial Budaya</span>
+                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Sosial Budaya" class="modern-checkbox">
+                                <span class="text-base font-medium">Sosial Budaya</span>
                             </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="lintasBidang" value="Kesehatan" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm">Kesehatan</span>
+                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Kesehatan" class="modern-checkbox">
+                                <span class="text-base font-medium">Kesehatan</span>
                             </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="lintasBidang" value="Seni & Budaya" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm">Seni & Budaya</span>
+                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Seni & Budaya" class="modern-checkbox">
+                                <span class="text-base font-medium">Seni & Budaya</span>
                             </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="lintasBidang" value="Kewirausahaan" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm">Kewirausahaan</span>
+                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Kewirausahaan" class="modern-checkbox">
+                                <span class="text-base font-medium">Kewirausahaan</span>
                             </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="lintasBidang" value="Politik & Hukum" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm">Politik & Hukum</span>
+                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Politik & Hukum" class="modern-checkbox">
+                                <span class="text-base font-medium">Politik & Hukum</span>
                             </label>
                         </div>
-                        <div class="mt-3">
-                            <label for="lintasBidangLainnya" class="block text-sm font-medium text-gray-700 mb-2">Bidang Lainnya (opsional)</label>
-                            <input type="text" id="lintasBidangLainnya" placeholder="Contoh: Psikologi, Antropologi, Geografi, dll." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <div class="mt-6">
+                            <label for="lintasBidangLainnya" class="block text-lg font-semibold text-gray-800 mb-3">Bidang Lainnya (opsional)</label>
+                            <input type="text" id="lintasBidangLainnya" placeholder="Contoh: Psikologi, Antropologi, Geografi, dll." class="modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg">
                         </div>
                     </div>
 
@@ -404,8 +692,12 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-8 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
-                        🚀 Generate Modul Ajar AI v13.0 Enhanced
+                    <button type="submit" class="modern-button w-full text-white py-6 px-8 rounded-2xl font-bold text-xl shadow-2xl relative z-10">
+                        <span class="relative z-10 flex items-center justify-center space-x-3">
+                            <span>🚀</span>
+                            <span>Generate Modul Ajar AI v13.0 Enhanced</span>
+                            <span>✨</span>
+                        </span>
                     </button>
                 </form>
             </div>
@@ -452,31 +744,43 @@
         </section>
 
         <!-- Features Section -->
-        <section class="mb-12 fade-in">
-            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                    ✨ Fitur Unggulan v13.0 Enhanced
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
-                        <div class="text-4xl mb-4">🤖</div>
-                        <h3 class="text-xl font-semibold text-blue-800 mb-2">AI Powered</h3>
-                        <p class="text-blue-600">Menggunakan kecerdasan buatan untuk menghasilkan modul yang berkualitas</p>
+        <section class="mb-16 fade-in">
+            <div class="glass-card rounded-3xl p-10 neon-border">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-black gradient-text mb-4">
+                        ✨ Fitur Unggulan v13.0 Enhanced
+                    </h2>
+                    <p class="text-xl text-gray-600 font-light">Revolusi Pembelajaran dengan Teknologi AI Terdepan</p>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="feature-card text-center p-8 rounded-2xl group">
+                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300">
+                            🤖
+                        </div>
+                        <h3 class="text-2xl font-bold text-blue-800 mb-4">AI Powered</h3>
+                        <p class="text-blue-600 leading-relaxed">Menggunakan kecerdasan buatan untuk menghasilkan modul yang berkualitas dan kontekstual</p>
                     </div>
-                    <div class="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
-                        <div class="text-4xl mb-4">📚</div>
-                        <h3 class="text-xl font-semibold text-green-800 mb-2">kurikulum nasional</h3>
-                        <p class="text-green-600">Sesuai dengan standar dan prinsip kurikulum deep learning terbaru</p>
+                    <div class="feature-card text-center p-8 rounded-2xl group">
+                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300">
+                            📚
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-800 mb-4">Kurikulum Merdeka</h3>
+                        <p class="text-green-600 leading-relaxed">Sesuai dengan standar dan prinsip Kurikulum Merdeka terbaru dengan 8 dimensi profil lulusan</p>
                     </div>
-                    <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
-                        <div class="text-4xl mb-4">🎯</div>
-                        <h3 class="text-xl font-semibold text-purple-800 mb-2">Kontekstual</h3>
-                        <p class="text-purple-600">Pembelajaran yang relevan dengan kehidupan nyata siswa</p>
+                    <div class="feature-card text-center p-8 rounded-2xl group">
+                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300">
+                            🎯
+                        </div>
+                        <h3 class="text-2xl font-bold text-purple-800 mb-4">Kontekstual</h3>
+                        <p class="text-purple-600 leading-relaxed">Pembelajaran yang relevan dengan kehidupan nyata siswa dan kebutuhan masa depan</p>
                     </div>
-                    <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl">
-                        <div class="text-4xl mb-4">⚡</div>
-                        <h3 class="text-xl font-semibold text-orange-800 mb-2">Cepat & Mudah</h3>
-                        <p class="text-orange-600">Generate modul ajar lengkap hanya dalam hitungan detik</p>
+                    <div class="feature-card text-center p-8 rounded-2xl group">
+                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300">
+                            ⚡
+                        </div>
+                        <h3 class="text-2xl font-bold text-orange-800 mb-4">Cepat & Mudah</h3>
+                        <p class="text-orange-600 leading-relaxed">Generate modul ajar lengkap hanya dalam hitungan detik dengan kualitas profesional</p>
                     </div>
                 </div>
             </div>
@@ -489,7 +793,7 @@
             <p class="text-gray-400">Edisi Guru Inovasi - Powered by AI Technology</p>
             <div class="mt-4 flex justify-center space-x-4 flex-wrap">
                 <span class="bg-blue-600 px-3 py-1 rounded-full text-sm mb-2">🤖 AI Powered</span>
-                <span class="bg-green-600 px-3 py-1 rounded-full text-sm mb-2">📚 kurikulum deep learning</span>
+                <span class="bg-green-600 px-3 py-1 rounded-full text-sm mb-2">📚 Kurikulum Merdeka</span>
                 <span class="bg-purple-600 px-3 py-1 rounded-full text-sm mb-2">🎯 Kontekstual</span>
                 <span class="bg-orange-600 px-3 py-1 rounded-full text-sm mb-2">⚡ Cepat & Mudah</span>
             </div>
@@ -501,6 +805,15 @@
     </footer>
 
     <script>
+        // Scroll Progress Indicator
+        window.addEventListener('scroll', function() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
         // Form submission handler
         document.getElementById('modulForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1051,7 +1364,7 @@
                                         <span class="font-medium text-green-600">95/100</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span>Alignment with kurikulum deep learning:</span>
+                                        <span>Alignment with Kurikulum Merdeka:</span>
                                         <span class="font-medium text-blue-600">Excellent</span>
                                     </div>
                                     <div class="flex justify-between">
@@ -1133,7 +1446,7 @@
                             <div class="p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg border-l-4 border-green-500">
                                 <h6 class="font-semibold text-green-800 mb-2">🎯 Quality Assurance v13.0</h6>
                                 <ul class="text-sm text-green-700 space-y-1">
-                                    <li>• 🎯 Alignment dengan kurikulum deep learning: 100%</li>
+                                    <li>• 🎯 Alignment dengan Kurikulum Merdeka: 100%</li>
                                     <li>• 📊 Rubrik penilaian 4 level dengan 5 aspek</li>
                                     <li>• 🤔 Refleksi guru 8 pertanyaan kunci</li>
                                     <li>• 🌐 Konteks pembelajaran: ${kontekstual.substring(0, 50)}...</li>
@@ -1601,7 +1914,7 @@ Powered by Advanced AI Technology
 Format: Microsoft Word (.doc) - Enhanced Interactive Worksheet
 Font: Calibri, 11pt | Spacing: 1.15 lines
 Compatible dengan Microsoft Word, Google Docs, dan LibreOffice Writer
-Optimized untuk kurikulum deep learning dengan 8 Dimensi Profil Lulusan
+Optimized untuk Kurikulum Merdeka dengan 8 Dimensi Profil Lulusan
             `;
         }
 
@@ -1893,7 +2206,7 @@ ASPEK PENILAIAN (Skala 1-4):
 
 QUALITY METRICS:
 • Completeness Score: 95/100
-• Alignment with kurikulum deep learning: Excellent
+• Alignment with Kurikulum Merdeka: Excellent
 • Differentiation Level: Advanced
 • Assessment Quality: High
 
@@ -1917,7 +2230,7 @@ ENHANCED FEATURES DETECTED:
 ✅ Program remedial dan pengayaan spesifik
 
 QUALITY ASSURANCE v13.0:
-🎯 Alignment dengan Kurikulum nasional: 100%
+🎯 Alignment dengan Kurikulum Merdeka: 100%
 📊 Rubrik penilaian 4 level dengan 5 aspek
 🤔 Refleksi guru 8 pertanyaan kunci
 🌐 Konteks pembelajaran terintegrasi
@@ -1934,7 +2247,7 @@ Powered by Advanced AI Technology
 Format: Microsoft Word (.doc) - Enhanced Learning Module
 Font: Calibri, 11pt | Spacing: 1.15 lines
 Compatible dengan Microsoft Word, Google Docs, dan LibreOffice Writer
-Optimized untuk Kurikulum nasional dengan Profil Lulusan 8 Dimensi
+Optimized untuk Kurikulum Merdeka dengan Profil Lulusan 8 Dimensi
             `;
         }
 
@@ -1946,5 +2259,5 @@ Optimized untuk Kurikulum nasional dengan Profil Lulusan 8 Dimensi
             return generateEnhancedWordContent(); // Same content for text
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'992ad2aeb08799c5',t:'MTc2MTE1NTI3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'992ade1d4512834e',t:'MTc2MTE1NTc0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
