@@ -3,428 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Pembuat Modul Ajar AI v13.0 Enhanced</title>
+    <title>Generator Modul Ajar AI - Kurikulum Merdeka</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-docx-js/0.4.1/html-docx.min.js"></script>
     <style>
         body {
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.15"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.15"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.15"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .glass-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            background: rgba(255, 255, 255, 0.98);
-        }
-        
-        .neon-border {
-            position: relative;
-            border: 2px solid transparent;
-            background: linear-gradient(white, white) padding-box,
-                       linear-gradient(45deg, #667eea, #764ba2, #f093fb) border-box;
-        }
-        
-        .floating-animation {
-            animation: floating 6s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .fade-in {
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        @keyframes fadeInUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0);
-            }
-        }
-        
-        .pulse-glow {
-            animation: pulseGlow 3s ease-in-out infinite;
-        }
-        
-        @keyframes pulseGlow {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-            }
-            50% { 
-                box-shadow: 0 0 40px rgba(102, 126, 234, 0.6);
-            }
-        }
-        
-        .modern-input {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(102, 126, 234, 0.2);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .modern-input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-            background: rgba(255, 255, 255, 1);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .modern-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            border: none;
-            position: relative;
-            overflow: hidden;
+        .card-hover {
             transition: all 0.3s ease;
         }
         
-        .modern-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-        
-        .modern-button:hover::before {
-            left: 100%;
-        }
-        
-        .modern-button:hover {
+        .card-hover:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
-        .dimension-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .analysis-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-left: 4px solid #3b82f6;
         }
         
-        .dimension-card:hover {
-            transform: translateY(-5px) rotateY(5deg);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        .loading-dots {
+            display: inline-block;
         }
         
-        .feature-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature-card::before {
+        .loading-dots::after {
             content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            animation: dots 1.5s steps(5, end) infinite;
         }
         
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-        }
-        
-        .modern-select {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(102, 126, 234, 0.2);
-            backdrop-filter: blur(10px);
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.5rem center;
-            background-repeat: no-repeat;
-            background-size: 1.5em 1.5em;
-            padding-right: 2.5rem;
-        }
-        
-        .modern-checkbox {
-            appearance: none;
-            width: 1.2rem;
-            height: 1.2rem;
-            border: 2px solid #667eea;
-            border-radius: 0.25rem;
-            background: rgba(255, 255, 255, 0.9);
-            position: relative;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .modern-checkbox:checked {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-color: #667eea;
-        }
-        
-        .modern-checkbox:checked::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-        
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
-            margin: 2rem 0;
-        }
-        
-        .loading-shimmer {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(102, 126, 234, 0.2);
-            z-index: 1000;
-        }
-        
-        .scroll-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-            width: 0%;
-            transition: width 0.1s ease;
-        }
-        
-        @media (max-width: 768px) {
-            .glass-card {
-                margin: 0.5rem;
-                padding: 1rem;
-            }
-            
-            .dimension-card:hover {
-                transform: translateY(-3px);
-            }
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
         }
     </style>
 </head>
 <body class="min-h-full bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-indicator">
-        <div class="scroll-progress" id="scrollProgress"></div>
-    </div>
-    <header class="gradient-bg text-white shadow-2xl relative overflow-hidden">
-        <div class="container mx-auto px-6 py-12 relative z-10">
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-8">
             <div class="text-center">
-                <div class="floating-animation">
-                    <h1 class="text-5xl md:text-6xl font-black mb-4 tracking-tight">
-                        <span class="inline-block">🧠</span> 
-                        <span class="gradient-text bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-purple-100">
-                            Dashboard Pembuat Modul Ajar AI
-                        </span>
-                    </h1>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                    🧠 Generator Modul Ajar AI
+                </h1>
+                <p class="text-xl mb-6">Kurikulum Merdeka - Analisis Mendalam & Terstruktur</p>
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">🤖 AI Analysis</span>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">📚 Kurikulum Merdeka</span>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">📄 Format Word</span>
                 </div>
-                <p class="text-2xl font-light mb-6 opacity-95">v13.0 Enhanced - Edisi Guru Inovasi</p>
-                <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
-                    <span class="glass-card px-4 py-2 rounded-full text-sm font-medium backdrop-blur-md bg-white/20 border border-white/30 pulse-glow">
-                        🤖 AI Powered
-                    </span>
-                    <span class="glass-card px-4 py-2 rounded-full text-sm font-medium backdrop-blur-md bg-white/20 border border-white/30">
-                        📚 Kurikulum Merdeka
-                    </span>
-                    <span class="glass-card px-4 py-2 rounded-full text-sm font-medium backdrop-blur-md bg-white/20 border border-white/30">
-                        🎯 Kontekstual
-                    </span>
-                    <span class="glass-card px-4 py-2 rounded-full text-sm font-medium backdrop-blur-md bg-white/20 border border-white/30">
-                        ⚡ Cepat & Mudah
-                    </span>
-                </div>
-                <div class="text-lg opacity-80 max-w-2xl mx-auto">
-                    Revolusi pembelajaran dengan kecerdasan buatan untuk menciptakan modul ajar yang bermakna dan kontekstual
-                </div>
+                <p class="text-lg opacity-90 max-w-2xl mx-auto">
+                    Menganalisis input pembelajaran secara mendalam dan menghasilkan modul ajar terstruktur sesuai kurikulum terbaru
+                </p>
             </div>
-        </div>
-        <!-- Decorative Elements -->
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-            <div class="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
-            <div class="absolute top-32 right-20 w-32 h-32 bg-purple-300/20 rounded-full blur-2xl"></div>
-            <div class="absolute bottom-20 left-1/4 w-24 h-24 bg-blue-300/20 rounded-full blur-xl"></div>
         </div>
     </header>
 
     <main class="container mx-auto px-6 py-8">
-        <!-- Profil Lulusan Deep Learning Section -->
-        <section class="mb-16 fade-in">
-            <div class="glass-card rounded-3xl p-10 neon-border">
-                <div class="text-center mb-10">
-                    <h2 class="text-4xl font-black gradient-text mb-4">
-                        🎯 Profil Lulusan Deep Learning
-                    </h2>
-                    <p class="text-xl text-gray-600 font-light">(8 Dimensi Revolusioner)</p>
-                    <div class="section-divider"></div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="dimension-card p-6 rounded-2xl group">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
-                                🙏
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-blue-800 text-lg">Keimanan & Ketakwaan</h3>
-                                <p class="text-sm text-blue-600 font-medium">Spiritual Digital Era</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dimension-card p-6 rounded-2xl group">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
-                                🌍
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-green-800 text-lg">Kewargaan Digital</h3>
-                                <p class="text-sm text-green-600 font-medium">Citizenship 4.0</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dimension-card p-6 rounded-2xl group">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
-                                🧠
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-purple-800 text-lg">Penalaran Kritis</h3>
-                                <p class="text-sm text-purple-600 font-medium">Critical Thinking</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dimension-card p-6 rounded-2xl group">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
-                                🎨
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-pink-800 text-lg">Kreativitas & Inovasi</h3>
-                                <p class="text-sm text-pink-600 font-medium">Innovation 4.0</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dimension-card p-6 rounded-2xl group">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
-                                🤝
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-indigo-800 text-lg">Kolaborasi Global</h3>
-                                <p class="text-sm text-indigo-600 font-medium">Global Teamwork</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dimension-card p-6 rounded-2xl group">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
-                                💪
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-yellow-800 text-lg">Kemandirian Belajar</h3>
-                                <p class="text-sm text-yellow-600 font-medium">Self-Directed Learning</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dimension-card p-6 rounded-2xl group">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
-                                🏃
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-red-800 text-lg">Kesehatan Holistik</h3>
-                                <p class="text-sm text-red-600 font-medium">Holistic Wellness</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dimension-card p-6 rounded-2xl group">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center text-white text-xl mr-4 group-hover:scale-110 transition-transform">
-                                💬
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-teal-800 text-lg">Komunikasi Efektif</h3>
-                                <p class="text-sm text-teal-600 font-medium">Multi-Modal Communication</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <!-- Form Input Section -->
-        <section class="mb-16 fade-in">
-            <div class="glass-card rounded-3xl p-10 neon-border">
-                <div class="text-center mb-10">
-                    <h2 class="text-4xl font-black gradient-text mb-4">
-                        📝 Input Data Pembelajaran Enhanced
+        <section id="formSection" class="mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                        📝 Input Data Pembelajaran
                     </h2>
-                    <p class="text-xl text-gray-600 font-light">Konfigurasi AI untuk Modul Ajar Revolusioner</p>
-                    <div class="section-divider"></div>
+                    <p class="text-lg text-gray-600">Masukkan data untuk analisis mendalam dan pembuatan modul ajar</p>
                 </div>
                 <form id="modulForm" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="mataPelajaran" class="block text-lg font-semibold text-gray-800 mb-3">Mata Pelajaran</label>
-                            <select id="mataPelajaran" class="modern-select modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium">
+                            <select id="mataPelajaran" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                                 <option value="">Pilih Mata Pelajaran</option>
                                 <optgroup label="📚 Mata Pelajaran Umum (SD/SMP/SMA)">
                                     <option value="Matematika">Matematika</option>
@@ -486,7 +145,7 @@
                         </div>
                         <div>
                             <label for="kelas" class="block text-lg font-semibold text-gray-800 mb-3">Kelas</label>
-                            <select id="kelas" class="modern-select modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium">
+                            <select id="kelas" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                                 <option value="">Pilih Kelas/Fase</option>
                                 <optgroup label="🎒 Sekolah Dasar (SD)">
                                     <option value="I">Kelas I (Fase A)</option>
@@ -523,12 +182,12 @@
 
                     <div>
                         <label for="topik" class="block text-lg font-semibold text-gray-800 mb-3">Topik/Materi Pembelajaran</label>
-                        <input type="text" id="topik" placeholder="Contoh: Fungsi Kuadrat, Sistem Pencernaan, Teks Persuasi" class="modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg">
+                        <input type="text" id="topik" placeholder="Contoh: Fungsi Kuadrat, Sistem Pencernaan, Teks Persuasi" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     </div>
 
                     <div>
                         <label for="metodePembelajaran" class="block text-lg font-semibold text-gray-800 mb-3">Metode Pembelajaran</label>
-                        <select id="metodePembelajaran" class="modern-select modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium">
+                        <select id="metodePembelajaran" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <option value="">Pilih Metode Pembelajaran</option>
                             <option value="Ceramah Interaktif">Ceramah Interaktif</option>
                             <option value="Diskusi Kelompok">Diskusi Kelompok</option>
@@ -550,7 +209,7 @@
 
                     <div>
                         <label for="modelPembelajaran" class="block text-lg font-semibold text-gray-800 mb-3">Model Pembelajaran</label>
-                        <select id="modelPembelajaran" class="modern-select modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium">
+                        <select id="modelPembelajaran" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <option value="">Pilih Model Pembelajaran</option>
                             <option value="Problem Based Learning">Problem Based Learning (PBL)</option>
                             <option value="Project Based Learning">Project Based Learning</option>
@@ -577,48 +236,48 @@
 
                     <div>
                         <label for="tujuanPembelajaran" class="block text-lg font-semibold text-gray-800 mb-3">Tujuan Pembelajaran Spesifik</label>
-                        <textarea id="tujuanPembelajaran" rows="4" placeholder="Contoh: Siswa mampu menganalisis fungsi kuadrat untuk optimalisasi keuntungan UMKM, menerapkan konsep dalam konteks ekonomi lokal..." class="modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg resize-none"></textarea>
+                        <textarea id="tujuanPembelajaran" rows="4" placeholder="Contoh: Siswa mampu menganalisis fungsi kuadrat untuk optimalisasi keuntungan UMKM, menerapkan konsep dalam konteks ekonomi lokal..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"></textarea>
                     </div>
 
                     <div>
                         <label for="lintasBidang" class="block text-lg font-semibold text-gray-800 mb-4">Lintas Bidang Disiplin Ilmu</label>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
-                                <input type="checkbox" name="lintasBidang" value="Ekonomi" class="modern-checkbox">
+                            <label class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Ekonomi" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <span class="text-base font-medium">Ekonomi</span>
                             </label>
-                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
-                                <input type="checkbox" name="lintasBidang" value="Teknologi" class="modern-checkbox">
+                            <label class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Teknologi" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <span class="text-base font-medium">Teknologi</span>
                             </label>
-                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
-                                <input type="checkbox" name="lintasBidang" value="Lingkungan" class="modern-checkbox">
+                            <label class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Lingkungan" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <span class="text-base font-medium">Lingkungan</span>
                             </label>
-                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
-                                <input type="checkbox" name="lintasBidang" value="Sosial Budaya" class="modern-checkbox">
+                            <label class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Sosial Budaya" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <span class="text-base font-medium">Sosial Budaya</span>
                             </label>
-                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
-                                <input type="checkbox" name="lintasBidang" value="Kesehatan" class="modern-checkbox">
+                            <label class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Kesehatan" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <span class="text-base font-medium">Kesehatan</span>
                             </label>
-                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
-                                <input type="checkbox" name="lintasBidang" value="Seni & Budaya" class="modern-checkbox">
+                            <label class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Seni & Budaya" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <span class="text-base font-medium">Seni & Budaya</span>
                             </label>
-                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
-                                <input type="checkbox" name="lintasBidang" value="Kewirausahaan" class="modern-checkbox">
+                            <label class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Kewirausahaan" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <span class="text-base font-medium">Kewirausahaan</span>
                             </label>
-                            <label class="flex items-center space-x-3 p-3 rounded-xl glass-card cursor-pointer hover:bg-blue-50 transition-colors">
-                                <input type="checkbox" name="lintasBidang" value="Politik & Hukum" class="modern-checkbox">
+                            <label class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-blue-50 transition-colors">
+                                <input type="checkbox" name="lintasBidang" value="Politik & Hukum" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <span class="text-base font-medium">Politik & Hukum</span>
                             </label>
                         </div>
                         <div class="mt-6">
                             <label for="lintasBidangLainnya" class="block text-lg font-semibold text-gray-800 mb-3">Bidang Lainnya (opsional)</label>
-                            <input type="text" id="lintasBidangLainnya" placeholder="Contoh: Psikologi, Antropologi, Geografi, dll." class="modern-input w-full px-6 py-4 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg">
+                            <input type="text" id="lintasBidangLainnya" placeholder="Contoh: Psikologi, Antropologi, Geografi, dll." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                     </div>
 
@@ -692,12 +351,8 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="modern-button w-full text-white py-6 px-8 rounded-2xl font-bold text-xl shadow-2xl relative z-10">
-                        <span class="relative z-10 flex items-center justify-center space-x-3">
-                            <span>🚀</span>
-                            <span>Generate Modul Ajar AI v13.0 Enhanced</span>
-                            <span>✨</span>
-                        </span>
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-8 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-700 hover:to-purple-700">
+                        🧠 Analisis & Generate Modul Ajar
                     </button>
                 </form>
             </div>
@@ -711,26 +366,26 @@
                         📋 Modul Ajar AI v13.0 Enhanced
                     </h2>
                     <div class="flex space-x-3">
-                        <button onclick="downloadWord()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center space-x-2 text-sm">
+                        <button onclick="downloadWord()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center space-x-2 text-sm touch-highlight">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
                             </svg>
                             <span>📄 Word</span>
                         </button>
-                        <button onclick="downloadPDF()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300 flex items-center space-x-2 text-sm">
+                        <button onclick="downloadPDF()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300 flex items-center space-x-2 text-sm touch-highlight">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
                             </svg>
                             <span>📑 PDF</span>
                         </button>
-                        <button onclick="copyToClipboard()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-300 flex items-center space-x-2 text-sm">
+                        <button onclick="copyToClipboard()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-300 flex items-center space-x-2 text-sm touch-highlight">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/>
                                 <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/>
                             </svg>
                             <span>📋 Copy</span>
                         </button>
-                        <button onclick="downloadLKPD()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center space-x-2 text-sm">
+                        <button onclick="downloadLKPD()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center space-x-2 text-sm touch-highlight">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
                                 <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 001 1h6a1 1 0 001-1V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
@@ -754,29 +409,29 @@
                     <div class="section-divider"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="feature-card text-center p-8 rounded-2xl group">
-                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300">
+                    <div class="feature-card text-center p-8 rounded-2xl group touch-highlight">
+                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300 bounce-animation">
                             🤖
                         </div>
                         <h3 class="text-2xl font-bold text-blue-800 mb-4">AI Powered</h3>
                         <p class="text-blue-600 leading-relaxed">Menggunakan kecerdasan buatan untuk menghasilkan modul yang berkualitas dan kontekstual</p>
                     </div>
-                    <div class="feature-card text-center p-8 rounded-2xl group">
-                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300">
+                    <div class="feature-card text-center p-8 rounded-2xl group touch-highlight">
+                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300 bounce-animation">
                             📚
                         </div>
                         <h3 class="text-2xl font-bold text-green-800 mb-4">Kurikulum Merdeka</h3>
                         <p class="text-green-600 leading-relaxed">Sesuai dengan standar dan prinsip Kurikulum Merdeka terbaru dengan 8 dimensi profil lulusan</p>
                     </div>
-                    <div class="feature-card text-center p-8 rounded-2xl group">
-                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300">
+                    <div class="feature-card text-center p-8 rounded-2xl group touch-highlight">
+                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300 bounce-animation">
                             🎯
                         </div>
                         <h3 class="text-2xl font-bold text-purple-800 mb-4">Kontekstual</h3>
                         <p class="text-purple-600 leading-relaxed">Pembelajaran yang relevan dengan kehidupan nyata siswa dan kebutuhan masa depan</p>
                     </div>
-                    <div class="feature-card text-center p-8 rounded-2xl group">
-                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300">
+                    <div class="feature-card text-center p-8 rounded-2xl group touch-highlight">
+                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform duration-300 bounce-animation">
                             ⚡
                         </div>
                         <h3 class="text-2xl font-bold text-orange-800 mb-4">Cepat & Mudah</h3>
@@ -792,10 +447,10 @@
             <p class="text-lg mb-2">🧠 Dashboard Pembuat Modul Ajar AI v13.0 Enhanced</p>
             <p class="text-gray-400">Edisi Guru Inovasi - Powered by AI Technology</p>
             <div class="mt-4 flex justify-center space-x-4 flex-wrap">
-                <span class="bg-blue-600 px-3 py-1 rounded-full text-sm mb-2">🤖 AI Powered</span>
-                <span class="bg-green-600 px-3 py-1 rounded-full text-sm mb-2">📚 Kurikulum Merdeka</span>
-                <span class="bg-purple-600 px-3 py-1 rounded-full text-sm mb-2">🎯 Kontekstual</span>
-                <span class="bg-orange-600 px-3 py-1 rounded-full text-sm mb-2">⚡ Cepat & Mudah</span>
+                <span class="bg-blue-600 px-3 py-1 rounded-full text-sm mb-2 touch-highlight">🤖 AI Powered</span>
+                <span class="bg-green-600 px-3 py-1 rounded-full text-sm mb-2 touch-highlight">📚 Kurikulum Merdeka</span>
+                <span class="bg-purple-600 px-3 py-1 rounded-full text-sm mb-2 touch-highlight">🎯 Kontekstual</span>
+                <span class="bg-orange-600 px-3 py-1 rounded-full text-sm mb-2 touch-highlight">⚡ Cepat & Mudah</span>
             </div>
             <div class="mt-4 text-sm text-gray-400">
                 <p>© 2025 Dashboard Pembuat Modul Ajar AI - Enhanced Edition</p>
@@ -805,16 +460,197 @@
     </footer>
 
     <script>
-        // Scroll Progress Indicator
+        // Enhanced Scroll Progress Indicator
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('header');
+        
         window.addEventListener('scroll', function() {
             const scrollProgress = document.getElementById('scrollProgress');
             const scrollTop = window.pageYOffset;
             const docHeight = document.body.scrollHeight - window.innerHeight;
             const scrollPercent = (scrollTop / docHeight) * 100;
             scrollProgress.style.width = scrollPercent + '%';
+            
+            // Auto-hide navigation on scroll down
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                navbar.classList.add('nav-hidden');
+            } else {
+                navbar.classList.remove('nav-hidden');
+            }
+            lastScrollTop = scrollTop;
         });
 
-        // Form submission handler
+        // Smooth scroll functions
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToForm() {
+            document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Enhanced AI Contextual Learning Database
+        const contextualLearningDatabase = {
+            'Matematika': {
+                'SD': {
+                    'Penjumlahan': 'Menghitung total belanja di warung sekolah untuk belajar mengelola uang saku dengan bijak dan mengembangkan kemampuan berhitung dalam kehidupan sehari-hari',
+                    'Pengurangan': 'Menghitung sisa makanan di kantin sekolah untuk memahami konsep berkurang dan mengembangkan kesadaran tentang mengurangi sampah makanan',
+                    'Perkalian': 'Menghitung jumlah tanaman di kebun sekolah untuk memahami konsep perkalian sambil belajar tentang pertanian dan lingkungan hidup',
+                    'Pembagian': 'Membagi kue ulang tahun secara adil di kelas untuk memahami konsep pembagian dan nilai-nilai keadilan serta berbagi',
+                    'Pecahan': 'Membagi pizza dalam acara kelas untuk memahami pecahan sambil belajar tentang kerjasama dan berbagi makanan',
+                    'Geometri': 'Mengukur dan menggambar bentuk-bentuk di playground sekolah untuk memahami geometri dalam lingkungan nyata'
+                },
+                'SMP': {
+                    'Aljabar': 'Menghitung biaya internet sekolah dengan variabel penggunaan untuk memahami persamaan linear sambil belajar tentang teknologi dan pengelolaan anggaran',
+                    'Geometri': 'Merancang taman sekolah yang ramah lingkungan dengan menghitung luas dan keliling untuk mengoptimalkan ruang hijau dan pembelajaran outdoor',
+                    'Statistika': 'Menganalisis data tinggi badan siswa untuk membuat program gizi sekolah yang tepat sasaran dan meningkatkan kesehatan siswa',
+                    'Peluang': 'Menghitung peluang cuaca untuk merencanakan kegiatan outdoor sekolah dan mengembangkan kemampuan prediksi berbasis data',
+                    'Persamaan Linear': 'Menghitung tarif listrik sekolah untuk mengoptimalkan penggunaan energi dan mengembangkan kesadaran hemat energi',
+                    'Fungsi': 'Menganalisis hubungan antara waktu belajar dan nilai siswa untuk mengoptimalkan jadwal belajar yang efektif'
+                },
+                'SMA': {
+                    'Fungsi Kuadrat': 'Mengoptimalkan lahan parkir sekolah untuk menampung maksimal kendaraan siswa dengan mempertimbangkan aspek keamanan dan efisiensi ruang',
+                    'Trigonometri': 'Menghitung sudut elevasi untuk instalasi panel surya di atap sekolah guna mengoptimalkan energi terbarukan dan pembelajaran teknologi hijau',
+                    'Limit': 'Menganalisis batas maksimal siswa dalam satu kelas untuk pembelajaran optimal dengan mempertimbangkan kualitas pendidikan dan interaksi sosial',
+                    'Turunan': 'Mengoptimalkan kecepatan pertumbuhan tanaman di greenhouse sekolah untuk program pertanian berkelanjutan dan ketahanan pangan',
+                    'Integral': 'Menghitung volume air hujan yang dapat ditampung untuk sistem irigasi sekolah dan mengembangkan kesadaran konservasi air',
+                    'Matriks': 'Menganalisis jadwal pelajaran optimal untuk semua kelas dengan mempertimbangkan efisiensi guru dan fasilitas sekolah',
+                    'Barisan dan Deret': 'Menghitung pertumbuhan tabungan siswa untuk program kewirausahaan sekolah dan literasi keuangan',
+                    'Peluang': 'Menganalisis peluang keberhasilan program beasiswa untuk siswa kurang mampu dan meningkatkan akses pendidikan'
+                },
+                'SMK': {
+                    'Matematika Teknik': 'Menghitung beban listrik optimal untuk workshop SMK agar aman dan efisien dalam mendukung pembelajaran praktik',
+                    'Statistika Industri': 'Menganalisis data produksi hasil praktik siswa untuk meningkatkan kualitas dan efisiensi pembelajaran berbasis industri',
+                    'Geometri Teknik': 'Merancang layout workshop yang ergonomis dan aman untuk meningkatkan produktivitas dan keselamatan kerja siswa'
+                }
+            },
+            'IPA': {
+                'SD': {
+                    'Tumbuhan': 'Menanam sayuran organik di kebun sekolah untuk memahami pertumbuhan tumbuhan sambil menyediakan makanan sehat untuk kantin sekolah',
+                    'Hewan': 'Mengamati kupu-kupu di taman sekolah untuk memahami metamorfosis dan pentingnya menjaga habitat alami',
+                    'Benda dan Sifatnya': 'Memilah sampah di sekolah berdasarkan sifat benda untuk memahami klasifikasi materi dan mengembangkan kesadaran lingkungan',
+                    'Energi': 'Membuat kincir angin sederhana untuk menerangi area sekolah dan memahami energi terbarukan'
+                },
+                'SMP': {
+                    'Sistem Pencernaan': 'Merancang menu sehat kantin sekolah untuk mencegah stunting siswa dan meningkatkan kesehatan serta prestasi belajar',
+                    'Sistem Pernapasan': 'Menganalisis kualitas udara di sekitar sekolah dan merancang taman hijau untuk meningkatkan kualitas udara dan kesehatan',
+                    'Ekosistem': 'Membangun ekosistem mini di sekolah untuk memahami keseimbangan alam dan mengembangkan kesadaran konservasi',
+                    'Listrik': 'Merancang sistem penerangan LED hemat energi untuk kelas dan memahami konsep listrik serta efisiensi energi',
+                    'Zat dan Perubahannya': 'Mengolah sampah organik menjadi kompos untuk kebun sekolah dan memahami perubahan kimia yang bermanfaat'
+                },
+                'SMA': {
+                    'Fisika': 'Merancang sistem ventilasi alami untuk kelas yang nyaman dengan memanfaatkan prinsip fisika dan meningkatkan kualitas pembelajaran',
+                    'Kimia': 'Menganalisis kandungan nutrisi tanah sekolah untuk optimalisasi pertanian organik dan pembelajaran kimia terapan',
+                    'Biologi': 'Mengembangkan program konservasi keanekaragaman hayati di lingkungan sekolah untuk pelestarian dan pembelajaran ekologi'
+                }
+            },
+            'Bahasa Indonesia': {
+                'SD': {
+                    'Membaca': 'Membaca cerita rakyat daerah setempat untuk memahami budaya lokal dan mengembangkan kecintaan terhadap warisan budaya',
+                    'Menulis': 'Menulis surat untuk orang tua tentang kegiatan sekolah untuk mengembangkan kemampuan komunikasi dan memperkuat hubungan keluarga',
+                    'Berbicara': 'Bercerita tentang cita-cita di depan kelas untuk mengembangkan kepercayaan diri dan kemampuan public speaking'
+                },
+                'SMP': {
+                    'Teks Deskripsi': 'Mendeskripsikan keindahan alam Indonesia untuk mempromosikan pariwisata lokal dan mengembangkan rasa cinta tanah air',
+                    'Teks Narasi': 'Menulis pengalaman gotong royong di masyarakat untuk memahami nilai-nilai sosial dan memperkuat karakter',
+                    'Teks Eksposisi': 'Menjelaskan pentingnya menjaga lingkungan hidup untuk mengembangkan kesadaran ekologi dan tanggung jawab sosial'
+                },
+                'SMA': {
+                    'Teks Argumentasi': 'Menyusun argumen tentang pentingnya pendidikan karakter untuk membangun generasi yang berintegritas dan bermoral',
+                    'Teks Negosiasi': 'Bernegosiasi dalam simulasi bisnis sekolah untuk mengembangkan kemampuan komunikasi dan jiwa kewirausahaan',
+                    'Sastra': 'Menganalisis karya sastra Indonesia untuk memahami nilai-nilai budaya dan mengembangkan apresiasi terhadap karya bangsa'
+                }
+            },
+            'Informatika': {
+                'SMP': {
+                    'Algoritma': 'Membuat algoritma untuk mengatur jadwal piket kelas secara adil dan efisien dengan mengembangkan kemampuan berpikir sistematis',
+                    'Pemrograman': 'Membuat aplikasi sederhana untuk mencatat prestasi siswa dan membantu administrasi sekolah menjadi lebih digital'
+                },
+                'SMA': {
+                    'Basis Data': 'Merancang sistem informasi perpustakaan sekolah untuk meningkatkan layanan dan minat baca siswa',
+                    'Jaringan': 'Membangun jaringan internet sekolah yang aman dan cepat untuk mendukung pembelajaran digital yang efektif',
+                    'Kecerdasan Buatan': 'Mengembangkan chatbot untuk informasi sekolah dan membantu siswa mengakses informasi dengan mudah'
+                },
+                'SMK': {
+                    'Rekayasa Perangkat Lunak': 'Mengembangkan aplikasi e-learning untuk sekolah yang user-friendly dan mendukung pembelajaran jarak jauh',
+                    'Sistem Informasi': 'Merancang sistem manajemen sekolah terintegrasi untuk meningkatkan efisiensi administrasi dan pelayanan',
+                    'Keamanan Siber': 'Mengamankan data siswa dan sekolah dari ancaman cyber untuk melindungi privasi dan integritas informasi'
+                }
+            }
+        };
+
+        // Enhanced AI Context Generator
+        function generateAIContext(mataPelajaran, kelas, topik, lintasBidang, modelPembelajaran) {
+            // Determine education level
+            let level = 'SMA';
+            if (kelas.includes('I') || kelas.includes('II') || kelas.includes('III') || 
+                kelas.includes('IV') || kelas.includes('V') || kelas.includes('VI') || 
+                kelas.includes('PAUD') || kelas.includes('TK')) {
+                level = 'SD';
+            } else if (kelas.includes('VII') || kelas.includes('VIII') || kelas.includes('IX')) {
+                level = 'SMP';
+            } else if (kelas.includes('SMK')) {
+                level = 'SMK';
+            }
+
+            // Get base context from database
+            let baseContext = '';
+            if (contextualLearningDatabase[mataPelajaran] && 
+                contextualLearningDatabase[mataPelajaran][level] && 
+                contextualLearningDatabase[mataPelajaran][level][topik]) {
+                baseContext = contextualLearningDatabase[mataPelajaran][level][topik];
+            } else {
+                // Generate generic context based on subject and level
+                const genericContexts = {
+                    'SD': `Siswa belajar ${topik} melalui kegiatan bermain dan eksplorasi di lingkungan sekolah untuk mengembangkan pemahaman dasar dan karakter positif`,
+                    'SMP': `Siswa menerapkan konsep ${topik} dalam proyek sekolah yang bermanfaat untuk komunitas dan mengembangkan kemampuan berpikir kritis`,
+                    'SMA': `Siswa menganalisis ${topik} dalam konteks masalah nyata di masyarakat untuk mengembangkan solusi inovatif dan kemampuan problem solving`,
+                    'SMK': `Siswa menerapkan ${topik} dalam simulasi industri dan proyek praktis untuk mempersiapkan dunia kerja dan kewirausahaan`
+                };
+                baseContext = genericContexts[level] || genericContexts['SMA'];
+            }
+
+            // Enhance context with cross-disciplinary integration
+            if (lintasBidang && lintasBidang.length > 0) {
+                const integrationPhrases = {
+                    'Teknologi': 'dengan memanfaatkan teknologi digital dan aplikasi modern',
+                    'Ekonomi': 'dengan mempertimbangkan aspek ekonomi dan kewirausahaan',
+                    'Lingkungan': 'dengan fokus pada kelestarian lingkungan dan keberlanjutan',
+                    'Sosial Budaya': 'dengan mengintegrasikan nilai-nilai sosial dan budaya lokal',
+                    'Kesehatan': 'dengan memperhatikan aspek kesehatan dan kesejahteraan masyarakat',
+                    'Seni & Budaya': 'dengan mengekspresikan kreativitas dan apresiasi seni budaya',
+                    'Kewirausahaan': 'dengan mengembangkan jiwa wirausaha dan inovasi bisnis',
+                    'Politik & Hukum': 'dengan memahami aspek hukum dan tata kelola yang baik'
+                };
+
+                const selectedIntegrations = lintasBidang.slice(0, 2).map(bidang => 
+                    integrationPhrases[bidang] || `dengan mengintegrasikan aspek ${bidang.toLowerCase()}`
+                );
+
+                baseContext += ' ' + selectedIntegrations.join(' dan ');
+            }
+
+            // Enhance context with learning model
+            if (modelPembelajaran) {
+                const modelEnhancements = {
+                    'Problem Based Learning': 'melalui identifikasi dan pemecahan masalah nyata secara sistematis',
+                    'Project Based Learning': 'melalui pengerjaan proyek kolaboratif yang menghasilkan produk bermakna',
+                    'Discovery Learning': 'melalui eksplorasi dan penemuan konsep secara mandiri dan aktif',
+                    'Inquiry Learning': 'melalui penyelidikan dan penelitian yang mendalam dan terstruktur',
+                    'STEAM': 'melalui pendekatan interdisipliner sains, teknologi, engineering, seni, dan matematika',
+                    'Design Thinking': 'melalui proses desain kreatif untuk menghasilkan solusi inovatif',
+                    'Gamification': 'melalui pendekatan permainan yang menyenangkan dan memotivasi'
+                };
+
+                const enhancement = modelEnhancements[modelPembelajaran] || 
+                    `melalui pendekatan ${modelPembelajaran.toLowerCase()} yang interaktif`;
+                baseContext += ' ' + enhancement;
+            }
+
+            return baseContext;
+        }
+
+        // Form submission handler with enhanced AI context
         document.getElementById('modulForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -863,32 +699,78 @@
         });
 
         function showMessage(message, type) {
+            // Create enhanced message with glassmorphism
             const messageDiv = document.createElement('div');
-            messageDiv.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${type === 'error' ? 'bg-red-500' : 'bg-green-500'}`;
-            messageDiv.textContent = message;
+            messageDiv.className = `fixed top-20 right-4 p-4 rounded-2xl text-white z-50 glass-card backdrop-blur-md border transition-all duration-300 transform translate-x-full ${type === 'error' ? 'bg-red-500/90 border-red-300' : 'bg-green-500/90 border-green-300'}`;
+            messageDiv.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">${type === 'error' ? '❌' : '✅'}</span>
+                    <span class="font-medium">${message}</span>
+                </div>
+            `;
             document.body.appendChild(messageDiv);
             
+            // Animate in
             setTimeout(() => {
-                document.body.removeChild(messageDiv);
+                messageDiv.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Animate out and remove
+            setTimeout(() => {
+                messageDiv.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (document.body.contains(messageDiv)) {
+                        document.body.removeChild(messageDiv);
+                    }
+                }, 300);
             }, 3000);
         }
 
         function generateModul(mataPelajaran, kelas, topik, tujuanPembelajaran, metodePembelajaran, modelPembelajaran, alokasi, jumlahSiswa, lintasBidang, saranaPrasarana, sumberBelajar) {
-            // Show loading state
+            // Show loading state with enhanced animation
             const hasilSection = document.getElementById('hasilSection');
             const hasilModul = document.getElementById('hasilModul');
             
             hasilSection.classList.remove('hidden');
             hasilModul.innerHTML = `
                 <div class="text-center py-12">
-                    <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p class="text-lg text-gray-600">🧠 AI sedang menganalisis dan membuat modul ajar enhanced...</p>
-                    <p class="text-sm text-gray-500 mt-2">Mohon tunggu sebentar, proses enhanced membutuhkan waktu lebih lama</p>
-                    <div class="mt-4 space-y-2">
-                        <div class="pulse-animation text-sm text-blue-600">✅ Menganalisis Profil Lulusan 8 Dimensi...</div>
-                        <div class="pulse-animation text-sm text-green-600">✅ Mengintegrasikan lintas bidang disiplin ilmu...</div>
-                        <div class="pulse-animation text-sm text-purple-600">✅ Menyusun diferensiasi pembelajaran...</div>
-                        <div class="pulse-animation text-sm text-orange-600">✅ Membuat rubrik penilaian komprehensif...</div>
+                    <div class="relative">
+                        <div class="animate-spin rounded-full h-20 w-20 border-4 border-blue-200 border-t-blue-600 mx-auto mb-6"></div>
+                        <div class="absolute inset-0 rounded-full h-20 w-20 border-4 border-purple-200 border-t-purple-600 mx-auto animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+                    </div>
+                    <p class="text-xl font-semibold text-gray-700 mb-2">🧠 AI sedang menganalisis dan membuat modul ajar enhanced...</p>
+                    <p class="text-sm text-gray-500 mb-6">Mohon tunggu sebentar, proses enhanced membutuhkan waktu lebih lama</p>
+                    <div class="space-y-3">
+                        <div class="glass-card p-3 rounded-xl pulse-glow">
+                            <div class="flex items-center justify-center space-x-3">
+                                <div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+                                <span class="text-sm text-blue-600 font-medium">✅ Menganalisis Profil Lulusan 8 Dimensi...</span>
+                            </div>
+                        </div>
+                        <div class="glass-card p-3 rounded-xl pulse-glow" style="animation-delay: 0.5s;">
+                            <div class="flex items-center justify-center space-x-3">
+                                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                <span class="text-sm text-green-600 font-medium">✅ Mengintegrasikan lintas bidang disiplin ilmu...</span>
+                            </div>
+                        </div>
+                        <div class="glass-card p-3 rounded-xl pulse-glow" style="animation-delay: 1s;">
+                            <div class="flex items-center justify-center space-x-3">
+                                <div class="w-3 h-3 bg-purple-500 rounded-full animate-pulse"></div>
+                                <span class="text-sm text-purple-600 font-medium">✅ Menyusun diferensiasi pembelajaran...</span>
+                            </div>
+                        </div>
+                        <div class="glass-card p-3 rounded-xl pulse-glow" style="animation-delay: 1.5s;">
+                            <div class="flex items-center justify-center space-x-3">
+                                <div class="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
+                                <span class="text-sm text-orange-600 font-medium">✅ Membuat rubrik penilaian komprehensif...</span>
+                            </div>
+                        </div>
+                        <div class="glass-card p-3 rounded-xl pulse-glow" style="animation-delay: 2s;">
+                            <div class="flex items-center justify-center space-x-3">
+                                <div class="w-3 h-3 bg-pink-500 rounded-full animate-pulse"></div>
+                                <span class="text-sm text-pink-600 font-medium">✅ Generating AI contextual recommendations...</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -898,7 +780,8 @@
                 const modulContent = generateEnhancedModul(mataPelajaran, kelas, topik, tujuanPembelajaran, metodePembelajaran, modelPembelajaran, alokasi, jumlahSiswa, lintasBidang, saranaPrasarana, sumberBelajar);
                 hasilModul.innerHTML = modulContent;
                 hasilSection.scrollIntoView({ behavior: 'smooth' });
-            }, 4000);
+                showMessage('🎉 Modul Ajar Enhanced v13.0 berhasil dibuat dengan AI recommendations!', 'success');
+            }, 4500);
         }
 
         function generateEnhancedModul(mataPelajaran, kelas, topik, tujuanPembelajaran, metodePembelajaran, modelPembelajaran, alokasi, jumlahSiswa, lintasBidang, saranaPrasarana, sumberBelajar) {
@@ -951,39 +834,9 @@
             
             const aiRecommendations = getAIRecommendations();
             
-            // Enhanced contextual examples
-            const kontekstualExamples = {
-                'Matematika': {
-                    'Fungsi Kuadrat': 'Optimalisasi lahan pertanian untuk meningkatkan hasil panen dengan keterbatasan modal',
-                    'Statistika': 'Menganalisis data pendidikan dan ekonomi masyarakat untuk pengambilan keputusan',
-                    'Geometri': 'Merancang bangunan yang tahan gempa dengan teknologi modern',
-                    'Trigonometri': 'Menghitung sudut elevasi untuk sistem irigasi pertanian bertingkat',
-                    'Peluang': 'Menganalisis peluang keberhasilan usaha kecil di era digital',
-                    'Aljabar': 'Menyelesaikan masalah pembagian sumber daya secara adil dan efisien'
-                },
-                'Informatika': {
-                    'Algoritma dan Pemrograman': 'Membuat sistem informasi untuk transparansi dan partisipasi masyarakat',
-                    'Jaringan Komputer': 'Membangun infrastruktur internet untuk sekolah dengan anggaran terbatas',
-                    'Sistem Komputer': 'Mengoptimalkan penggunaan perangkat teknologi bekas untuk laboratorium komputer',
-                    'Analisis Data': 'Menganalisis pola migrasi dan dampaknya terhadap pendidikan',
-                    'Keamanan Siber': 'Melindungi data pribadi dari penipuan online di media sosial',
-                    'Kecerdasan Buatan': 'Mengembangkan chatbot untuk pelestarian budaya lokal di era digital'
-                },
-                'IPA': {
-                    'Sistem Pencernaan': 'Mengatasi masalah stunting dan gizi buruk anak dengan memanfaatkan pangan lokal',
-                    'Ekosistem': 'Pelestarian ekosistem mangrove di pesisir untuk melindungi nelayan dari abrasi',
-                    'Energi': 'Pemanfaatan energi terbarukan (surya, angin, biogas) untuk desa terpencil',
-                    'Sistem Pernapasan': 'Dampak polusi udara terhadap kesehatan siswa dan solusi ramah lingkungan'
-                },
-                'Bahasa Indonesia': {
-                    'Teks Persuasi': 'Menyusun proposal pembangunan infrastruktur desa dengan bahasa yang efektif',
-                    'Puisi': 'Mengekspresikan kecintaan terhadap alam dan keprihatinan terhadap kerusakan lingkungan',
-                    'Cerpen': 'Menulis cerita tentang kehidupan anak nelayan yang berjuang sekolah',
-                    'Teks Eksposisi': 'Menjelaskan pentingnya pelestarian bahasa daerah di era globalisasi'
-                }
-            };
-
-            const kontekstual = kontekstualExamples[mataPelajaran]?.[topik] || `Siswa menerapkan ${topik} dalam kehidupan sehari-hari, belajar melalui pengalaman langsung dan menghubungkan dengan konteks nyata`;
+            // Generate AI-enhanced contextual learning
+            const finalLintasBidang = lintasBidang.length > 0 ? lintasBidang : aiRecommendations.lintasBidang || [];
+            const kontekstual = generateAIContext(mataPelajaran, kelas, topik, finalLintasBidang, modelPembelajaran);
 
             // Generate AI Content
             const pertanyaanPemantik = generatePertanyaanPemantik(mataPelajaran, topik, kontekstual);
@@ -994,7 +847,6 @@
             const refleksiGuru = generateRefleksiGuru();
 
             // Generate cross-disciplinary connections with AI recommendations
-            const finalLintasBidang = lintasBidang.length > 0 ? lintasBidang : aiRecommendations.lintasBidang || [];
             const lintasBidangText = finalLintasBidang.length > 0 ? finalLintasBidang.join(', ') : 'Tidak ada integrasi lintas bidang';
             
             // Generate resource requirements with AI recommendations
@@ -1018,6 +870,36 @@
                         <div class="mt-3 space-y-2">
                             ${metodePembelajaran ? `<div class="bg-white/20 p-3 rounded-lg"><strong>📋 Metode:</strong> ${metodePembelajaran}</div>` : ''}
                             ${modelPembelajaran ? `<div class="bg-white/20 p-3 rounded-lg"><strong>🚀 Model:</strong> ${modelPembelajaran}</div>` : ''}
+                        </div>
+                    </div>
+
+                    <!-- AI Enhanced Contextual Learning -->
+                    <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 p-6 rounded-xl border-l-4 border-cyan-500">
+                        <h4 class="text-xl font-bold text-cyan-800 mb-4 flex items-center">
+                            🤖 AI Enhanced Contextual Learning
+                            <span class="ml-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-2 py-1 rounded text-xs">AI GENERATED</span>
+                        </h4>
+                        <div class="bg-white p-4 rounded-lg border border-cyan-200">
+                            <h5 class="font-semibold text-cyan-700 mb-2">Konteks Pembelajaran AI:</h5>
+                            <p class="text-cyan-600 leading-relaxed">${kontekstual}</p>
+                            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <h6 class="font-medium text-cyan-700 mb-1">🎯 Learning Outcomes:</h6>
+                                    <ul class="text-cyan-600 space-y-1">
+                                        <li>• Pemahaman konsep ${topik} dalam konteks nyata</li>
+                                        <li>• Pengembangan keterampilan abad 21</li>
+                                        <li>• Integrasi nilai-nilai karakter dan profil lulusan</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h6 class="font-medium text-cyan-700 mb-1">🌟 Real-world Impact:</h6>
+                                    <ul class="text-cyan-600 space-y-1">
+                                        <li>• Solusi untuk masalah komunitas</li>
+                                        <li>• Pengembangan kesadaran sosial</li>
+                                        <li>• Persiapan menghadapi tantangan masa depan</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -1072,7 +954,7 @@
                                     <h5 class="font-semibold mb-2">Tujuan Kognitif:</h5>
                                     <ul class="space-y-1 text-sm">
                                         <li>• Menganalisis konsep ${topik} secara mendalam</li>
-                                        <li>• Mengevaluasi penerapan dalam konteks: ${kontekstual}</li>
+                                        <li>• Mengevaluasi penerapan dalam konteks: ${kontekstual.substring(0, 80)}...</li>
                                         <li>• Mensintesis solusi inovatif berbasis kearifan lokal</li>
                                     </ul>
                                 </div>
@@ -1145,60 +1027,191 @@
                         </div>
                     </div>
 
-                    <!-- Langkah Pembelajaran Terstruktur -->
+                    <!-- Enhanced Structured Learning Steps Table -->
                     <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-500">
-                        <h4 class="text-xl font-bold text-blue-800 mb-4">📋 Langkah Pembelajaran Terstruktur (${modelPembelajaran || 'Standar'})</h4>
-                        <div class="space-y-4">
-                            <div class="bg-white p-4 rounded-lg border border-blue-200">
-                                <h5 class="font-semibold text-blue-700 mb-2">1. Pendahuluan (10 menit)</h5>
-                                <ul class="text-sm text-blue-600 space-y-1">
-                                    <li>• Salam dan doa pembuka</li>
-                                    <li>• Apersepsi: menghubungkan dengan pengalaman siswa terkait ${topik}</li>
-                                    <li>• Menyampaikan tujuan pembelajaran dan profil lulusan yang dikembangkan</li>
-                                    <li>• Motivasi: mengajukan pertanyaan pemantik kontekstual</li>
+                        <h4 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
+                            📋 Langkah Pembelajaran Terstruktur (${modelPembelajaran || 'Standar'})
+                            <span class="ml-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-2 py-1 rounded text-xs">EDITABLE TABLE</span>
+                        </h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border-2 border-blue-300 bg-white rounded-lg shadow-lg">
+                                <thead>
+                                    <tr class="bg-gradient-to-r from-blue-100 to-blue-200">
+                                        <th class="border-2 border-blue-300 px-4 py-3 text-left font-bold text-blue-800 w-1/6">TAHAP PEMBELAJARAN</th>
+                                        <th class="border-2 border-blue-300 px-4 py-3 text-center font-bold text-blue-800 w-1/12">WAKTU</th>
+                                        <th class="border-2 border-blue-300 px-4 py-3 text-left font-bold text-blue-800 w-1/3">KEGIATAN GURU</th>
+                                        <th class="border-2 border-blue-300 px-4 py-3 text-left font-bold text-blue-800 w-1/3">KEGIATAN SISWA</th>
+                                        <th class="border-2 border-blue-300 px-4 py-3 text-left font-bold text-blue-800 w-1/6">MEDIA/SUMBER</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-blue-25 transition-colors">
+                                        <td class="border-2 border-blue-300 px-4 py-4 font-bold text-blue-700 bg-blue-50">
+                                            🚀 PENDAHULUAN<br>
+                                            <span class="text-sm font-normal">(Opening)</span>
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-center font-semibold text-blue-600">
+                                            10<br>menit
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-sm">
+                                            <div class="space-y-2">
+                                                <div><strong>1. Pembukaan:</strong> Mengucapkan salam, berdoa, dan mengecek kehadiran siswa</div>
+                                                <div><strong>2. Apersepsi:</strong> Menghubungkan materi ${topik} dengan pengalaman siswa sehari-hari</div>
+                                                <div><strong>3. Orientasi:</strong> Menyampaikan tujuan pembelajaran dan profil lulusan yang akan dikembangkan</div>
+                                                <div><strong>4. Motivasi:</strong> Mengajukan pertanyaan pemantik kontekstual terkait ${kontekstual.substring(0, 50)}...</div>
+                                            </div>
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-sm">
+                                            <div class="space-y-2">
+                                                <div>• Menjawab salam, berdoa, dan merespon pengecekan kehadiran</div>
+                                                <div>• Mendengarkan dan merespon apersepsi dengan berbagi pengalaman terkait ${topik}</div>
+                                                <div>• Memperhatikan tujuan pembelajaran dan mengidentifikasi profil lulusan yang akan dikembangkan</div>
+                                                <div>• Merespon pertanyaan pemantik dan mengajukan pertanyaan awal</div>
+                                            </div>
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-sm">
+                                            <div class="space-y-1">
+                                                <div>📽️ Proyektor</div>
+                                                <div>📱 Smartphone</div>
+                                                <div>🎯 Slide presentasi</div>
+                                                <div>📋 Daftar hadir</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-green-25 transition-colors">
+                                        <td class="border-2 border-blue-300 px-4 py-4 font-bold text-green-700 bg-green-50">
+                                            🎯 KEGIATAN INTI<br>
+                                            <span class="text-sm font-normal">(Core Activity)</span>
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-center font-semibold text-green-600">
+                                            ${parseInt(alokasi.split(' ')[0]) * 40 - 20}<br>menit
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-sm">
+                                            <div class="space-y-3">
+                                                <div class="bg-blue-100 p-2 rounded">
+                                                    <strong class="text-blue-700">🔍 FASE EKSPLORASI (${Math.floor((parseInt(alokasi.split(' ')[0]) * 40 - 20) / 3)} menit)</strong>
+                                                    <ul class="mt-1 space-y-1 text-xs">
+                                                        <li>• Memfasilitasi siswa mengamati fenomena terkait ${topik}</li>
+                                                        <li>• Membimbing identifikasi masalah dalam konteks kehidupan nyata</li>
+                                                        <li>• Mendorong siswa mengajukan hipotesis dan pertanyaan penelitian</li>
+                                                        <li>• Memfasilitasi aktivasi prior knowledge melalui diskusi</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="bg-green-100 p-2 rounded">
+                                                    <strong class="text-green-700">🔬 FASE ELABORASI (${Math.floor((parseInt(alokasi.split(' ')[0]) * 40 - 20) / 3)} menit)</strong>
+                                                    <ul class="mt-1 space-y-1 text-xs">
+                                                        <li>• Memfasilitasi ${metodePembelajaran || 'diskusi kelompok'} dengan pendekatan ${modelPembelajaran || 'kolaboratif'}</li>
+                                                        <li>• Membimbing pencarian informasi dari sumber: ${sumberBelajarText}</li>
+                                                        <li>• Mendorong analisis data dan informasi secara kritis</li>
+                                                        <li>• Memfasilitasi integrasi perspektif lintas bidang: ${lintasBidangText}</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="bg-purple-100 p-2 rounded">
+                                                    <strong class="text-purple-700">✅ FASE KONFIRMASI (${Math.floor((parseInt(alokasi.split(' ')[0]) * 40 - 20) / 3)} menit)</strong>
+                                                    <ul class="mt-1 space-y-1 text-xs">
+                                                        <li>• Memfasilitasi presentasi hasil kelompok dengan media: ${saranaPrasaranaText}</li>
+                                                        <li>• Memberikan klarifikasi dan penguatan konsep</li>
+                                                        <li>• Melakukan evaluasi pemahaman melalui asesmen formatif</li>
+                                                        <li>• Memfasilitasi refleksi pembelajaran dan koneksi dengan profil lulusan</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-sm">
+                                            <div class="space-y-3">
+                                                <div class="bg-blue-100 p-2 rounded">
+                                                    <strong class="text-blue-700">🔍 EKSPLORASI</strong>
+                                                    <ul class="mt-1 space-y-1 text-xs">
+                                                        <li>• Mengamati dan mengidentifikasi fenomena terkait ${topik}</li>
+                                                        <li>• Merumuskan masalah berdasarkan konteks kehidupan nyata</li>
+                                                        <li>• Mengajukan hipotesis dan pertanyaan penelitian</li>
+                                                        <li>• Berbagi pengetahuan awal melalui diskusi kelompok</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="bg-green-100 p-2 rounded">
+                                                    <strong class="text-green-700">🔬 ELABORASI</strong>
+                                                    <ul class="mt-1 space-y-1 text-xs">
+                                                        <li>• Berpartisipasi aktif dalam ${metodePembelajaran || 'diskusi kelompok'}</li>
+                                                        <li>• Mencari dan mengumpulkan informasi dari berbagai sumber</li>
+                                                        <li>• Menganalisis data dan informasi secara kolaboratif</li>
+                                                        <li>• Mengintegrasikan perspektif dari berbagai bidang ilmu</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="bg-purple-100 p-2 rounded">
+                                                    <strong class="text-purple-700">✅ KONFIRMASI</strong>
+                                                    <ul class="mt-1 space-y-1 text-xs">
+                                                        <li>• Mempresentasikan hasil kerja kelompok dengan percaya diri</li>
+                                                        <li>• Memberikan tanggapan dan masukan terhadap presentasi kelompok lain</li>
+                                                        <li>• Mengerjakan asesmen formatif untuk evaluasi pemahaman</li>
+                                                        <li>• Melakukan refleksi pembelajaran dan mengaitkan dengan profil lulusan</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-sm">
+                                            <div class="space-y-1">
+                                                <div>💻 ${saranaPrasaranaText}</div>
+                                                <div>📚 ${sumberBelajarText}</div>
+                                                <div>🎯 LKPD Enhanced</div>
+                                                <div>📊 Platform digital</div>
+                                                <div>🔬 Alat eksperimen</div>
+                                                <div>📱 Aplikasi pembelajaran</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-orange-25 transition-colors">
+                                        <td class="border-2 border-blue-300 px-4 py-4 font-bold text-orange-700 bg-orange-50">
+                                            🎉 PENUTUP<br>
+                                            <span class="text-sm font-normal">(Closing)</span>
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-center font-semibold text-orange-600">
+                                            10<br>menit
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-sm">
+                                            <div class="space-y-2">
+                                                <div><strong>1. Refleksi:</strong> Memfasilitasi refleksi pembelajaran bersama siswa tentang pencapaian tujuan</div>
+                                                <div><strong>2. Kesimpulan:</strong> Membimbing siswa menyimpulkan materi dan kaitannya dengan kehidupan nyata</div>
+                                                <div><strong>3. Tindak Lanjut:</strong> Memberikan tugas atau rencana pembelajaran berikutnya</div>
+                                                <div><strong>4. Penutupan:</strong> Doa penutup dan salam</div>
+                                            </div>
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-sm">
+                                            <div class="space-y-2">
+                                                <div>• Melakukan refleksi tentang pembelajaran yang telah dilakukan dan pencapaian tujuan</div>
+                                                <div>• Menyimpulkan materi ${topik} dan mengaitkan dengan kehidupan sehari-hari</div>
+                                                <div>• Mencatat tugas dan mempersiapkan pembelajaran berikutnya</div>
+                                                <div>• Berdoa dan menjawab salam penutup</div>
+                                            </div>
+                                        </td>
+                                        <td class="border-2 border-blue-300 px-4 py-4 text-sm">
+                                            <div class="space-y-1">
+                                                <div>📝 Lembar refleksi</div>
+                                                <div>📋 Checklist tujuan</div>
+                                                <div>📚 Buku tugas</div>
+                                                <div>🎯 Slide kesimpulan</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <h6 class="font-semibold text-blue-800 mb-2">📝 Catatan Penting:</h6>
+                                <ul class="text-blue-700 space-y-1">
+                                    <li>• Sesuaikan waktu dengan kondisi dan kemampuan siswa</li>
+                                    <li>• Pastikan semua siswa terlibat aktif dalam pembelajaran</li>
+                                    <li>• Gunakan diferensiasi sesuai kebutuhan individual siswa</li>
+                                    <li>• Integrasikan teknologi untuk meningkatkan engagement</li>
                                 </ul>
                             </div>
-                            
-                            <div class="bg-white p-4 rounded-lg border border-blue-200">
-                                <h5 class="font-semibold text-blue-700 mb-2">2. Kegiatan Inti (${parseInt(alokasi.split(' ')[0]) * 40 - 20} menit)</h5>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                                    <div>
-                                        <h6 class="font-medium text-blue-600 mb-1">Eksplorasi:</h6>
-                                        <ul class="text-blue-600 space-y-1">
-                                            <li>• Mengamati fenomena terkait ${topik}</li>
-                                            <li>• Mengidentifikasi masalah dalam konteks: ${kontekstual}</li>
-                                            <li>• Mengajukan hipotesis dan pertanyaan penelitian</li>
-                                            <li>• Aktivasi prior knowledge melalui diskusi</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h6 class="font-medium text-blue-600 mb-1">Elaborasi:</h6>
-                                        <ul class="text-blue-600 space-y-1">
-                                            <li>• ${metodePembelajaran || 'Diskusi kelompok'} dengan pendekatan ${modelPembelajaran || 'kolaboratif'}</li>
-                                            <li>• Mencari informasi dari sumber: ${sumberBelajarText}</li>
-                                            <li>• Menganalisis data dan informasi secara kritis</li>
-                                            <li>• Mengintegrasikan perspektif lintas bidang: ${lintasBidangText}</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h6 class="font-medium text-blue-600 mb-1">Konfirmasi:</h6>
-                                        <ul class="text-blue-600 space-y-1">
-                                            <li>• Presentasi hasil kelompok dengan media: ${saranaPrasaranaText}</li>
-                                            <li>• Klarifikasi dan penguatan konsep oleh guru</li>
-                                            <li>• Evaluasi pemahaman melalui asesmen formatif</li>
-                                            <li>• Refleksi pembelajaran dan koneksi dengan profil lulusan</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-white p-4 rounded-lg border border-blue-200">
-                                <h5 class="font-semibold text-blue-700 mb-2">3. Penutup (10 menit)</h5>
-                                <ul class="text-sm text-blue-600 space-y-1">
-                                    <li>• Refleksi pembelajaran bersama siswa</li>
-                                    <li>• Menyimpulkan materi yang telah dipelajari dan kaitannya dengan kehidupan nyata</li>
-                                    <li>• Memberikan tugas atau rencana pembelajaran berikutnya</li>
-                                    <li>• Doa penutup dan salam</li>
+                            <div class="bg-green-100 p-3 rounded-lg">
+                                <h6 class="font-semibold text-green-800 mb-2">🎯 Indikator Keberhasilan:</h6>
+                                <ul class="text-green-700 space-y-1">
+                                    <li>• Siswa aktif berpartisipasi dalam setiap fase pembelajaran</li>
+                                    <li>• Tercapainya tujuan pembelajaran yang telah ditetapkan</li>
+                                    <li>• Siswa mampu mengaitkan materi dengan kehidupan nyata</li>
+                                    <li>• Berkembangnya 8 dimensi profil lulusan secara optimal</li>
                                 </ul>
                             </div>
                         </div>
@@ -1437,7 +1450,8 @@
                                 <ul class="text-sm text-blue-700 space-y-1">
                                     <li>• ✅ Profil Lulusan 8 Dimensi terintegrasi penuh</li>
                                     <li>• ✅ Lintas bidang disiplin ilmu: ${lintasBidangText}</li>
-                                    <li>• ✅ AI-generated pertanyaan pemantik kontekstual</li>
+                                    <li>• ✅ AI-generated contextual learning recommendations</li>
+                                    <li>• ✅ Structured learning table (editable format)</li>
                                     <li>• ✅ Asesmen formatif, sumatif, dan autentik lengkap</li>
                                     <li>• ✅ Diferensiasi pembelajaran komprehensif</li>
                                     <li>• ✅ Program remedial dan pengayaan spesifik</li>
@@ -1449,9 +1463,10 @@
                                     <li>• 🎯 Alignment dengan Kurikulum Merdeka: 100%</li>
                                     <li>• 📊 Rubrik penilaian 4 level dengan 5 aspek</li>
                                     <li>• 🤔 Refleksi guru 8 pertanyaan kunci</li>
-                                    <li>• 🌐 Konteks pembelajaran: ${kontekstual.substring(0, 50)}...</li>
+                                    <li>• 🌐 AI contextual learning: ${kontekstual.substring(0, 50)}...</li>
                                     <li>• 🛠️ Sarana prasarana: ${saranaPrasaranaText}</li>
                                     <li>• 📚 Sumber belajar: ${sumberBelajarText}</li>
+                                    <li>• 📋 Structured table format (Word-ready)</li>
                                 </ul>
                             </div>
                         </div>
@@ -1464,14 +1479,14 @@
         function generatePertanyaanPemantik(mataPelajaran, topik, kontekstual) {
             const pertanyaanTemplates = {
                 'Informatika': [
-                    `Bagaimana teknologi ${topik} dapat membantu mengatasi masalah dalam ${kontekstual}?`,
+                    `Bagaimana teknologi ${topik} dapat membantu mengatasi masalah dalam ${kontekstual.substring(0, 80)}...?`,
                     `Apa dampak positif dan negatif dari implementasi ${topik} di Indonesia?`,
                     `Bagaimana cara kerja ${topik} dalam kehidupan sehari-hari kita?`,
                     `Mengapa ${topik} penting untuk masa depan Indonesia?`,
                     `Bagaimana kita dapat menggunakan ${topik} secara etis dan bertanggung jawab?`
                 ],
                 'Matematika': [
-                    `Bagaimana konsep ${topik} dapat diterapkan dalam ${kontekstual}?`,
+                    `Bagaimana konsep ${topik} dapat diterapkan dalam ${kontekstual.substring(0, 80)}...?`,
                     `Mengapa pemahaman ${topik} penting untuk kehidupan sehari-hari?`,
                     `Bagaimana ${topik} membantu dalam pengambilan keputusan yang tepat?`,
                     `Apa hubungan antara ${topik} dengan teknologi modern?`,
@@ -1480,7 +1495,7 @@
                 'default': [
                     `Bagaimana ${topik} berkaitan dengan kehidupan sehari-hari di Indonesia?`,
                     `Mengapa penting bagi kita untuk memahami ${topik}?`,
-                    `Bagaimana ${topik} dapat membantu mengatasi masalah dalam ${kontekstual}?`,
+                    `Bagaimana ${topik} dapat membantu mengatasi masalah dalam ${kontekstual.substring(0, 80)}...?`,
                     `Apa manfaat mempelajari ${topik} untuk masa depan?`,
                     `Bagaimana kita dapat menerapkan ${topik} dalam konteks lokal Indonesia?`
                 ]
@@ -1500,764 +1515,4 @@
                 ],
                 sumatif: [
                     'Presentasi hasil proyek dengan rubrik komprehensif',
-                    'Portofolio digital dengan dokumentasi proses pembelajaran',
-                    'Tes tertulis kontekstual berbasis masalah nyata',
-                    'Performance task dengan kriteria autentik',
-                    'Produk kreatif yang menunjukkan penguasaan konsep'
-                ],
-                autentik: [
-                    `Penerapan ${topik} dalam mengatasi masalah nyata di lingkungan sekitar`,
-                    'Kolaborasi dengan komunitas lokal untuk implementasi solusi',
-                    'Dokumentasi proses pembelajaran dalam bentuk multimedia',
-                    'Presentasi hasil kepada stakeholder terkait',
-                    'Refleksi mendalam tentang dampak pembelajaran terhadap diri dan masyarakat'
-                ]
-            };
-        }
-
-        function generateDiferensiasi(kelas, jumlahSiswa) {
-            return {
-                konten: [
-                    'Materi dengan tingkat kompleksitas yang bervariasi (basic, intermediate, advanced)',
-                    'Multiple representation: visual, auditory, kinesthetic, dan reading/writing',
-                    'Sumber belajar yang beragam: video, artikel, podcast, infografis, simulasi',
-                    'Konten yang disesuaikan dengan minat dan latar belakang siswa',
-                    'Gamifikasi dengan level yang dapat disesuaikan'
-                ],
-                proses: [
-                    'Flexible grouping berdasarkan readiness, interest, dan learning profile',
-                    'Choice boards dengan berbagai pilihan aktivitas pembelajaran',
-                    'Learning contracts yang disesuaikan dengan kemampuan individual',
-                    'Scaffolding dan support yang berjenjang sesuai kebutuhan',
-                    'Aktivitas hands-on yang disesuaikan dengan gaya belajar'
-                ],
-                produk: [
-                    'Multiple ways untuk mendemonstrasikan pembelajaran (presentasi, poster, video, model, performance)',
-                    'Rubrik yang disesuaikan dengan tingkat kemampuan siswa',
-                    'Portfolio assessment dengan kriteria yang fleksibel',
-                    'Peer dan self-assessment untuk mengembangkan metacognition',
-                    'Showcase kreatif dengan berbagai format presentasi'
-                ]
-            };
-        }
-
-        function generateRemedialPengayaan(mataPelajaran, topik) {
-            return {
-                remedial: [
-                    `Review konsep dasar ${topik} dengan pendekatan gamifikasi`,
-                    'Pembelajaran individual dengan bimbingan intensif guru',
-                    'Penggunaan media pembelajaran yang lebih konkret dan visual',
-                    'Latihan soal dengan tingkat kesulitan yang bertahap',
-                    'Peer tutoring dengan siswa yang sudah menguasai materi',
-                    'Aktivitas hands-on yang memperkuat pemahaman dasar'
-                ],
-                pengayaan: [
-                    `Eksplorasi aplikasi lanjutan ${topik} dalam konteks yang lebih kompleks`,
-                    'Proyek penelitian mini dengan topik yang lebih mendalam',
-                    'Mentoring siswa lain yang membutuhkan bantuan (peer teaching)',
-                    'Partisipasi dalam kompetisi atau olimpiade terkait',
-                    'Kolaborasi dengan ahli atau praktisi di bidang terkait',
-                    'Pengembangan produk inovatif menggunakan teknologi'
-                ]
-            };
-        }
-
-        function generateRubrikPenilaian(topik) {
-            return {
-                kriteria: [
-                    {
-                        aspek: 'Pemahaman Konsep',
-                        sangat_baik: `Menunjukkan pemahaman mendalam tentang ${topik} dengan dapat menjelaskan konsep secara detail dan akurat`,
-                        baik: `Menunjukkan pemahaman yang baik tentang ${topik} dengan penjelasan yang cukup akurat`,
-                        cukup: `Menunjukkan pemahaman dasar tentang ${topik} namun masih ada beberapa kesalahan konsep`,
-                        perlu_bimbingan: `Menunjukkan pemahaman yang terbatas tentang ${topik} dan memerlukan bimbingan lebih lanjut`
-                    },
-                    {
-                        aspek: 'Penerapan Kontekstual',
-                        sangat_baik: 'Mampu menerapkan konsep dalam berbagai konteks nyata dengan solusi yang inovatif dan tepat',
-                        baik: 'Mampu menerapkan konsep dalam konteks nyata dengan solusi yang tepat',
-                        cukup: 'Mampu menerapkan konsep dalam konteks sederhana dengan bimbingan',
-                        perlu_bimbingan: 'Kesulitan menerapkan konsep dalam konteks nyata dan memerlukan bantuan signifikan'
-                    },
-                    {
-                        aspek: 'Kolaborasi dan Komunikasi',
-                        sangat_baik: 'Berkolaborasi secara efektif, berkomunikasi dengan jelas, dan memimpin diskusi dengan baik',
-                        baik: 'Berkolaborasi dengan baik dan berkomunikasi secara efektif dalam kelompok',
-                        cukup: 'Berpartisipasi dalam kolaborasi namun komunikasi masih perlu ditingkatkan',
-                        perlu_bimbingan: 'Kesulitan berkolaborasi dan berkomunikasi, memerlukan dukungan untuk berpartisipasi'
-                    },
-                    {
-                        aspek: 'Kreativitas dan Inovasi',
-                        sangat_baik: 'Menunjukkan kreativitas tinggi dengan ide-ide original dan solusi inovatif',
-                        baik: 'Menunjukkan kreativitas dengan ide-ide yang menarik dan solusi yang tepat',
-                        cukup: 'Menunjukkan beberapa kreativitas namun masih mengikuti pola yang umum',
-                        perlu_bimbingan: 'Kreativitas terbatas dan cenderung mengikuti contoh yang diberikan'
-                    },
-                    {
-                        aspek: 'Integrasi Profil Lulusan',
-                        sangat_baik: 'Menunjukkan pengembangan optimal dari 8 dimensi profil lulusan dalam pembelajaran',
-                        baik: 'Menunjukkan pengembangan yang baik dari beberapa dimensi profil lulusan',
-                        cukup: 'Menunjukkan pengembangan dasar dari dimensi profil lulusan',
-                        perlu_bimbingan: 'Memerlukan bimbingan untuk mengembangkan dimensi profil lulusan'
-                    }
-                ]
-            };
-        }
-
-        function generateRefleksiGuru() {
-            return [
-                'Bagaimana efektivitas integrasi 8 dimensi profil lulusan dalam pembelajaran ini?',
-                'Sejauh mana siswa dapat menghubungkan materi dengan konteks kehidupan nyata?',
-                'Bagaimana respons siswa terhadap pembelajaran lintas bidang disiplin ilmu?',
-                'Apa tantangan utama dalam mengimplementasikan diferensiasi pembelajaran?',
-                'Bagaimana efektivitas asesmen formatif, sumatif, dan autentik yang diterapkan?',
-                'Sejauh mana program remedial dan pengayaan membantu siswa mencapai tujuan?',
-                'Bagaimana kualitas kolaborasi dan komunikasi siswa selama pembelajaran?',
-                'Apa yang akan saya tingkatkan untuk pembelajaran selanjutnya?'
-            ];
-        }
-
-        // Multi-format download functions (enhanced)
-        function downloadWord() {
-            const mataPelajaran = document.getElementById('mataPelajaran').value;
-            const topik = document.getElementById('topik').value;
-            const modulContent = generateEnhancedWordContent();
-            
-            const blob = new Blob([modulContent], { 
-                type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' 
-            });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Modul_Ajar_${mataPelajaran}_${topik}_v13.0_Enhanced.doc`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            showMessage('📄 Modul Enhanced v13.0 berhasil didownload dalam format Word (.doc)!', 'success');
-        }
-
-        function downloadPDF() {
-            const mataPelajaran = document.getElementById('mataPelajaran').value;
-            const topik = document.getElementById('topik').value;
-            
-            // Create PDF-friendly content
-            const pdfContent = generateEnhancedPDFContent();
-            const blob = new Blob([pdfContent], { type: 'application/pdf' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Modul_Ajar_${mataPelajaran}_${topik}_v13.0_Enhanced.pdf`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            showMessage('📑 Modul Enhanced v13.0 berhasil didownload dalam format PDF!', 'success');
-        }
-
-        function copyToClipboard() {
-            const textContent = generateEnhancedTextContent();
-            
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(textContent).then(() => {
-                    showMessage('📋 Modul Enhanced v13.0 berhasil disalin ke clipboard!', 'success');
-                }).catch(() => {
-                    fallbackCopyToClipboard(textContent);
-                });
-            } else {
-                fallbackCopyToClipboard(textContent);
-            }
-        }
-
-        function fallbackCopyToClipboard(text) {
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            textArea.style.position = 'fixed';
-            textArea.style.left = '-999999px';
-            textArea.style.top = '-999999px';
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                showMessage('📋 Modul Enhanced v13.0 berhasil disalin ke clipboard!', 'success');
-            } catch (err) {
-                showMessage('❌ Gagal menyalin ke clipboard. Silakan copy manual.', 'error');
-            }
-            
-            document.body.removeChild(textArea);
-        }
-
-        function downloadLKPD() {
-            const mataPelajaran = document.getElementById('mataPelajaran').value;
-            const kelas = document.getElementById('kelas').value;
-            const topik = document.getElementById('topik').value;
-            const alokasi = document.getElementById('alokasi').value;
-            
-            if (!mataPelajaran || !kelas || !topik) {
-                showMessage('❌ Mohon generate modul terlebih dahulu sebelum download LKPD!', 'error');
-                return;
-            }
-            
-            const lkpdContent = generateEnhancedLKPDContent(mataPelajaran, kelas, topik, alokasi);
-            const blob = new Blob([lkpdContent], { type: 'application/msword' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `LKPD_Enhanced_${mataPelajaran}_${topik}_${kelas}_v13.0.doc`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            showMessage('📝 LKPD Enhanced v13.0 berhasil didownload dalam format Word (.doc)!', 'success');
-        }
-
-        function generateEnhancedLKPDContent(mataPelajaran, kelas, topik, alokasi) {
-            return `
-LEMBAR KERJA PESERTA DIDIK (LKPD) ENHANCED
-Dashboard Pembuat Modul Ajar AI v13.0 Enhanced
-
-===========================================
-IDENTITAS LKPD ENHANCED
-===========================================
-Mata Pelajaran    : ${mataPelajaran}
-Kelas/Semester    : ${kelas}
-Topik/Materi      : ${topik}
-Alokasi Waktu     : ${alokasi}
-Fitur Enhanced    : Profil Lulusan 8 Dimensi + Lintas Bidang + Diferensiasi
-
-===========================================
-🎯 PROFIL LULUSAN 8 DIMENSI TRACKER
-===========================================
-Centang dimensi yang akan dikembangkan dalam pembelajaran ini:
-
-□ 🙏 Keimanan & Ketakwaan - Spiritual Digital Era
-□ 🌍 Kewargaan Digital - Citizenship 4.0  
-□ 🧠 Penalaran Kritis - Critical Thinking
-□ 🎨 Kreativitas & Inovasi - Innovation 4.0
-□ 🤝 Kolaborasi Global - Global Teamwork
-□ 💪 Kemandirian Belajar - Self-Directed Learning
-□ 🏃 Kesehatan Holistik - Holistic Wellness
-□ 💬 Komunikasi Efektif - Multi-Modal Communication
-
-===========================================
-🌐 AKTIVITAS LINTAS BIDANG DISIPLIN ILMU
-===========================================
-
-1. 🔍 Identifikasi Koneksi:
-   Hubungkan ${topik} dengan bidang lain:
-   
-   Teknologi: ________________________________________
-   Ekonomi: __________________________________________
-   Sosial Budaya: ___________________________________
-   Lingkungan: ______________________________________
-   Kesehatan: _______________________________________
-
-2. 🎯 Analisis Kontekstual:
-   Bagaimana ${topik} diterapkan dalam kehidupan nyata?
-   _________________________________________________
-   _________________________________________________
-
-3. 💡 Solusi Inovatif:
-   Berikan ide kreatif untuk mengatasi masalah terkait ${topik}:
-   _________________________________________________
-   _________________________________________________
-
-===========================================
-🎨 DIFERENSIASI PEMBELAJARAN
-===========================================
-
-PILIH JALUR BELAJAR ANDA:
-
-□ JALUR VISUAL (Learner Visual)
-  - Buat mind map tentang ${topik}
-  - Gambar diagram atau infografis
-  - Tonton video pembelajaran
-
-□ JALUR AUDITORI (Learner Auditori)  
-  - Diskusikan dengan teman
-  - Dengarkan podcast/audio
-  - Presentasi lisan
-
-□ JALUR KINESTETIK (Learner Kinestetik)
-  - Lakukan eksperimen hands-on
-  - Buat model atau prototype
-  - Role playing dan simulasi
-
-□ JALUR READING/WRITING (Learner R/W)
-  - Baca artikel dan jurnal
-  - Tulis essay atau laporan
-  - Buat catatan detail
-
-===========================================
-📊 ASESMEN DIRI (SELF-ASSESSMENT)
-===========================================
-
-Nilai pemahaman Anda (1-4):
-
-Pemahaman Konsep ${topik}: ___/4
-Penerapan dalam Konteks Nyata: ___/4  
-Kolaborasi dengan Teman: ___/4
-Kreativitas dalam Solusi: ___/4
-Komunikasi Hasil: ___/4
-
-Total Skor: ___/20
-
-Refleksi:
-Apa yang sudah saya kuasai? _________________________
-Apa yang masih perlu dipelajari? ___________________
-Bagaimana saya akan meningkatkan pemahaman? __________
-
-===========================================
-🤝 AKTIVITAS KOLABORATIF
-===========================================
-
-NAMA KELOMPOK: ____________________________________
-
-ANGGOTA KELOMPOK:
-1. _________________________ (Peran: _____________)
-2. _________________________ (Peran: _____________) 
-3. _________________________ (Peran: _____________)
-4. _________________________ (Peran: _____________)
-
-TUGAS KELOMPOK:
-Buat proyek mini yang menerapkan ${topik} untuk mengatasi masalah di lingkungan sekolah/masyarakat.
-
-Masalah yang dipilih: _______________________________
-Solusi yang diusulkan: _____________________________
-Langkah implementasi: ______________________________
-Hasil yang diharapkan: _____________________________
-
-===========================================
-🚀 PROGRAM REMEDIAL & PENGAYAAN
-===========================================
-
-UNTUK SISWA YANG MEMERLUKAN REMEDIAL:
-□ Review materi dasar dengan video pembelajaran
-□ Latihan soal bertingkat dari mudah ke sulit
-□ Bimbingan peer tutoring
-□ Aktivitas hands-on sederhana
-
-UNTUK SISWA YANG MEMERLUKAN PENGAYAAN:
-□ Eksplorasi topik lanjutan
-□ Proyek penelitian mini
-□ Mentoring teman yang kesulitan
-□ Partisipasi dalam kompetisi
-
-===========================================
-📏 RUBRIK PENILAIAN SISWA
-===========================================
-
-ASPEK PENILAIAN (Beri tanda ✓):
-
-PEMAHAMAN KONSEP:
-□ Sangat Baik (4) - Paham sempurna dan bisa menjelaskan
-□ Baik (3) - Paham dengan baik  
-□ Cukup (2) - Paham dasar
-□ Perlu Bimbingan (1) - Belum paham
-
-PENERAPAN KONTEKSTUAL:
-□ Sangat Baik (4) - Bisa menerapkan dalam berbagai situasi
-□ Baik (3) - Bisa menerapkan dengan tepat
-□ Cukup (2) - Bisa menerapkan sederhana
-□ Perlu Bimbingan (1) - Kesulitan menerapkan
-
-KOLABORASI & KOMUNIKASI:
-□ Sangat Baik (4) - Memimpin dan berkomunikasi excellent
-□ Baik (3) - Berkolaborasi dan berkomunikasi baik
-□ Cukup (2) - Berpartisipasi cukup aktif
-□ Perlu Bimbingan (1) - Kesulitan berkolaborasi
-
-===========================================
-🤔 REFLEKSI PEMBELAJARAN
-===========================================
-
-1. Dimensi profil lulusan mana yang paling berkembang hari ini?
-   ________________________________________________
-
-2. Bagaimana ${topik} berhubungan dengan bidang lain?
-   ________________________________________________
-
-3. Apa tantangan terbesar dalam pembelajaran ini?
-   ________________________________________________
-
-4. Bagaimana saya akan menerapkan ilmu ini di kehidupan nyata?
-   ________________________________________________
-
-5. Apa yang ingin saya pelajari lebih lanjut?
-   ________________________________________________
-
-===========================================
-📝 CATATAN GURU
-===========================================
-
-Observasi Pembelajaran:
-_______________________________________________________
-
-Kemajuan Siswa:
-_______________________________________________________
-
-Rekomendasi Tindak Lanjut:
-_______________________________________________________
-
-===========================================
-COPYRIGHT & LEGAL
-===========================================
-© 2025 Dashboard Pembuat Modul Ajar AI v13.0 Enhanced
-LKPD dapat diedit sesuai kebutuhan sekolah dan karakteristik siswa
-Powered by Advanced AI Technology
-
-Format: Microsoft Word (.doc) - Enhanced Interactive Worksheet
-Font: Calibri, 11pt | Spacing: 1.15 lines
-Compatible dengan Microsoft Word, Google Docs, dan LibreOffice Writer
-Optimized untuk Kurikulum Merdeka dengan 8 Dimensi Profil Lulusan
-            `;
-        }
-
-        function generateEnhancedWordContent() {
-            const mataPelajaran = document.getElementById('mataPelajaran').value;
-            const kelas = document.getElementById('kelas').value;
-            const topik = document.getElementById('topik').value;
-            const alokasi = document.getElementById('alokasi').value;
-            const jumlahSiswa = document.getElementById('jumlahSiswa').value;
-            const metodePembelajaran = document.getElementById('metodePembelajaran').value;
-            const modelPembelajaran = document.getElementById('modelPembelajaran').value;
-            
-            // Get selected resources
-            const lintasBidang = Array.from(document.querySelectorAll('input[name="lintasBidang"]:checked')).map(cb => cb.value);
-            const saranaPrasarana = Array.from(document.querySelectorAll('input[name="sarana"]:checked')).map(cb => cb.value);
-            const sumberBelajar = Array.from(document.querySelectorAll('input[name="sumber"]:checked')).map(cb => cb.value);
-            
-            const lintasBidangText = lintasBidang.length > 0 ? lintasBidang.join(', ') : 'Teknologi, Ekonomi, Sosial Budaya';
-            const saranaPrasaranaText = saranaPrasarana.length > 0 ? saranaPrasarana.join(', ') : 'Proyektor, Alat Peraga';
-            const sumberBelajarText = sumberBelajar.length > 0 ? sumberBelajar.join(', ') : 'Buku Teks, Video Pembelajaran';
-            
-            return `
-MODUL AJAR ${mataPelajaran.toUpperCase()} ENHANCED
-Dashboard Pembuat Modul Ajar AI v13.0 Enhanced
-
-===========================================
-IDENTITAS MODUL ENHANCED
-===========================================
-Mata Pelajaran    : ${mataPelajaran}
-Kelas/Semester    : ${kelas}
-Topik/Materi      : ${topik}
-Alokasi Waktu     : ${alokasi}
-Jumlah Siswa      : ${jumlahSiswa} orang
-Metode            : ${metodePembelajaran || 'Diskusi Kelompok'}
-Model             : ${modelPembelajaran || 'Cooperative Learning'}
-Fitur Enhanced    : Profil Lulusan 8 Dimensi + Lintas Bidang + Diferensiasi
-
-===========================================
-🎓 PROFIL LULUSAN 8 DIMENSI
-===========================================
-1. 🙏 Keimanan & Ketakwaan - Spiritual Digital Era
-2. 🌍 Kewargaan Digital - Citizenship 4.0
-3. 🧠 Penalaran Kritis - Critical Thinking  
-4. 🎨 Kreativitas & Inovasi - Innovation 4.0
-5. 🤝 Kolaborasi Global - Global Teamwork
-6. 💪 Kemandirian Belajar - Self-Directed Learning
-7. 🏃 Kesehatan Holistik - Holistic Wellness
-8. 💬 Komunikasi Efektif - Multi-Modal Communication
-
-===========================================
-🎯 TUJUAN PEMBELAJARAN SPESIFIK
-===========================================
-Tujuan Kognitif:
-• Menganalisis konsep ${topik} secara mendalam
-• Mengevaluasi penerapan dalam konteks kehidupan nyata
-• Mensintesis solusi inovatif berbasis kearifan lokal
-
-Tujuan Afektif & Psikomotorik:
-• Mengembangkan sikap kritis dan kreatif
-• Berkolaborasi efektif dalam tim multidisipliner  
-• Mengomunikasikan hasil dengan percaya diri
-
-===========================================
-🌐 INTEGRASI LINTAS BIDANG DISIPLIN ILMU
-===========================================
-Bidang Terintegrasi: ${lintasBidangText}
-Konteks Pembelajaran: Siswa menerapkan ${topik} dalam kehidupan sehari-hari
-Manfaat Integrasi: Pemahaman holistik dan keterkaitan antar disiplin ilmu
-
-===========================================
-📋 LANGKAH PEMBELAJARAN KOMPREHENSIF
-===========================================
-
-TABEL LANGKAH PEMBELAJARAN ENHANCED
-+------------------+--------+----------------------------------------+----------------------------------------+------------------+
-| TAHAP            | WAKTU  | KEGIATAN GURU                          | KEGIATAN SISWA                         | MEDIA/SUMBER     |
-+------------------+--------+----------------------------------------+----------------------------------------+------------------+
-| 🚀 PENDAHULUAN   | 10     | 1. Pembukaan: Mengucapkan salam,       | • Menjawab salam, berdoa, dan         | 📽️ Proyektor    |
-| (Opening)        | menit  |    berdoa, dan mengecek kehadiran      |   merespon pengecekan kehadiran       | 📱 Smartphone   |
-|                  |        | 2. Apersepsi: Menghubungkan materi     | • Mendengarkan dan merespon           | 🎯 Slide         |
-|                  |        |    ${topik} dengan pengalaman siswa    |   apersepsi dengan berbagi            |    presentasi    |
-|                  |        | 3. Orientasi: Menyampaikan tujuan      |   pengalaman terkait ${topik}         | 📋 Daftar hadir  |
-|                  |        |    pembelajaran dan profil lulusan     | • Memperhatikan tujuan pembelajaran   |                  |
-|                  |        | 4. Motivasi: Mengajukan pertanyaan     |   dan mengidentifikasi profil         |                  |
-|                  |        |    pemantik kontekstual                |   lulusan yang akan dikembangkan      |                  |
-|                  |        |                                        | • Merespon pertanyaan pemantik dan    |                  |
-|                  |        |                                        |   mengajukan pertanyaan awal          |                  |
-+------------------+--------+----------------------------------------+----------------------------------------+------------------+
-| 🎯 KEGIATAN INTI | ${parseInt(alokasi.split(' ')[0]) * 40 - 20}     | 🔍 FASE EKSPLORASI (${Math.floor((parseInt(alokasi.split(' ')[0]) * 40 - 20) / 3)} menit)        | 🔍 EKSPLORASI                          | 💻 ${saranaPrasaranaText} |
-| (Core Activity)  | menit  | • Memfasilitasi siswa mengamati        | • Mengamati dan mengidentifikasi      | 📚 ${sumberBelajarText}   |
-|                  |        |   fenomena terkait ${topik}            |   fenomena terkait ${topik}           | 🎯 LKPD Enhanced |
-|                  |        | • Membimbing identifikasi masalah      | • Merumuskan masalah berdasarkan      | 📊 Platform      |
-|                  |        |   dalam konteks kehidupan nyata        |   konteks kehidupan nyata             |    digital       |
-|                  |        | • Mendorong siswa mengajukan           | • Mengajukan hipotesis dan            | 🔬 Alat          |
-|                  |        |   hipotesis dan pertanyaan penelitian  |   pertanyaan penelitian               |    eksperimen    |
-|                  |        | • Memfasilitasi aktivasi prior         | • Berbagi pengetahuan awal melalui    | 📱 Aplikasi      |
-|                  |        |   knowledge melalui diskusi            |   diskusi kelompok                    |    pembelajaran  |
-|                  |        |                                        |                                        |                  |
-|                  |        | 🔬 FASE ELABORASI (${Math.floor((parseInt(alokasi.split(' ')[0]) * 40 - 20) / 3)} menit)         | 🔬 ELABORASI                           |                  |
-|                  |        | • Memfasilitasi ${metodePembelajaran || 'diskusi kelompok'}   | • Berpartisipasi aktif dalam          |                  |
-|                  |        |   dengan pendekatan ${modelPembelajaran || 'kolaboratif'}     |   ${metodePembelajaran || 'diskusi kelompok'}                |                  |
-|                  |        | • Membimbing pencarian informasi       | • Mencari dan mengumpulkan informasi  |                  |
-|                  |        |   dari sumber: ${sumberBelajarText}    |   dari berbagai sumber                |                  |
-|                  |        | • Mendorong analisis data dan          | • Menganalisis data dan informasi     |                  |
-|                  |        |   informasi secara kritis              |   secara kolaboratif                  |                  |
-|                  |        | • Memfasilitasi integrasi perspektif   | • Mengintegrasikan perspektif dari    |                  |
-|                  |        |   lintas bidang: ${lintasBidangText}   |   berbagai bidang ilmu                |                  |
-|                  |        |                                        |                                        |                  |
-|                  |        | ✅ FASE KONFIRMASI (${Math.floor((parseInt(alokasi.split(' ')[0]) * 40 - 20) / 3)} menit)        | ✅ KONFIRMASI                          |                  |
-|                  |        | • Memfasilitasi presentasi hasil       | • Mempresentasikan hasil kerja        |                  |
-|                  |        |   kelompok dengan media: ${saranaPrasaranaText} | kelompok dengan percaya diri    |                  |
-|                  |        | • Memberikan klarifikasi dan           | • Memberikan tanggapan dan masukan    |                  |
-|                  |        |   penguatan konsep                     |   terhadap presentasi kelompok lain   |                  |
-|                  |        | • Melakukan evaluasi pemahaman         | • Mengerjakan asesmen formatif untuk  |                  |
-|                  |        |   melalui asesmen formatif             |   evaluasi pemahaman                  |                  |
-|                  |        | • Memfasilitasi refleksi pembelajaran  | • Melakukan refleksi pembelajaran     |                  |
-|                  |        |   dan koneksi dengan profil lulusan    |   dan mengaitkan dengan profil        |                  |
-|                  |        |                                        |   lulusan                             |                  |
-+------------------+--------+----------------------------------------+----------------------------------------+------------------+
-| 🎉 PENUTUP       | 10     | 1. Refleksi: Memfasilitasi refleksi    | • Melakukan refleksi tentang          | 📝 Lembar        |
-| (Closing)        | menit  |    pembelajaran bersama siswa tentang  |   pembelajaran yang telah dilakukan   |    refleksi      |
-|                  |        |    pencapaian tujuan                   |   dan pencapaian tujuan               | 📋 Checklist     |
-|                  |        | 2. Kesimpulan: Membimbing siswa        | • Menyimpulkan materi ${topik} dan    |    tujuan        |
-|                  |        |    menyimpulkan materi dan kaitannya   |   mengaitkan dengan kehidupan         | 📚 Buku tugas    |
-|                  |        |    dengan kehidupan nyata              |   sehari-hari                        | 🎯 Slide         |
-|                  |        | 3. Tindak Lanjut: Memberikan tugas     | • Mencatat tugas dan mempersiapkan    |    kesimpulan    |
-|                  |        |    atau rencana pembelajaran berikutnya|   pembelajaran berikutnya             |                  |
-|                  |        | 4. Penutupan: Doa penutup dan salam    | • Berdoa dan menjawab salam penutup   |                  |
-+------------------+--------+----------------------------------------+----------------------------------------+------------------+
-
-CATATAN PENTING:
-• Sesuaikan waktu dengan kondisi dan kemampuan siswa
-• Pastikan semua siswa terlibat aktif dalam pembelajaran
-• Gunakan diferensiasi sesuai kebutuhan individual siswa
-• Integrasikan teknologi untuk meningkatkan engagement
-
-INDIKATOR KEBERHASILAN:
-• Siswa aktif berpartisipasi dalam setiap fase pembelajaran
-• Tercapainya tujuan pembelajaran yang telah ditetapkan
-• Siswa mampu mengaitkan materi dengan kehidupan nyata
-• Berkembangnya 8 dimensi profil lulusan secara optimal
-
-===========================================
-💡 PERTANYAAN PEMANTIK (AI GENERATED)
-===========================================
-1. Bagaimana ${topik} berkaitan dengan kehidupan sehari-hari di Indonesia?
-2. Mengapa penting bagi kita untuk memahami ${topik}?
-3. Bagaimana ${topik} dapat membantu mengatasi masalah nyata?
-4. Apa manfaat mempelajari ${topik} untuk masa depan?
-5. Bagaimana kita dapat menerapkan ${topik} dalam konteks lokal?
-
-===========================================
-📊 ASESMEN LENGKAP (AI GENERATED)
-===========================================
-
-ASESMEN FORMATIF:
-• Observasi aktivitas siswa dengan rubrik engagement
-• Tanya jawab interaktif dan diskusi terstruktur
-• Quiz digital real-time dengan gamifikasi
-• Peer assessment dengan kriteria jelas
-• Exit ticket dengan pertanyaan reflektif
-
-ASESMEN SUMATIF:
-• Presentasi hasil proyek dengan rubrik komprehensif
-• Portofolio digital dengan dokumentasi proses
-• Tes tertulis kontekstual berbasis masalah nyata
-• Performance task dengan kriteria autentik
-• Produk kreatif yang menunjukkan penguasaan konsep
-
-ASESMEN AUTENTIK:
-• Penerapan ${topik} dalam mengatasi masalah nyata
-• Kolaborasi dengan komunitas lokal
-• Dokumentasi proses pembelajaran multimedia
-• Presentasi hasil kepada stakeholder
-• Refleksi mendalam tentang dampak pembelajaran
-
-===========================================
-🎨 DIFERENSIASI PEMBELAJARAN
-===========================================
-
-DIFERENSIASI KONTEN:
-• Materi dengan tingkat kompleksitas bervariasi
-• Multiple representation: visual, auditory, kinesthetic
-• Sumber belajar beragam: video, artikel, podcast
-• Konten disesuaikan minat dan latar belakang siswa
-• Gamifikasi dengan level yang dapat disesuaikan
-
-DIFERENSIASI PROSES:
-• Flexible grouping berdasarkan readiness dan interest
-• Choice boards dengan berbagai pilihan aktivitas
-• Learning contracts disesuaikan kemampuan individual
-• Scaffolding dan support berjenjang sesuai kebutuhan
-• Aktivitas hands-on sesuai gaya belajar
-
-DIFERENSIASI PRODUK:
-• Multiple ways untuk mendemonstrasikan pembelajaran
-• Rubrik disesuaikan tingkat kemampuan siswa
-• Portfolio assessment dengan kriteria fleksibel
-• Peer dan self-assessment untuk metacognition
-• Showcase kreatif dengan berbagai format
-
-===========================================
-🔄 PROGRAM REMEDIAL & PENGAYAAN
-===========================================
-
-PROGRAM REMEDIAL:
-• Review konsep dasar ${topik} dengan gamifikasi
-• Pembelajaran individual dengan bimbingan intensif
-• Media pembelajaran konkret dan visual
-• Latihan soal dengan tingkat kesulitan bertahap
-• Peer tutoring dengan siswa yang sudah menguasai
-• Aktivitas hands-on yang memperkuat pemahaman
-
-PROGRAM PENGAYAAN:
-• Eksplorasi aplikasi lanjutan ${topik}
-• Proyek penelitian mini dengan topik mendalam
-• Mentoring siswa lain yang membutuhkan bantuan
-• Partisipasi dalam kompetisi atau olimpiade
-• Kolaborasi dengan ahli atau praktisi
-• Pengembangan produk inovatif menggunakan teknologi
-
-===========================================
-📏 RUBRIK PENILAIAN ENHANCED
-===========================================
-
-ASPEK PENILAIAN (Skala 1-4):
-
-1. PEMAHAMAN KONSEP
-   Sangat Baik (4): Pemahaman mendalam tentang ${topik}
-   Baik (3): Pemahaman baik dengan penjelasan akurat
-   Cukup (2): Pemahaman dasar dengan beberapa kesalahan
-   Perlu Bimbingan (1): Pemahaman terbatas, perlu bimbingan
-
-2. PENERAPAN KONTEKSTUAL
-   Sangat Baik (4): Menerapkan dalam berbagai konteks inovatif
-   Baik (3): Menerapkan dalam konteks nyata dengan tepat
-   Cukup (2): Menerapkan dalam konteks sederhana
-   Perlu Bimbingan (1): Kesulitan menerapkan, perlu bantuan
-
-3. KOLABORASI DAN KOMUNIKASI
-   Sangat Baik (4): Memimpin kolaborasi dan komunikasi excellent
-   Baik (3): Berkolaborasi baik dan komunikasi efektif
-   Cukup (2): Berpartisipasi, komunikasi perlu ditingkatkan
-   Perlu Bimbingan (1): Kesulitan kolaborasi dan komunikasi
-
-4. KREATIVITAS DAN INOVASI
-   Sangat Baik (4): Kreativitas tinggi dengan ide original
-   Baik (3): Kreativitas dengan ide menarik dan tepat
-   Cukup (2): Beberapa kreativitas, mengikuti pola umum
-   Perlu Bimbingan (1): Kreativitas terbatas, ikuti contoh
-
-5. INTEGRASI PROFIL LULUSAN
-   Sangat Baik (4): Pengembangan optimal 8 dimensi
-   Baik (3): Pengembangan baik beberapa dimensi
-   Cukup (2): Pengembangan dasar dimensi profil lulusan
-   Perlu Bimbingan (1): Perlu bimbingan mengembangkan dimensi
-
-===========================================
-🤔 REFLEKSI GURU (8 PERTANYAAN KUNCI)
-===========================================
-
-1. Bagaimana efektivitas integrasi 8 dimensi profil lulusan?
-   _________________________________________________
-
-2. Sejauh mana siswa menghubungkan materi dengan konteks nyata?
-   _________________________________________________
-
-3. Bagaimana respons siswa terhadap pembelajaran lintas bidang?
-   _________________________________________________
-
-4. Apa tantangan utama dalam diferensiasi pembelajaran?
-   _________________________________________________
-
-5. Bagaimana efektivitas asesmen yang diterapkan?
-   _________________________________________________
-
-6. Sejauh mana program remedial dan pengayaan membantu?
-   _________________________________________________
-
-7. Bagaimana kualitas kolaborasi dan komunikasi siswa?
-   _________________________________________________
-
-8. Apa yang akan saya tingkatkan untuk pembelajaran selanjutnya?
-   _________________________________________________
-
-===========================================
-🤖 AI ANALYSIS ENHANCED v13.0
-===========================================
-
-QUALITY METRICS:
-• Completeness Score: 95/100
-• Alignment with Kurikulum Merdeka: Excellent
-• Differentiation Level: Advanced
-• Assessment Quality: High
-
-ENHANCEMENT FEATURES:
-• 8 Dimensi Integration: 100%
-• Cross-disciplinary: 90%
-• AI Recommendations: 98%
-
-INNOVATION LEVEL:
-• Contextual Learning: Advanced
-• Technology Integration: High
-• 21st Century Skills: Excellent
-• Future Readiness: Outstanding
-
-ENHANCED FEATURES DETECTED:
-✅ Profil Lulusan 8 Dimensi terintegrasi penuh
-✅ Lintas bidang disiplin ilmu komprehensif
-✅ AI-generated pertanyaan pemantik kontekstual
-✅ Asesmen formatif, sumatif, dan autentik lengkap
-✅ Diferensiasi pembelajaran komprehensif
-✅ Program remedial dan pengayaan spesifik
-
-QUALITY ASSURANCE v13.0:
-🎯 Alignment dengan Kurikulum Merdeka: 100%
-📊 Rubrik penilaian 4 level dengan 5 aspek
-🤔 Refleksi guru 8 pertanyaan kunci
-🌐 Konteks pembelajaran terintegrasi
-🛠️ Sarana prasarana optimal
-📚 Sumber belajar komprehensif
-
-===========================================
-COPYRIGHT & LEGAL
-===========================================
-© 2025 Dashboard Pembuat Modul Ajar AI v13.0 Enhanced
-Modul dapat diedit sesuai kebutuhan sekolah dan karakteristik siswa
-Powered by Advanced AI Technology
-
-Format: Microsoft Word (.doc) - Enhanced Learning Module
-Font: Calibri, 11pt | Spacing: 1.15 lines
-Compatible dengan Microsoft Word, Google Docs, dan LibreOffice Writer
-Optimized untuk Kurikulum Merdeka dengan Profil Lulusan 8 Dimensi
-            `;
-        }
-
-        function generateEnhancedPDFContent() {
-            return generateEnhancedWordContent(); // Same content for PDF
-        }
-
-        function generateEnhancedTextContent() {
-            return generateEnhancedWordContent(); // Same content for text
-        }
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'992ade1d4512834e',t:'MTc2MTE1NTc0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'992b0fe1d59cde08',t:'MTc2MTE1Nzc4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
