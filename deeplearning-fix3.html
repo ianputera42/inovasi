@@ -1,0 +1,2441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pembuat Modul Ajar AI v32.0 - Enhanced Student Activities Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .activity-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+            margin: 1px;
+        }
+        
+        .student-activity {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-left: 4px solid #2196f3;
+            padding: 8px;
+            margin: 4px 0;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body class="min-h-full bg-gray-50">
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold mb-2">🧠 Dashboard Pembuat Modul Ajar AI</h1>
+                <p class="text-xl opacity-90">v32.0 Enhanced Student Activities Edition</p>
+                <div class="flex items-center justify-center mt-3 space-x-4">
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">🚀 Neural AI Powered</span>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">🎯 Detailed Student Activities</span>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">🎓 Enhanced Learning Experience</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <!-- Profil Lulusan Deep Learning Section -->
+        <section class="mb-12 fade-in">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    🎯 Profil Lulusan Deep Learning (8 Dimensi)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl border-l-4 border-blue-500">
+                        <div class="flex items-center mb-2">
+                            <span class="text-2xl mr-2">🙏</span>
+                            <h3 class="font-semibold text-blue-800">Keimanan & Ketakwaan</h3>
+                        </div>
+                        <p class="text-sm text-blue-600">Spiritual Digital Era</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-xl border-l-4 border-green-500">
+                        <div class="flex items-center mb-2">
+                            <span class="text-2xl mr-2">🌍</span>
+                            <h3 class="font-semibold text-green-800">Kewargaan Digital</h3>
+                        </div>
+                        <p class="text-sm text-green-600">Citizenship 4.0</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-xl border-l-4 border-purple-500">
+                        <div class="flex items-center mb-2">
+                            <span class="text-2xl mr-2">🧠</span>
+                            <h3 class="font-semibold text-purple-800">Penalaran Kritis</h3>
+                        </div>
+                        <p class="text-sm text-purple-600">Critical Thinking</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-4 rounded-xl border-l-4 border-pink-500">
+                        <div class="flex items-center mb-2">
+                            <span class="text-2xl mr-2">🎨</span>
+                            <h3 class="font-semibold text-pink-800">Kreativitas & Inovasi</h3>
+                        </div>
+                        <p class="text-sm text-pink-600">Innovation 4.0</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-4 rounded-xl border-l-4 border-indigo-500">
+                        <div class="flex items-center mb-2">
+                            <span class="text-2xl mr-2">🤝</span>
+                            <h3 class="font-semibold text-indigo-800">Kolaborasi Global</h3>
+                        </div>
+                        <p class="text-sm text-indigo-600">Global Teamwork</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 rounded-xl border-l-4 border-yellow-500">
+                        <div class="flex items-center mb-2">
+                            <span class="text-2xl mr-2">💪</span>
+                            <h3 class="font-semibold text-yellow-800">Kemandirian Belajar</h3>
+                        </div>
+                        <p class="text-sm text-yellow-600">Self-Directed Learning</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-4 rounded-xl border-l-4 border-red-500">
+                        <div class="flex items-center mb-2">
+                            <span class="text-2xl mr-2">🏃</span>
+                            <h3 class="font-semibold text-red-800">Kesehatan Holistik</h3>
+                        </div>
+                        <p class="text-sm text-red-600">Holistic Wellness</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-4 rounded-xl border-l-4 border-teal-500">
+                        <div class="flex items-center mb-2">
+                            <span class="text-2xl mr-2">💬</span>
+                            <h3 class="font-semibold text-teal-800">Komunikasi Efektif</h3>
+                        </div>
+                        <p class="text-sm text-teal-600">Multi-Modal Communication</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Student Activities Showcase -->
+        <section class="mb-12 fade-in">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    🎯 Enhanced Student Activities Framework v32.0
+                    <span class="ml-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm">NEW</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl">
+                        <h3 class="font-semibold text-blue-800 mb-3 flex items-center">
+                            <span class="text-2xl mr-2">🎮</span>Gamifikasi Maksimal
+                        </h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="activity-badge">🏆 Achievement System</div>
+                            <div class="activity-badge">📊 Real-time Leaderboard</div>
+                            <div class="activity-badge">🎯 Quest & Missions</div>
+                            <div class="activity-badge">⭐ XP & Level Up</div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-xl">
+                        <h3 class="font-semibold text-green-800 mb-3 flex items-center">
+                            <span class="text-2xl mr-2">🎭</span>Interactive Learning
+                        </h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="activity-badge">🎪 Role Playing</div>
+                            <div class="activity-badge">🎨 Creative Expression</div>
+                            <div class="activity-badge">🎵 Musical Integration</div>
+                            <div class="activity-badge">🎬 Storytelling</div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-xl">
+                        <h3 class="font-semibold text-purple-800 mb-3 flex items-center">
+                            <span class="text-2xl mr-2">🔬</span>Hands-on Activities
+                        </h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="activity-badge">🧪 Experiments</div>
+                            <div class="activity-badge">🔨 Building & Making</div>
+                            <div class="activity-badge">📊 Data Collection</div>
+                            <div class="activity-badge">🌱 Real-world Projects</div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-xl">
+                        <h3 class="font-semibold text-orange-800 mb-3 flex items-center">
+                            <span class="text-2xl mr-2">💻</span>Digital Integration
+                        </h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="activity-badge">🤖 AI Tools</div>
+                            <div class="activity-badge">📱 Mobile Apps</div>
+                            <div class="activity-badge">🌐 Online Collaboration</div>
+                            <div class="activity-badge">📹 Multimedia Creation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Input Section -->
+        <section class="mb-12 fade-in">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    📝 Input Data Pembelajaran
+                </h2>
+                <form id="modulForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="mataPelajaran" class="block text-sm font-medium text-gray-700 mb-2">Mata Pelajaran</label>
+                            <select id="mataPelajaran" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Pilih Mata Pelajaran</option>
+                                <optgroup label="📚 Mata Pelajaran Umum (SD/SMP/SMA)">
+                                    <option value="Matematika">Matematika</option>
+                                    <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                                    <option value="Bahasa Inggris">Bahasa Inggris</option>
+                                    <option value="IPA">IPA (Ilmu Pengetahuan Alam)</option>
+                                    <option value="IPS">IPS (Ilmu Pengetahuan Sosial)</option>
+                                    <option value="Informatika">Informatika/TIK</option>
+                                    <option value="PJOK">PJOK (Pendidikan Jasmani)</option>
+                                    <option value="Seni Budaya">Seni Budaya</option>
+                                    <option value="Prakarya">Prakarya</option>
+                                    <option value="PPKn">PPKn (Pendidikan Pancasila)</option>
+                                </optgroup>
+                                <optgroup label="🙏 Pendidikan Agama">
+                                    <option value="PAI">PAI (Pendidikan Agama Islam)</option>
+                                    <option value="PA Kristen">PA Kristen</option>
+                                    <option value="PA Katolik">PA Katolik</option>
+                                    <option value="PA Hindu">PA Hindu</option>
+                                    <option value="PA Buddha">PA Buddha</option>
+                                    <option value="PA Khonghucu">PA Khonghucu</option>
+                                </optgroup>
+                                <optgroup label="🔬 Mata Pelajaran SMA (Peminatan)">
+                                    <option value="Fisika">Fisika</option>
+                                    <option value="Kimia">Kimia</option>
+                                    <option value="Biologi">Biologi</option>
+                                    <option value="Geografi">Geografi</option>
+                                    <option value="Sejarah">Sejarah</option>
+                                    <option value="Sosiologi">Sosiologi</option>
+                                    <option value="Ekonomi">Ekonomi</option>
+                                    <option value="Antropologi">Antropologi</option>
+                                    <option value="Bahasa Daerah">Bahasa Daerah</option>
+                                    <option value="Bahasa Asing">Bahasa Asing (Mandarin/Jepang/Arab)</option>
+                                </optgroup>
+                                <optgroup label="🛠️ Mata Pelajaran SMK">
+                                    <option value="Teknik Komputer Jaringan">Teknik Komputer & Jaringan</option>
+                                    <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
+                                    <option value="Multimedia">Multimedia</option>
+                                    <option value="Akuntansi">Akuntansi & Keuangan</option>
+                                    <option value="Administrasi Perkantoran">Administrasi Perkantoran</option>
+                                    <option value="Pemasaran">Pemasaran</option>
+                                    <option value="Teknik Mesin">Teknik Mesin</option>
+                                    <option value="Teknik Elektro">Teknik Elektro</option>
+                                    <option value="Teknik Otomotif">Teknik Otomotif</option>
+                                    <option value="Teknik Bangunan">Teknik Bangunan</option>
+                                    <option value="Tata Boga">Tata Boga</option>
+                                    <option value="Tata Busana">Tata Busana</option>
+                                    <option value="Perhotelan">Perhotelan</option>
+                                    <option value="Pariwisata">Pariwisata</option>
+                                    <option value="Agribisnis">Agribisnis</option>
+                                    <option value="Perikanan">Perikanan</option>
+                                    <option value="Kehutanan">Kehutanan</option>
+                                </optgroup>
+                                <optgroup label="🎯 Mata Pelajaran Khusus SD">
+                                    <option value="Tematik">Pembelajaran Tematik</option>
+                                    <option value="Literasi">Literasi & Numerasi</option>
+                                    <option value="Karakter">Pendidikan Karakter</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="kelas" class="block text-sm font-medium text-gray-700 mb-2">Kelas</label>
+                            <select id="kelas" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Pilih Kelas/Fase</option>
+                                <optgroup label="🎒 Sekolah Dasar (SD)">
+                                    <option value="I">Kelas I (Fase A)</option>
+                                    <option value="II">Kelas II (Fase A)</option>
+                                    <option value="III">Kelas III (Fase B)</option>
+                                    <option value="IV">Kelas IV (Fase B)</option>
+                                    <option value="V">Kelas V (Fase C)</option>
+                                    <option value="VI">Kelas VI (Fase C)</option>
+                                </optgroup>
+                                <optgroup label="🏫 Sekolah Menengah Pertama (SMP)">
+                                    <option value="VII">Kelas VII (Fase D)</option>
+                                    <option value="VIII">Kelas VIII (Fase D)</option>
+                                    <option value="IX">Kelas IX (Fase E)</option>
+                                </optgroup>
+                                <optgroup label="🎓 Sekolah Menengah Atas (SMA)">
+                                    <option value="X">Kelas X (Fase E)</option>
+                                    <option value="XI">Kelas XI (Fase F)</option>
+                                    <option value="XII">Kelas XII (Fase F)</option>
+                                </optgroup>
+                                <optgroup label="🛠️ Sekolah Menengah Kejuruan (SMK)">
+                                    <option value="X SMK">Kelas X SMK (Fase E)</option>
+                                    <option value="XI SMK">Kelas XI SMK (Fase F)</option>
+                                    <option value="XII SMK">Kelas XII SMK (Fase F)</option>
+                                </optgroup>
+                                <optgroup label="🌟 Pendidikan Khusus">
+                                    <option value="PAUD">PAUD (Usia 3-6 tahun)</option>
+                                    <option value="TK A">TK A (Usia 4-5 tahun)</option>
+                                    <option value="TK B">TK B (Usia 5-6 tahun)</option>
+                                    <option value="SLB">SLB (Berkebutuhan Khusus)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="topik" class="block text-sm font-medium text-gray-700 mb-2">Topik/Materi Pembelajaran</label>
+                        <input type="text" id="topik" placeholder="Contoh: Fungsi Kuadrat, Sistem Pencernaan, Teks Persuasi" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label for="metodePembelajaran" class="block text-sm font-medium text-gray-700 mb-2">Metode Pembelajaran</label>
+                        <select id="metodePembelajaran" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Pilih Metode Pembelajaran</option>
+                            <option value="Ceramah Interaktif">Ceramah Interaktif</option>
+                            <option value="Diskusi Kelompok">Diskusi Kelompok</option>
+                            <option value="Tanya Jawab">Tanya Jawab</option>
+                            <option value="Demonstrasi">Demonstrasi</option>
+                            <option value="Eksperimen">Eksperimen</option>
+                            <option value="Simulasi">Simulasi</option>
+                            <option value="Role Playing">Role Playing</option>
+                            <option value="Brainstorming">Brainstorming</option>
+                            <option value="Mind Mapping">Mind Mapping</option>
+                            <option value="Studi Kasus">Studi Kasus</option>
+                            <option value="Peer Teaching">Peer Teaching</option>
+                            <option value="Gallery Walk">Gallery Walk</option>
+                            <option value="Think Pair Share">Think Pair Share</option>
+                            <option value="Jigsaw">Jigsaw</option>
+                            <option value="Storytelling">Storytelling</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="modelPembelajaran" class="block text-sm font-medium text-gray-700 mb-2">Model Pembelajaran</label>
+                        <select id="modelPembelajaran" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Pilih Model Pembelajaran</option>
+                            <option value="Problem Based Learning">Problem Based Learning (PBL)</option>
+                            <option value="Project Based Learning">Project Based Learning</option>
+                            <option value="Discovery Learning">Discovery Learning</option>
+                            <option value="Inquiry Learning">Inquiry Learning</option>
+                            <option value="Cooperative Learning">Cooperative Learning</option>
+                            <option value="Blended Learning">Blended Learning</option>
+                            <option value="STEAM">STEAM (Science, Technology, Engineering, Arts, Mathematics)</option>
+                            <option value="Flipped Classroom">Flipped Classroom</option>
+                            <option value="Design Thinking">Design Thinking</option>
+                            <option value="Service Learning">Service Learning</option>
+                            <option value="Contextual Teaching Learning">Contextual Teaching Learning (CTL)</option>
+                            <option value="Differentiated Instruction">Differentiated Instruction</option>
+                            <option value="Gamification">Gamification</option>
+                            <option value="Outdoor Learning">Outdoor Learning</option>
+                            <option value="Case Based Learning">Case Based Learning</option>
+                            <option value="Experiential Learning">Experiential Learning</option>
+                            <option value="Collaborative Learning">Collaborative Learning</option>
+                            <option value="Constructivist Learning">Constructivist Learning</option>
+                            <option value="Authentic Assessment">Authentic Assessment</option>
+                            <option value="Peer Learning">Peer Learning</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="tujuanPembelajaran" class="block text-sm font-medium text-gray-700 mb-2">Tujuan Pembelajaran Spesifik</label>
+                        <textarea id="tujuanPembelajaran" rows="3" placeholder="Contoh: Siswa mampu menganalisis fungsi kuadrat untuk optimalisasi keuntungan UMKM, menerapkan konsep dalam konteks ekonomi lokal..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="lintasBidang" class="block text-sm font-medium text-gray-700 mb-2">Lintas Bidang Disiplin Ilmu</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="lintasBidang" value="Ekonomi" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm">Ekonomi</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="lintasBidang" value="Teknologi" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm">Teknologi</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="lintasBidang" value="Lingkungan" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm">Lingkungan</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="lintasBidang" value="Sosial Budaya" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm">Sosial Budaya</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="lintasBidang" value="Kesehatan" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm">Kesehatan</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="lintasBidang" value="Seni & Budaya" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm">Seni & Budaya</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="lintasBidang" value="Kewirausahaan" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm">Kewirausahaan</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="lintasBidang" value="Politik & Hukum" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm">Politik & Hukum</span>
+                            </label>
+                        </div>
+                        <div class="mt-3">
+                            <label for="lintasBidangLainnya" class="block text-sm font-medium text-gray-700 mb-2">Bidang Lainnya (opsional)</label>
+                            <input type="text" id="lintasBidangLainnya" placeholder="Contoh: Psikologi, Antropologi, Geografi, dll." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="saranaPrasarana" class="block text-sm font-medium text-gray-700 mb-2">Sarana & Prasarana</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="sarana" value="Laptop/Komputer" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">Laptop/Komputer</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="sarana" value="Proyektor" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">Proyektor & Layar</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="sarana" value="Internet" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">Akses Internet</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="sarana" value="Lab" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">Laboratorium</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="sarana" value="Alat Peraga" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">Alat Peraga</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="sumberBelajar" class="block text-sm font-medium text-gray-700 mb-2">Sumber Belajar</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="sumber" value="Buku Teks" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">Buku Teks Kurikulum</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="sumber" value="Video Pembelajaran" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">Video Pembelajaran</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="sumber" value="Artikel Jurnal" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">Artikel Jurnal</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="sumber" value="Website Edukatif" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">Website Edukatif</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="sumber" value="Narasumber Ahli" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">Narasumber Ahli</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="alokasi" class="block text-sm font-medium text-gray-700 mb-2">Alokasi Waktu</label>
+                            <select id="alokasi" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Pilih Alokasi Waktu</option>
+                                <option value="1 x 40 menit">1 x 40 menit</option>
+                                <option value="2 x 40 menit">2 x 40 menit</option>
+                                <option value="3 x 40 menit">3 x 40 menit</option>
+                                <option value="4 x 40 menit">4 x 40 menit</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="jumlahSiswa" class="block text-sm font-medium text-gray-700 mb-2">Jumlah Siswa</label>
+                            <input type="number" id="jumlahSiswa" placeholder="Contoh: 32" min="1" max="50" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-8 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                        🚀 Generate Modul Ajar AI v32.0
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="hasilSection" class="hidden fade-in">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800 flex items-center">
+                        📋 Modul Ajar AI v32.0 - Enhanced Student Activities Edition
+                    </h2>
+                    <div class="flex space-x-3">
+                        <button onclick="downloadWord()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center space-x-2 text-sm">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
+                            </svg>
+                            <span>📄 Word</span>
+                        </button>
+                        <button onclick="downloadPDF()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300 flex items-center space-x-2 text-sm">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
+                            </svg>
+                            <span>📑 PDF</span>
+                        </button>
+                        <button onclick="copyToClipboard()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-300 flex items-center space-x-2 text-sm">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/>
+                                <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/>
+                            </svg>
+                            <span>📋 Copy</span>
+                        </button>
+                        <button onclick="downloadLKPD()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center space-x-2 text-sm">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 001 1h6a1 1 0 001-1V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>📝 LKPD</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="hasilModul" class="prose max-w-none"></div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="mb-12 fade-in">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    ✨ Fitur Unggulan v32.0 Enhanced Student Activities Edition
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h3 class="text-xl font-semibold text-blue-800 mb-2">Detailed Student Activities</h3>
+                        <p class="text-blue-600">Aktivitas siswa yang sangat detail dan menarik sesuai karakteristik jenjang</p>
+                    </div>
+                    <div class="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+                        <div class="text-4xl mb-4">🎮</div>
+                        <h3 class="text-xl font-semibold text-green-800 mb-2">Enhanced Gamification</h3>
+                        <p class="text-green-600">Sistem gamifikasi yang lebih canggih dengan XP, badges, dan leaderboard</p>
+                    </div>
+                    <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                        <div class="text-4xl mb-4">🎭</div>
+                        <h3 class="text-xl font-semibold text-purple-800 mb-2">Interactive Learning</h3>
+                        <p class="text-purple-600">Role playing, storytelling, dan aktivitas interaktif yang engaging</p>
+                    </div>
+                    <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl">
+                        <div class="text-4xl mb-4">🔬</div>
+                        <h3 class="text-xl font-semibold text-orange-800 mb-2">Hands-on Activities</h3>
+                        <p class="text-orange-600">Eksperimen, building, dan proyek nyata yang melibatkan siswa aktif</p>
+                    </div>
+                </div>
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-r from-cyan-50 to-cyan-100 p-4 rounded-xl border-l-4 border-cyan-500">
+                        <h4 class="font-semibold text-cyan-800 mb-2">🎪 Multi-Sensory Learning</h4>
+                        <p class="text-sm text-cyan-600">Visual, auditory, kinesthetic, dan reading/writing activities terintegrasi</p>
+                    </div>
+                    <div class="bg-gradient-to-r from-pink-50 to-pink-100 p-4 rounded-xl border-l-4 border-pink-500">
+                        <h4 class="font-semibold text-pink-800 mb-2">💻 Digital Integration</h4>
+                        <p class="text-sm text-pink-600">AI tools, mobile apps, dan multimedia creation dalam setiap aktivitas</p>
+                    </div>
+                    <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 p-4 rounded-xl border-l-4 border-indigo-500">
+                        <h4 class="font-semibold text-indigo-800 mb-2">🌟 Differentiated Activities</h4>
+                        <p class="text-sm text-indigo-600">Aktivitas yang disesuaikan dengan karakteristik dan kebutuhan siswa</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg mb-2">🧠 Dashboard Pembuat Modul Ajar AI v32.0</p>
+            <p class="text-gray-400">Enhanced Student Activities Edition - Powered by Advanced AI Technology</p>
+            <div class="mt-4 flex justify-center space-x-4 flex-wrap">
+                <span class="bg-blue-600 px-3 py-1 rounded-full text-sm mb-2">🎯 Detailed Activities</span>
+                <span class="bg-green-600 px-3 py-1 rounded-full text-sm mb-2">🎮 Enhanced Gamification</span>
+                <span class="bg-purple-600 px-3 py-1 rounded-full text-sm mb-2">🎭 Interactive Learning</span>
+                <span class="bg-orange-600 px-3 py-1 rounded-full text-sm mb-2">🔬 Hands-on Activities</span>
+                <span class="bg-cyan-600 px-3 py-1 rounded-full text-sm mb-2">💻 Digital Integration</span>
+            </div>
+            <div class="mt-4 text-sm text-gray-400">
+                <p>© 2025 Dashboard Pembuat Modul Ajar AI - Edisi Guru Inovasi - Ian Dwi Putera, S.Pd</p>
+                <p>Optimized untuk pembelajaran abad 21 dengan aktivitas siswa yang detail dan menarik</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handler
+        document.getElementById('modulForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const mataPelajaran = document.getElementById('mataPelajaran').value;
+            const kelas = document.getElementById('kelas').value;
+            const topik = document.getElementById('topik').value;
+            const tujuanPembelajaran = document.getElementById('tujuanPembelajaran').value;
+            const metodePembelajaran = document.getElementById('metodePembelajaran').value;
+            const modelPembelajaran = document.getElementById('modelPembelajaran').value;
+            const alokasi = document.getElementById('alokasi').value;
+            const jumlahSiswa = document.getElementById('jumlahSiswa').value;
+            
+            // Get selected lintas bidang
+            const lintasBidang = Array.from(document.querySelectorAll('input[name="lintasBidang"]:checked')).map(cb => cb.value);
+            const lintasBidangLainnya = document.getElementById('lintasBidangLainnya').value;
+            if (lintasBidangLainnya) {
+                lintasBidang.push(lintasBidangLainnya);
+            }
+            
+            // Get selected sarana prasarana
+            const saranaPrasarana = Array.from(document.querySelectorAll('input[name="sarana"]:checked')).map(cb => cb.value);
+            
+            // Get selected sumber belajar
+            const sumberBelajar = Array.from(document.querySelectorAll('input[name="sumber"]:checked')).map(cb => cb.value);
+            
+            // Enhanced validation with specific messages
+            const missingFields = [];
+            if (!mataPelajaran) missingFields.push('Mata Pelajaran');
+            if (!kelas) missingFields.push('Kelas');
+            if (!topik) missingFields.push('Topik/Materi');
+            if (!alokasi) missingFields.push('Alokasi Waktu');
+            if (!jumlahSiswa) missingFields.push('Jumlah Siswa');
+            
+            if (missingFields.length > 0) {
+                showMessage(`Mohon lengkapi field: ${missingFields.join(', ')}`, 'error');
+                return;
+            }
+            
+            // Validate student count
+            if (jumlahSiswa < 1 || jumlahSiswa > 50) {
+                showMessage('Jumlah siswa harus antara 1-50 orang', 'error');
+                return;
+            }
+            
+            generateModul(mataPelajaran, kelas, topik, tujuanPembelajaran, metodePembelajaran, modelPembelajaran, alokasi, jumlahSiswa, lintasBidang, saranaPrasarana, sumberBelajar);
+        });
+
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${type === 'error' ? 'bg-red-500' : 'bg-green-500'}`;
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(messageDiv);
+            }, 3000);
+        }
+
+        function generateModul(mataPelajaran, kelas, topik, tujuanPembelajaran, metodePembelajaran, modelPembelajaran, alokasi, jumlahSiswa, lintasBidang, saranaPrasarana, sumberBelajar) {
+            // Show loading state
+            const hasilSection = document.getElementById('hasilSection');
+            const hasilModul = document.getElementById('hasilModul');
+            
+            hasilSection.classList.remove('hidden');
+            hasilModul.innerHTML = `
+                <div class="text-center py-12">
+                    <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                    <p class="text-lg text-gray-600">🧠 AI v32.0 sedang menganalisis 200+ parameter pembelajaran dengan aktivitas siswa yang detail...</p>
+                    <p class="text-sm text-gray-500 mt-2">Enhanced Student Activities Analysis: Gamifikasi + Interactive Learning + Hands-on Activities</p>
+                    <div class="mt-4 flex justify-center space-x-2">
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Analyzing Student Characteristics</span>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Generating Detailed Activities</span>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Optimizing Engagement</span>
+                    </div>
+                </div>
+            `;
+            
+            // Simulate AI processing with longer time for more comprehensive analysis
+            setTimeout(() => {
+                const modulContent = generateDetailedModul(mataPelajaran, kelas, topik, tujuanPembelajaran, metodePembelajaran, modelPembelajaran, alokasi, jumlahSiswa, lintasBidang, saranaPrasarana, sumberBelajar);
+                hasilModul.innerHTML = modulContent;
+                hasilSection.scrollIntoView({ behavior: 'smooth' });
+            }, 5000);
+        }
+
+        function generateTableRows(modelPembelajaran, topik, alokasi, kelas) {
+            // Calculate time allocation based on selected duration
+            const totalMinutes = parseInt(alokasi.split(' ')[0]) * 40;
+            const coreTime = totalMinutes - 20; // Minus opening (10) and closing (10)
+            
+            // Determine student developmental characteristics
+            const studentLevel = getStudentLevel(kelas);
+            
+            function getStudentLevel(kelas) {
+                if (kelas.includes('I') || kelas.includes('II') || kelas.includes('III')) {
+                    return 'SD Kelas Rendah';
+                } else if (kelas.includes('IV') || kelas.includes('V') || kelas.includes('VI')) {
+                    return 'SD Kelas Tinggi';
+                } else if (kelas.includes('VII') || kelas.includes('VIII') || kelas.includes('IX')) {
+                    return 'SMP';
+                } else {
+                    return 'SMA/SMK';
+                }
+            }
+            
+            // Generate enhanced phase-specific activities based on model and student level
+            const phases = generateEnhancedPhaseActivities(modelPembelajaran, topik, coreTime, studentLevel);
+            
+            return phases.map((phase, index) => `
+                <tr class="${index % 2 === 0 ? 'bg-emerald-25' : ''}">
+                    <td class="border border-emerald-300 px-4 py-3 font-semibold text-emerald-700">${phase.name}</td>
+                    <td class="border border-emerald-300 px-4 py-3 text-sm">${phase.teacherActivities}</td>
+                    <td class="border border-emerald-300 px-4 py-3 text-sm">${phase.studentActivities}</td>
+                    <td class="border border-emerald-300 px-4 py-3 text-center font-semibold">${phase.time} menit</td>
+                </tr>
+            `).join('');
+        }
+        
+        function generateEnhancedPhaseActivities(modelPembelajaran, topik, coreTime, studentLevel) {
+            const enhancedPhaseTemplates = {
+                'Problem Based Learning': [
+                    {
+                        name: 'Orientasi Masalah',
+                        time: Math.floor(coreTime * 0.2),
+                        teacherActivities: `• Menyajikan masalah nyata terkait ${topik}<br>• Memfasilitasi diskusi awal<br>• Membentuk kelompok kerja<br>• Aktivasi sistem gamifikasi`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>🎪 Aktivitas Detektif Cilik Super:</strong><br>
+                                • 👀 Mengamati video/gambar masalah dengan mata berbinar sambil mencatat petunjuk<br>
+                                • 🙋 Bertanya "Mengapa ini terjadi?" dengan rasa ingin tahu tinggi dan antusias<br>
+                                • 🎨 Menggambar atau menulis hal yang mereka lihat dengan detail dan warna-warni<br>
+                                • 💭 Berbagi cerita pengalaman serupa dengan antusias dan ekspresif<br>
+                                • 🤝 Bergabung dalam kelompok dengan semangat dan membuat yel-yel tim<br>
+                                • 🎯 Membuat "detective badge" dengan nama dan gambar diri<br>
+                                • 🎮 Mengumpulkan "clue points" untuk setiap petunjuk yang ditemukan<br>
+                                <span class="activity-badge">🎮 XP +15</span> <span class="activity-badge">🏆 Super Detective Badge</span> <span class="activity-badge">🔍 Clue Hunter</span>
+                            </div>` :
+                            studentLevel === 'SD Kelas Tinggi' ?
+                            `<div class="student-activity">
+                                <strong>🔍 Aktivitas Problem Explorer Advanced:</strong><br>
+                                • 🧠 Menganalisis masalah melalui diskusi kelompok terstruktur dengan mind mapping<br>
+                                • 📝 Mencatat informasi penting yang diketahui dalam format tabel investigasi<br>
+                                • ❓ Merumuskan pertanyaan "Bagaimana cara menyelesaikan?" dengan teknik 5W+1H<br>
+                                • 🗺️ Membuat mind map digital tentang masalah dengan tools online<br>
+                                • 🤝 Berbagi ide awal dengan teman kelompok menggunakan teknik brainstorming<br>
+                                • 📊 Membuat ranking prioritas masalah berdasarkan urgency dan impact<br>
+                                • 🎯 Menyusun hypothesis tree untuk solusi potensial<br>
+                                <span class="activity-badge">🎮 XP +20</span> <span class="activity-badge">🏆 Advanced Analyst Badge</span> <span class="activity-badge">🧠 Strategic Thinker</span>
+                            </div>` :
+                            studentLevel === 'SMP' ?
+                            `<div class="student-activity">
+                                <strong>🎯 Aktivitas Problem Solver Expert:</strong><br>
+                                • 🧠 Menganalisis masalah secara sistematis dengan framework SWOT analysis<br>
+                                • 📊 Mengidentifikasi data dan informasi yang tersedia melalui research matrix<br>
+                                • 🎯 Merumuskan pertanyaan penelitian yang spesifik dengan metode SMART<br>
+                                • 💡 Brainstorming solusi awal dalam kelompok menggunakan teknik design thinking<br>
+                                • 📱 Mencari informasi tambahan menggunakan teknologi dan AI tools<br>
+                                • 🔬 Melakukan preliminary research dengan sumber kredibel<br>
+                                • 🎪 Role playing sebagai stakeholder yang terdampak masalah<br>
+                                <span class="activity-badge">🎮 XP +25</span> <span class="activity-badge">🏆 Expert Problem Solver Badge</span> <span class="activity-badge">🔬 Research Master</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🚀 Aktivitas Advanced Problem Analysis Pro:</strong><br>
+                                • 🔬 Melakukan analisis mendalam terhadap masalah kompleks dengan multiple perspectives<br>
+                                • 📈 Mengidentifikasi variabel dan hubungan sebab-akibat menggunakan fishbone diagram<br>
+                                • 🎯 Merumuskan hipotesis dan pertanyaan penelitian dengan scientific method<br>
+                                • 💼 Menganalisis dampak masalah terhadap masyarakat dengan impact assessment<br>
+                                • 🌐 Menghubungkan dengan isu global dan lokal melalui comparative analysis<br>
+                                • 🤖 Menggunakan AI tools untuk data analysis dan pattern recognition<br>
+                                • 📊 Membuat infografis masalah dengan data visualization tools<br>
+                                <span class="activity-badge">🎮 XP +30</span> <span class="activity-badge">🏆 Master Problem Analyst Badge</span> <span class="activity-badge">🌟 Innovation Leader</span>
+                            </div>`
+                    },
+                    {
+                        name: 'Organisasi Belajar',
+                        time: Math.floor(coreTime * 0.25),
+                        teacherActivities: `• Membimbing pembagian tugas<br>• Menyediakan sumber belajar<br>• Memfasilitasi perencanaan investigasi<br>• Setup collaborative tools`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>🎨 Aktivitas Tim Kreatif Super:</strong><br>
+                                • 🌟 Membuat name tag kelompok dengan gambar lucu dan sticker hologram<br>
+                                • 🎵 Menciptakan yel-yel kelompok yang semangat dengan gerakan khas<br>
+                                • 📝 Membagi tugas sederhana dalam kelompok dengan role playing<br>
+                                • 🎯 Merencanakan cara mencari jawaban dengan treasure map<br>
+                                • 🛠️ Menyiapkan alat dan bahan dengan rapi dalam "magic box"<br>
+                                • 🎪 Membuat kontrak tim dengan gambar dan tanda tangan lucu<br>
+                                • 🏆 Menentukan "team mascot" dan "team superpower"<br>
+                                <span class="activity-badge">🎮 XP +18</span> <span class="activity-badge">🏆 Super Team Player Badge</span> <span class="activity-badge">🎨 Creative Organizer</span>
+                            </div>` :
+                            studentLevel === 'SD Kelas Tinggi' ?
+                            `<div class="student-activity">
+                                <strong>📋 Aktivitas Strategic Planning Advanced:</strong><br>
+                                • 💼 Pembentukan tim dengan keahlian komplementer berdasarkan strength assessment<br>
+                                • 📊 Penyusunan project charter dan timeline dengan Gantt chart sederhana<br>
+                                • 🎯 Identifikasi stakeholder dan sumber daya dengan mapping diagram<br>
+                                • 📱 Membuat grup komunikasi digital dengan platform kolaboratif<br>
+                                • 🏆 Menetapkan kriteria keberhasilan tim dengan SMART goals<br>
+                                • 🔄 Membuat workflow dan standard operating procedure<br>
+                                • 📈 Setup tracking system untuk monitoring progress<br>
+                                <span class="activity-badge">🎮 XP +22</span> <span class="activity-badge">🏆 Advanced Strategic Planner Badge</span> <span class="activity-badge">📊 Project Manager</span>
+                            </div>` :
+                            studentLevel === 'SMP' ?
+                            `<div class="student-activity">
+                                <strong>🚀 Aktivitas Professional Team Organization:</strong><br>
+                                • 💼 Pembentukan tim dengan role specialization dan leadership rotation<br>
+                                • 📊 Penyusunan comprehensive project plan dengan risk assessment<br>
+                                • 🎯 Stakeholder analysis dan resource allocation matrix<br>
+                                • 📱 Setup digital workspace dengan collaboration tools<br>
+                                • 🏆 Menetapkan KPI dan success metrics yang terukur<br>
+                                • 🔄 Implementasi agile methodology untuk project management<br>
+                                • 📈 Membuat dashboard untuk real-time progress monitoring<br>
+                                <span class="activity-badge">🎮 XP +28</span> <span class="activity-badge">🏆 Professional Organizer Badge</span> <span class="activity-badge">🚀 Agile Master</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🌟 Aktivitas Enterprise-Level Organization:</strong><br>
+                                • 💼 Strategic team formation dengan competency mapping dan succession planning<br>
+                                • 📊 Enterprise project charter dengan business case dan ROI analysis<br>
+                                • 🎯 Comprehensive stakeholder engagement dan communication strategy<br>
+                                • 📱 Implementation of advanced project management software<br>
+                                • 🏆 Establishment of governance structure dan quality assurance framework<br>
+                                • 🔄 Integration of lean six sigma principles dalam workflow optimization<br>
+                                • 📈 Development of predictive analytics untuk performance forecasting<br>
+                                <span class="activity-badge">🎮 XP +35</span> <span class="activity-badge">🏆 Enterprise Leader Badge</span> <span class="activity-badge">🌟 Strategic Visionary</span>
+                            </div>`
+                    },
+                    {
+                        name: 'Investigasi Mendalam',
+                        time: Math.floor(coreTime * 0.35),
+                        teacherActivities: `• Membimbing proses investigasi<br>• Memberikan scaffolding sesuai kebutuhan<br>• Memfasilitasi akses sumber belajar<br>• Monitoring real-time progress`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>🔍 Aktivitas Petualangan Belajar Super:</strong><br>
+                                • 🎪 Bermain "detektif cilik" mencari petunjuk dengan mission card<br>
+                                • 🔍 Menggunakan kaca pembesar untuk observasi detail dan mencatat di logbook<br>
+                                • 📷 Memotret hal-hal menarik yang ditemukan dan membuat album digital<br>
+                                • 🎨 Mencatat temuan dengan gambar dan warna dalam "discovery journal"<br>
+                                • 🎭 Meniru gerakan/suara yang diamati dan merekam video pendek<br>
+                                • 🧩 Menyusun puzzle informasi yang dikumpulkan<br>
+                                • 🎯 Bermain "treasure hunt" untuk menemukan fakta tersembunyi<br>
+                                • 🌟 Membuat "discovery badge" untuk setiap temuan baru<br>
+                                <span class="activity-badge">🎮 XP +25</span> <span class="activity-badge">🏆 Super Explorer Badge</span> <span class="activity-badge">🔍 Master Detective</span>
+                            </div>` :
+                            studentLevel === 'SD Kelas Tinggi' ?
+                            `<div class="student-activity">
+                                <strong>🔬 Aktivitas Research Scientist:</strong><br>
+                                • 🧪 Melakukan eksperimen terkontrol dengan protokol scientific method<br>
+                                • 📊 Menggunakan software analisis data sederhana untuk pattern recognition<br>
+                                • 🌐 Mengakses database online dan sumber kredibel dengan fact-checking<br>
+                                • 📱 Menggunakan AI tools untuk research assistance dan data validation<br>
+                                • 🤝 Melakukan wawancara terstruktur dengan narasumber ahli<br>
+                                • 📈 Membuat grafik dan visualisasi data dari hasil investigasi<br>
+                                • 🔍 Melakukan cross-referencing untuk verifikasi informasi<br>
+                                • 📝 Menyusun research report dengan format ilmiah sederhana<br>
+                                <span class="activity-badge">🎮 XP +35</span> <span class="activity-badge">🏆 Research Scientist Badge</span> <span class="activity-badge">📊 Data Analyst</span>
+                            </div>` :
+                            studentLevel === 'SMP' ?
+                            `<div class="student-activity">
+                                <strong>🚀 Aktivitas Advanced Research Master:</strong><br>
+                                • 🧪 Melakukan eksperimen kompleks dengan variabel control dan hypothesis testing<br>
+                                • 📊 Menggunakan advanced analytics tools untuk statistical analysis<br>
+                                • 🌐 Mengakses academic databases dan peer-reviewed journals<br>
+                                • 📱 Menggunakan AI tools untuk literature review dan meta-analysis<br>
+                                • 🤝 Melakukan expert interviews dengan structured questionnaire<br>
+                                • 📈 Membuat comprehensive data visualization dengan multiple chart types<br>
+                                • 🔍 Melakukan systematic review dan critical analysis<br>
+                                • 📝 Menyusun research paper dengan academic writing standards<br>
+                                <span class="activity-badge">🎮 XP +40</span> <span class="activity-badge">🏆 Advanced Research Master Badge</span> <span class="activity-badge">🔬 Scientific Investigator</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🌟 Aktivitas Professional Research Excellence:</strong><br>
+                                • 🧪 Melakukan cutting-edge research dengan innovative methodology<br>
+                                • 📊 Menggunakan professional-grade analytics dan machine learning tools<br>
+                                • 🌐 Mengakses international databases dan conducting global research<br>
+                                • 📱 Menggunakan AI dan automation untuk large-scale data processing<br>
+                                • 🤝 Melakukan collaborative research dengan international experts<br>
+                                • 📈 Membuat interactive dashboards dan real-time data visualization<br>
+                                • 🔍 Melakukan predictive analysis dan trend forecasting<br>
+                                • 📝 Menyusun publication-ready research dengan impact assessment<br>
+                                <span class="activity-badge">🎮 XP +50</span> <span class="activity-badge">🏆 Research Excellence Badge</span> <span class="activity-badge">🌟 Innovation Pioneer</span>
+                            </div>`
+                    },
+                    {
+                        name: 'Pengembangan & Showcase Hasil',
+                        time: Math.ceil(coreTime * 0.2),
+                        teacherActivities: `• Memfasilitasi penyusunan laporan<br>• Membimbing persiapan presentasi<br>• Memberikan feedback konstruktif<br>• Setup showcase environment`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>🎨 Aktivitas Showcase Kreatif Spektakuler:</strong><br>
+                                • 🎪 Menyusun hasil dalam "magic portfolio" dengan bantuan guru<br>
+                                • 🎭 Membuat presentasi sederhana dengan props, kostum, dan background<br>
+                                • 🎵 Berlatih menyampaikan hasil dengan lagu, rap, atau storytelling<br>
+                                • 🏆 Menunjukkan hasil karya dengan bangga di "mini exhibition"<br>
+                                • 🤗 Memberikan tepuk tangan dan sticker appreciation untuk teman<br>
+                                • 🌟 Membuat "achievement gallery" dengan foto dan karya terbaik<br>
+                                • 🎯 Bermain "show and tell" dengan format game show<br>
+                                • 🎊 Merayakan keberhasilan dengan "victory dance" kelompok<br>
+                                <span class="activity-badge">🎮 XP +30</span> <span class="activity-badge">🏆 Spectacular Presenter Badge</span> <span class="activity-badge">🎨 Creative Showcase Master</span>
+                            </div>` :
+                            studentLevel === 'SD Kelas Tinggi' ?
+                            `<div class="student-activity">
+                                <strong>🚀 Aktivitas Professional Presentation Advanced:</strong><br>
+                                • 💻 Membuat presentasi multimedia dengan AI tools dan interactive elements<br>
+                                • 📊 Menggunakan data visualization yang menarik dengan infografis dinamis<br>
+                                • 🎥 Membuat video dokumentasi proses dengan editing profesional<br>
+                                • 🌐 Mempublikasikan hasil di platform digital dengan SEO optimization<br>
+                                • 🏆 Melakukan peer assessment profesional dengan rubrik terstruktur<br>
+                                • 📱 Membuat digital portfolio dengan QR code dan augmented reality<br>
+                                • 🎯 Melakukan pitch presentation dengan elevator speech technique<br>
+                                • 🌟 Mengorganisir "innovation expo" dengan booth dan demonstration<br>
+                                <span class="activity-badge">🎮 XP +40</span> <span class="activity-badge">🏆 Advanced Innovation Champion Badge</span> <span class="activity-badge">💻 Digital Presentation Master</span>
+                            </div>` :
+                            studentLevel === 'SMP' ?
+                            `<div class="student-activity">
+                                <strong>🌟 Aktivitas Expert-Level Presentation & Publication:</strong><br>
+                                • 💻 Membuat comprehensive multimedia presentation dengan advanced AI integration<br>
+                                • 📊 Menggunakan sophisticated data visualization dengan interactive dashboards<br>
+                                • 🎥 Membuat professional documentary dengan cinematic quality<br>
+                                • 🌐 Mempublikasikan hasil di multiple platforms dengan content marketing strategy<br>
+                                • 🏆 Melakukan rigorous peer review dengan academic standards<br>
+                                • 📱 Membuat immersive digital experience dengan VR/AR technology<br>
+                                • 🎯 Melakukan TED-style presentation dengan storytelling mastery<br>
+                                • 🌟 Mengorganisir "research symposium" dengan keynote dan panel discussion<br>
+                                <span class="activity-badge">🎮 XP +50</span> <span class="activity-badge">🏆 Expert Presentation Master Badge</span> <span class="activity-badge">🌟 Thought Leader</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🏆 Aktivitas World-Class Innovation Showcase:</strong><br>
+                                • 💻 Membuat cutting-edge presentation dengan emerging technologies<br>
+                                • 📊 Menggunakan predictive analytics dan real-time data streaming<br>
+                                • 🎥 Membuat award-winning documentary dengan global impact narrative<br>
+                                • 🌐 Mempublikasikan hasil dengan international reach dan viral potential<br>
+                                • 🏆 Melakukan world-class peer review dengan international standards<br>
+                                • 📱 Membuat revolutionary digital experience dengan breakthrough technology<br>
+                                • 🎯 Melakukan keynote presentation dengan global audience engagement<br>
+                                • 🌟 Mengorganisir "global innovation summit" dengan international collaboration<br>
+                                <span class="activity-badge">🎮 XP +60</span> <span class="activity-badge">🏆 World-Class Innovation Badge</span> <span class="activity-badge">🌟 Global Change Maker</span>
+                            </div>`
+                    }
+                ],
+                'Project Based Learning': [
+                    {
+                        name: 'Penentuan Pertanyaan Mendasar',
+                        time: Math.floor(coreTime * 0.15),
+                        teacherActivities: `• Memfasilitasi brainstorming<br>• Membimbing perumusan driving question<br>• Menetapkan kriteria keberhasilan<br>• Aktivasi project mindset`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>🌟 Aktivitas Dream Project Super:</strong><br>
+                                • 🎨 Menggambar ide proyek impian mereka dengan detail dan cerita<br>
+                                • 🎪 Bermain peran sebagai "peneliti cilik" dengan kostum dan props<br>
+                                • 🎵 Menyanyikan lagu tentang topik pembelajaran dengan gerakan<br>
+                                • 👫 Bercerita tentang proyek yang pernah dilihat dengan antusias<br>
+                                • 🌈 Mencocokkan warna, bentuk, atau pola dalam permainan interaktif<br>
+                                • 🎯 Membuat "wish list" proyek dengan gambar dan sticker<br>
+                                • 🏆 Voting untuk proyek paling menarik dengan "star sticker"<br>
+                                <span class="activity-badge">🎮 XP +15</span> <span class="activity-badge">🏆 Super Dreamer Badge</span> <span class="activity-badge">🌟 Project Visionary</span>
+                            </div>` :
+                            studentLevel === 'SD Kelas Tinggi' ?
+                            `<div class="student-activity">
+                                <strong>🚀 Aktivitas Innovation Quest Advanced:</strong><br>
+                                • 💡 Merumuskan driving question yang menantang dengan teknik SCAMPER<br>
+                                • 📊 Menganalisis relevansi proyek dengan karir masa depan dan passion<br>
+                                • 🌍 Menghubungkan dengan Sustainable Development Goals dan local wisdom<br>
+                                • 💼 Menyusun project charter profesional dengan vision dan mission<br>
+                                • 🎯 Melakukan feasibility study dengan SWOT analysis sederhana<br>
+                                • 🔍 Research preliminary untuk validasi ide proyek<br>
+                                • 📈 Membuat project roadmap dengan milestone yang jelas<br>
+                                <span class="activity-badge">🎮 XP +28</span> <span class="activity-badge">🏆 Advanced Innovation Pioneer Badge</span> <span class="activity-badge">🚀 Strategic Planner</span>
+                            </div>` :
+                            studentLevel === 'SMP' ?
+                            `<div class="student-activity">
+                                <strong>🌟 Aktivitas Professional Innovation Quest:</strong><br>
+                                • 💡 Merumuskan driving question dengan design thinking methodology<br>
+                                • 📊 Menganalisis market opportunity dan social impact potential<br>
+                                • 🌍 Menghubungkan dengan global trends dan emerging technologies<br>
+                                • 💼 Menyusun comprehensive business case dengan ROI projection<br>
+                                • 🎯 Melakukan detailed feasibility study dengan risk assessment<br>
+                                • 🔍 Conducting extensive market research dan competitor analysis<br>
+                                • 📈 Membuat detailed project timeline dengan critical path method<br>
+                                <span class="activity-badge">🎮 XP +35</span> <span class="activity-badge">🏆 Professional Innovation Leader Badge</span> <span class="activity-badge">🌟 Strategic Visionary</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🏆 Aktivitas World-Class Innovation Quest:</strong><br>
+                                • 💡 Merumuskan breakthrough driving question dengan disruptive thinking<br>
+                                • 📊 Menganalisis global market dynamics dan future scenarios<br>
+                                • 🌍 Menghubungkan dengan planetary boundaries dan systemic change<br>
+                                • 💼 Menyusun venture capital-ready business plan dengan scalability model<br>
+                                • 🎯 Melakukan comprehensive feasibility dengan Monte Carlo simulation<br>
+                                • 🔍 Conducting international benchmarking dan patent landscape analysis<br>
+                                • 📈 Membuat agile project framework dengan adaptive planning<br>
+                                <span class="activity-badge">🎮 XP +45</span> <span class="activity-badge">🏆 World-Class Innovation Mastermind Badge</span> <span class="activity-badge">🌟 Global Game Changer</span>
+                            </div>`
+                    },
+                    {
+                        name: 'Perencanaan Proyek Komprehensif',
+                        time: Math.floor(coreTime * 0.25),
+                        teacherActivities: `• Memfasilitasi pembentukan tim<br>• Membimbing penyusunan timeline<br>• Membantu identifikasi sumber daya<br>• Setup project management system`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>🎯 Aktivitas Team Building Fun Spectacular:</strong><br>
+                                • 🎨 Membuat poster kelompok dengan gambar, motto, dan logo tim<br>
+                                • 🎵 Menciptakan lagu kelompok dengan dance moves yang unik<br>
+                                • 🗓️ Membuat jadwal kerja dengan sticker warna-warni dan gambar<br>
+                                • 🎪 Bermain ice breaker sederhana dan team bonding games<br>
+                                • 📝 Menentukan siapa mengerjakan apa dengan role playing<br>
+                                • 🏆 Membuat "team contract" dengan tanda tangan dan cap jempol<br>
+                                • 🌟 Menentukan "team superpower" dan "team mission"<br>
+                                <span class="activity-badge">🎮 XP +20</span> <span class="activity-badge">🏆 Spectacular Team Builder Badge</span> <span class="activity-badge">🎨 Creative Collaborator</span>
+                            </div>` :
+                            studentLevel === 'SD Kelas Tinggi' ?
+                            `<div class="student-activity">
+                                <strong>📋 Aktivitas Advanced Project Management:</strong><br>
+                                • 💼 Melakukan personality test untuk pembagian peran optimal<br>
+                                • 📊 Menganalisis kekuatan dan kelemahan tim dengan SWOT matrix<br>
+                                • 🎯 Menyusun work breakdown structure (WBS) dengan deliverable yang jelas<br>
+                                • 📱 Menggunakan project management tools dan collaboration platform<br>
+                                • 🏆 Menetapkan milestone dan deliverable dengan success criteria<br>
+                                • 📈 Membuat Gantt chart sederhana untuk timeline management<br>
+                                • 🔄 Setup communication protocol dan progress tracking system<br>
+                                <span class="activity-badge">🎮 XP +30</span> <span class="activity-badge">🏆 Advanced Project Manager Badge</span> <span class="activity-badge">📊 Strategic Organizer</span>
+                            </div>` :
+                            studentLevel === 'SMP' ?
+                            `<div class="student-activity">
+                                <strong>🚀 Aktivitas Professional Project Management:</strong><br>
+                                • 💼 Melakukan comprehensive team assessment dengan 360-degree feedback<br>
+                                • 📊 Menganalisis team dynamics dengan Belbin team roles assessment<br>
+                                • 🎯 Menyusun detailed project scope dengan acceptance criteria<br>
+                                • 📱 Implementing professional project management software (Asana/Trello)<br>
+                                • 🏆 Establishing governance structure dengan steering committee<br>
+                                • 📈 Membuat critical path analysis dengan resource optimization<br>
+                                • 🔄 Setup agile methodology dengan sprint planning dan retrospectives<br>
+                                <span class="activity-badge">🎮 XP +40</span> <span class="activity-badge">🏆 Professional Project Leader Badge</span> <span class="activity-badge">🚀 Agile Master</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🌟 Aktivitas Enterprise Project Management:</strong><br>
+                                • 💼 Melakukan strategic team formation dengan competency mapping<br>
+                                • 📊 Menganalisis organizational behavior dengan advanced psychometrics<br>
+                                • 🎯 Menyusun enterprise-grade project charter dengan business alignment<br>
+                                • 📱 Implementing enterprise project portfolio management system<br>
+                                • 🏆 Establishing program management office dengan governance framework<br>
+                                • 📈 Membuat predictive analytics untuk project success probability<br>
+                                • 🔄 Setup lean six sigma methodology dengan continuous improvement<br>
+                                <span class="activity-badge">🎮 XP +50</span> <span class="activity-badge">🏆 Enterprise Project Mastermind Badge</span> <span class="activity-badge">🌟 Strategic Leader</span>
+                            </div>`
+                    },
+                    {
+                        name: 'Eksekusi & Monitoring Proyek',
+                        time: Math.floor(coreTime * 0.4),
+                        teacherActivities: `• Monitoring progress proyek<br>• Memberikan coaching dan mentoring<br>• Memfasilitasi problem solving<br>• Quality assurance`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>🛠️ Aktivitas Building & Creating Fun:</strong><br>
+                                • 🎨 Membuat prototype dengan bahan daur ulang dan craft materials<br>
+                                • 🔨 Building model dengan blocks, clay, atau cardboard<br>
+                                • 📷 Dokumentasi proses dengan foto dan video lucu<br>
+                                • 🎪 Testing prototype dengan permainan dan eksperimen sederhana<br>
+                                • 🌟 Decorating hasil karya dengan warna dan sticker<br>
+                                • 🏆 Progress check dengan "milestone celebration"<br>
+                                • 🤝 Helping teman yang kesulitan dengan "buddy system"<br>
+                                <span class="activity-badge">🎮 XP +25</span> <span class="activity-badge">🏆 Master Builder Badge</span> <span class="activity-badge">🛠️ Creative Maker</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🚀 Aktivitas Professional Project Execution:</strong><br>
+                                • 🛠️ Implementing project deliverable dengan quality standards<br>
+                                • 📊 Real-time progress monitoring dengan dashboard analytics<br>
+                                • 🔄 Agile sprint execution dengan daily standups<br>
+                                • 🎯 Continuous testing dan iterative improvement<br>
+                                • 📱 Digital collaboration dengan cloud-based tools<br>
+                                • 🏆 Milestone achievement dengan stakeholder presentation<br>
+                                • 🌟 Innovation implementation dengan breakthrough solutions<br>
+                                <span class="activity-badge">🎮 XP +45</span> <span class="activity-badge">🏆 Project Execution Master Badge</span> <span class="activity-badge">🚀 Innovation Implementer</span>
+                            </div>`
+                    },
+                    {
+                        name: 'Evaluasi & Showcase Proyek',
+                        time: Math.ceil(coreTime * 0.2),
+                        teacherActivities: `• Memfasilitasi evaluasi hasil<br>• Membimbing presentasi final<br>• Memberikan feedback komprehensif<br>• Celebration of learning`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>🎊 Aktivitas Project Celebration Spectacular:</strong><br>
+                                • 🎪 Presentasi hasil dengan "mini exhibition" dan booth<br>
+                                • 🎭 Storytelling tentang journey proyek dengan drama mini<br>
+                                • 🏆 Showcase prototype dengan demonstration yang menarik<br>
+                                • 📸 Photo session dengan hasil karya dan team<br>
+                                • 🎵 Celebration song dan victory dance<br>
+                                • 🌟 Giving appreciation stickers untuk semua teman<br>
+                                • 🤗 Reflection circle dengan sharing pengalaman<br>
+                                <span class="activity-badge">🎮 XP +30</span> <span class="activity-badge">🏆 Project Celebration Champion Badge</span> <span class="activity-badge">🎊 Showcase Master</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🌟 Aktivitas Professional Project Showcase:</strong><br>
+                                • 🎯 Comprehensive project presentation dengan impact assessment<br>
+                                • 📊 Data-driven evaluation dengan metrics dan analytics<br>
+                                • 🏆 Stakeholder presentation dengan professional delivery<br>
+                                • 📱 Digital portfolio creation dengan multimedia documentation<br>
+                                • 🌐 Publication dan dissemination di platform digital<br>
+                                • 🔄 Lessons learned documentation dengan improvement recommendations<br>
+                                • 🚀 Future roadmap planning untuk project scaling<br>
+                                <span class="activity-badge">🎮 XP +50</span> <span class="activity-badge">🏆 Project Showcase Excellence Badge</span> <span class="activity-badge">🌟 Impact Creator</span>
+                            </div>`
+                    }
+                ],
+                'Discovery Learning': [
+                    {
+                        name: 'Stimulation',
+                        time: Math.floor(coreTime * 0.15),
+                        teacherActivities: `• Menyajikan fenomena menarik<br>• Melakukan demonstrasi<br>• Mengajukan pertanyaan pemantik`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>🎪 Aktivitas Wonder Explorer:</strong><br>
+                                • 👀 Mengamati dengan mata berbinar-binar<br>
+                                • 🎭 Meniru gerakan/suara yang diamati<br>
+                                • 🌈 Mencocokkan warna, bentuk, atau pola<br>
+                                • 🎵 Mendengarkan suara-suara di sekitar<br>
+                                • 💭 Bertanya "Apa itu?" dengan antusias<br>
+                                <span class="activity-badge">🎮 XP +8</span> <span class="activity-badge">🏆 Wonder Badge</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🔬 Aktivitas Scientific Observer:</strong><br>
+                                • 🧪 Melakukan eksperimen sederhana<br>
+                                • 📱 Menggunakan aplikasi simulasi<br>
+                                • 🎥 Membuat video observasi<br>
+                                • 📊 Mengumpulkan data dengan survey<br>
+                                • 🗺️ Membuat peta konsep awal<br>
+                                <span class="activity-badge">🎮 XP +18</span> <span class="activity-badge">🏆 Scientific Observer Badge</span>
+                            </div>`
+                    }
+                ],
+                'Cooperative Learning': [
+                    {
+                        name: 'Pembentukan Kelompok',
+                        time: Math.floor(coreTime * 0.15),
+                        teacherActivities: `• Membentuk kelompok heterogen<br>• Menjelaskan peran masing-masing<br>• Menetapkan aturan kerja sama`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>🎨 Aktivitas Friendship Circle:</strong><br>
+                                • 🎨 Membuat name tag kelompok dengan gambar<br>
+                                • 🎵 Menciptakan yel-yel kelompok<br>
+                                • 🤝 Bermain ice breaker sederhana<br>
+                                • 🌟 Memilih maskot kelompok<br>
+                                • 💝 Memberikan pelukan virtual<br>
+                                <span class="activity-badge">🎮 XP +10</span> <span class="activity-badge">🏆 Friendship Badge</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🤝 Aktivitas Professional Team Formation:</strong><br>
+                                • 💼 Melakukan personality test untuk pembagian peran<br>
+                                • 📊 Menganalisis kekuatan dan kelemahan tim<br>
+                                • 🎯 Menyusun team charter dan goal setting<br>
+                                • 📱 Membuat grup komunikasi digital<br>
+                                • 🏆 Menetapkan kriteria keberhasilan tim<br>
+                                <span class="activity-badge">🎮 XP +20</span> <span class="activity-badge">🏆 Team Leader Badge</span>
+                            </div>`
+                    }
+                ],
+                'Gamification': [
+                    {
+                        name: 'Motivation Activation',
+                        time: Math.floor(coreTime * 0.2),
+                        teacherActivities: `• Menciptakan game narrative<br>• Setup avatar & identity<br>• Goal setting gamification`,
+                        studentActivities: `<div class="student-activity">
+                            <strong>🎮 Aktivitas Game Master:</strong><br>
+                            • 🎨 Membuat avatar pembelajaran dengan kekuatan super<br>
+                            • 🏆 Menerima misi utama untuk mengatasi masalah<br>
+                            • 👥 Bergabung dalam guild/tim dengan nama keren<br>
+                            • 💎 Mengumpulkan starting resources dan power-ups<br>
+                            • 📊 Tracking progress di leaderboard real-time<br>
+                            <span class="activity-badge">🎮 XP +15</span> <span class="activity-badge">🏆 Game Master Badge</span>
+                        </div>`
+                    }
+                ],
+                'Design Thinking': [
+                    {
+                        name: 'Empathize',
+                        time: Math.floor(coreTime * 0.2),
+                        teacherActivities: `• Empathy skill building<br>• Safe space creation<br>• Interview technique training`,
+                        studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                            `<div class="student-activity">
+                                <strong>💝 Aktivitas Heart Connection:</strong><br>
+                                • 👂 Mendengarkan cerita teman dengan hati<br>
+                                • 🎭 Bermain peran sebagai orang lain<br>
+                                • 💝 Memberikan pelukan virtual<br>
+                                • 🎨 Menggambar perasaan orang lain<br>
+                                • 📝 Menulis surat untuk teman<br>
+                                <span class="activity-badge">🎮 XP +12</span> <span class="activity-badge">🏆 Empathy Badge</span>
+                            </div>` :
+                            `<div class="student-activity">
+                                <strong>🎤 Aktivitas Deep Empathy Research:</strong><br>
+                                • 🎤 Melakukan wawancara mendalam<br>
+                                • 📊 Membuat empathy map<br>
+                                • 🎥 Merekam user journey<br>
+                                • 📱 Menggunakan survey digital<br>
+                                • 🧠 Melakukan persona development<br>
+                                <span class="activity-badge">🎮 XP +25</span> <span class="activity-badge">🏆 Empathy Master Badge</span>
+                            </div>`
+                    }
+                ]
+            };
+            
+            // Default phases if model not found
+            const defaultPhases = [
+                {
+                    name: 'Eksplorasi',
+                    time: Math.floor(coreTime * 0.4),
+                    teacherActivities: `• Memfasilitasi eksplorasi konsep ${topik}<br>• Memberikan bimbingan sesuai kebutuhan<br>• Mendorong inquiry dan discovery`,
+                    studentActivities: studentLevel === 'SD Kelas Rendah' ? 
+                        `<div class="student-activity">
+                            <strong>🌟 Aktivitas Adventure Learning:</strong><br>
+                            • 🎪 Mengeksplorasi materi dengan permainan<br>
+                            • 🎨 Bertanya tentang hal yang menarik<br>
+                            • 🔍 Mencoba aktivitas pembelajaran<br>
+                            • 🎵 Belajar sambil bernyanyi<br>
+                            • 🤝 Berbagi dengan teman<br>
+                            <span class="activity-badge">🎮 XP +15</span> <span class="activity-badge">🏆 Explorer Badge</span>
+                        </div>` :
+                        `<div class="student-activity">
+                            <strong>🚀 Aktivitas Advanced Exploration:</strong><br>
+                            • 🔬 Mengeksplorasi konsep ${topik} secara mandiri<br>
+                            • 📊 Melakukan investigasi dan penelitian<br>
+                            • 💻 Menggunakan teknologi untuk eksplorasi<br>
+                            • 🤝 Berdiskusi dengan teman sebaya<br>
+                            • 📱 Dokumentasi digital proses belajar<br>
+                            <span class="activity-badge">🎮 XP +25</span> <span class="activity-badge">🏆 Advanced Explorer Badge</span>
+                        </div>`
+                }
+            ];
+            
+            return enhancedPhaseTemplates[modelPembelajaran] || defaultPhases;
+        }
+
+        // Enhanced AI Content Generation Functions
+        function generatePertanyaanPemantik(mataPelajaran, topik, kontekstual) {
+            const pertanyaanTemplates = {
+                'Informatika': [
+                    `Bagaimana teknologi ${topik} dapat membantu mengatasi masalah dalam ${kontekstual}?`,
+                    `Apa dampak positif dan negatif dari implementasi ${topik} di Indonesia?`,
+                    `Bagaimana cara kerja ${topik} dalam kehidupan sehari-hari kita?`,
+                    `Mengapa ${topik} penting untuk masa depan Indonesia?`,
+                    `Bagaimana kita dapat menggunakan ${topik} secara etis dan bertanggung jawab?`
+                ],
+                'Matematika': [
+                    `Bagaimana konsep ${topik} dapat diterapkan dalam ${kontekstual}?`,
+                    `Mengapa pemahaman ${topik} penting untuk kehidupan sehari-hari?`,
+                    `Bagaimana ${topik} membantu dalam pengambilan keputusan yang tepat?`,
+                    `Apa hubungan antara ${topik} dengan teknologi modern?`,
+                    `Bagaimana ${topik} berkontribusi pada pembangunan Indonesia?`
+                ],
+                'default': [
+                    `Bagaimana ${topik} berkaitan dengan kehidupan sehari-hari di Indonesia?`,
+                    `Mengapa penting bagi kita untuk memahami ${topik}?`,
+                    `Bagaimana ${topik} dapat membantu mengatasi masalah dalam ${kontekstual}?`,
+                    `Apa manfaat mempelajari ${topik} untuk masa depan?`,
+                    `Bagaimana kita dapat menerapkan ${topik} dalam konteks lokal Indonesia?`
+                ]
+            };
+            
+            return pertanyaanTemplates[mataPelajaran] || pertanyaanTemplates['default'];
+        }
+
+        function generateAsesmen(mataPelajaran, topik, modelPembelajaran) {
+            return {
+                formatif: [
+                    'Observasi aktivitas siswa selama pembelajaran dengan rubrik engagement',
+                    'Tanya jawab interaktif dan diskusi kelompok terstruktur',
+                    'Quiz digital real-time menggunakan platform gamifikasi',
+                    'Peer assessment dengan kriteria yang jelas',
+                    'Exit ticket dengan pertanyaan reflektif dan self-assessment'
+                ],
+                sumatif: [
+                    'Presentasi hasil proyek dengan rubrik komprehensif',
+                    'Portofolio digital dengan dokumentasi proses pembelajaran',
+                    'Tes tertulis kontekstual berbasis masalah nyata',
+                    'Performance task dengan kriteria autentik',
+                    'Produk kreatif yang menunjukkan penguasaan konsep'
+                ],
+                autentik: [
+                    `Penerapan ${topik} dalam mengatasi masalah nyata di lingkungan sekitar`,
+                    'Kolaborasi dengan komunitas lokal untuk implementasi solusi',
+                    'Dokumentasi proses pembelajaran dalam bentuk multimedia',
+                    'Presentasi hasil kepada stakeholder terkait',
+                    'Refleksi mendalam tentang dampak pembelajaran terhadap diri dan masyarakat'
+                ]
+            };
+        }
+
+        function generateDiferensiasi(kelas, jumlahSiswa) {
+            return {
+                konten: [
+                    'Materi dengan tingkat kompleksitas yang bervariasi (basic, intermediate, advanced)',
+                    'Multiple representation: visual, auditory, kinesthetic, dan reading/writing',
+                    'Sumber belajar yang beragam: video, artikel, podcast, infografis, simulasi',
+                    'Konten yang disesuaikan dengan minat dan latar belakang siswa',
+                    'Gamifikasi dengan level yang dapat disesuaikan'
+                ],
+                proses: [
+                    'Flexible grouping berdasarkan readiness, interest, dan learning profile',
+                    'Choice boards dengan berbagai pilihan aktivitas pembelajaran',
+                    'Learning contracts yang disesuaikan dengan kemampuan individual',
+                    'Scaffolding dan support yang berjenjang sesuai kebutuhan',
+                    'Aktivitas hands-on yang disesuaikan dengan gaya belajar'
+                ],
+                produk: [
+                    'Multiple ways untuk mendemonstrasikan pembelajaran (presentasi, poster, video, model, performance)',
+                    'Rubrik yang disesuaikan dengan tingkat kemampuan siswa',
+                    'Portfolio assessment dengan kriteria yang fleksibel',
+                    'Peer dan self-assessment untuk mengembangkan metacognition',
+                    'Showcase kreatif dengan berbagai format presentasi'
+                ]
+            };
+        }
+
+        function generateRemedialPengayaan(mataPelajaran, topik) {
+            return {
+                remedial: [
+                    `Review konsep dasar ${topik} dengan pendekatan gamifikasi`,
+                    'Pembelajaran individual dengan bimbingan intensif guru',
+                    'Penggunaan media pembelajaran yang lebih konkret dan visual',
+                    'Latihan soal dengan tingkat kesulitan yang bertahap',
+                    'Peer tutoring dengan siswa yang sudah menguasai materi',
+                    'Aktivitas hands-on yang memperkuat pemahaman dasar'
+                ],
+                pengayaan: [
+                    `Eksplorasi aplikasi lanjutan ${topik} dalam konteks yang lebih kompleks`,
+                    'Proyek penelitian mini dengan topik yang lebih mendalam',
+                    'Mentoring siswa lain yang membutuhkan bantuan (peer teaching)',
+                    'Partisipasi dalam kompetisi atau olimpiade terkait',
+                    'Kolaborasi dengan ahli atau praktisi di bidang terkait',
+                    'Pengembangan produk inovatif menggunakan teknologi'
+                ]
+            };
+        }
+
+        function generateRubrikPenilaian(topik) {
+            return {
+                kriteria: [
+                    {
+                        aspek: 'Pemahaman Konsep',
+                        sangat_baik: `Menunjukkan pemahaman mendalam tentang ${topik} dengan dapat menjelaskan konsep secara detail dan akurat`,
+                        baik: `Menunjukkan pemahaman yang baik tentang ${topik} dengan penjelasan yang cukup akurat`,
+                        cukup: `Menunjukkan pemahaman dasar tentang ${topik} namun masih ada beberapa kesalahan konsep`,
+                        perlu_bimbingan: `Menunjukkan pemahaman yang terbatas tentang ${topik} dan memerlukan bimbingan lebih lanjut`
+                    },
+                    {
+                        aspek: 'Penerapan Kontekstual',
+                        sangat_baik: 'Mampu menerapkan konsep dalam berbagai konteks nyata dengan solusi yang inovatif dan tepat',
+                        baik: 'Mampu menerapkan konsep dalam konteks nyata dengan solusi yang tepat',
+                        cukup: 'Mampu menerapkan konsep dalam konteks sederhana dengan bimbingan',
+                        perlu_bimbingan: 'Kesulitan menerapkan konsep dalam konteks nyata dan memerlukan bantuan signifikan'
+                    },
+                    {
+                        aspek: 'Kolaborasi dan Komunikasi',
+                        sangat_baik: 'Berkolaborasi secara efektif, berkomunikasi dengan jelas, dan memimpin diskusi dengan baik',
+                        baik: 'Berkolaborasi dengan baik dan berkomunikasi secara efektif dalam kelompok',
+                        cukup: 'Berpartisipasi dalam kolaborasi namun komunikasi masih perlu ditingkatkan',
+                        perlu_bimbingan: 'Kesulitan berkolaborasi dan berkomunikasi, memerlukan dukungan untuk berpartisipasi'
+                    },
+                    {
+                        aspek: 'Kreativitas dan Inovasi',
+                        sangat_baik: 'Menunjukkan kreativitas tinggi dengan ide-ide original dan solusi inovatif',
+                        baik: 'Menunjukkan kreativitas dengan ide-ide yang menarik dan solusi yang tepat',
+                        cukup: 'Menunjukkan beberapa kreativitas namun masih mengikuti pola yang umum',
+                        perlu_bimbingan: 'Kreativitas terbatas dan cenderung mengikuti contoh yang diberikan'
+                    },
+                    {
+                        aspek: 'Engagement dan Partisipasi',
+                        sangat_baik: 'Sangat aktif dan antusias dalam semua aktivitas pembelajaran, memotivasi teman lain',
+                        baik: 'Aktif berpartisipasi dalam sebagian besar aktivitas pembelajaran',
+                        cukup: 'Berpartisipasi dalam aktivitas namun perlu dorongan untuk lebih aktif',
+                        perlu_bimbingan: 'Partisipasi minimal dan memerlukan motivasi eksternal yang kuat'
+                    }
+                ]
+            };
+        }
+
+        function generateRefleksiGuru() {
+            return [
+                'Apakah aktivitas siswa yang dirancang sesuai dengan karakteristik perkembangan mereka?',
+                'Bagaimana tingkat engagement siswa selama aktivitas pembelajaran berlangsung?',
+                'Aktivitas mana yang paling efektif dalam mencapai tujuan pembelajaran?',
+                'Bagaimana efektivitas gamifikasi dan elemen interaktif dalam pembelajaran?',
+                'Apa tantangan utama dalam mengimplementasikan aktivitas yang beragam?',
+                'Bagaimana respons siswa terhadap aktivitas hands-on dan digital integration?',
+                'Apa yang akan saya modifikasi untuk meningkatkan kualitas aktivitas pembelajaran?',
+                'Bagaimana aktivitas ini dapat dihubungkan dengan pembelajaran selanjutnya?'
+            ];
+        }
+
+        function generateDetailedModul(mataPelajaran, kelas, topik, tujuanPembelajaran, metodePembelajaran, modelPembelajaran, alokasi, jumlahSiswa, lintasBidang, saranaPrasarana, sumberBelajar) {
+            
+            // AI Recommendations for empty fields
+            function getAIRecommendations() {
+                const recommendations = {};
+                
+                // AI Lintas Bidang Recommendations
+                if (lintasBidang.length === 0) {
+                    const lintasBidangAI = {
+                        'Matematika': ['Teknologi', 'Ekonomi', 'Seni & Budaya'],
+                        'IPA': ['Teknologi', 'Lingkungan', 'Kesehatan'],
+                        'Bahasa Indonesia': ['Sosial Budaya', 'Seni & Budaya', 'Teknologi'],
+                        'IPS': ['Ekonomi', 'Sosial Budaya', 'Politik & Hukum'],
+                        'Teknik Komputer Jaringan': ['Teknologi', 'Kewirausahaan', 'Ekonomi'],
+                        'Tata Boga': ['Kesehatan', 'Kewirausahaan', 'Sosial Budaya']
+                    };
+                    recommendations.lintasBidang = lintasBidangAI[mataPelajaran] || ['Teknologi', 'Sosial Budaya'];
+                }
+                
+                // AI Sarana Prasarana Recommendations
+                if (saranaPrasarana.length === 0) {
+                    const saranaPrasaranaAI = {
+                        'Problem Based Learning': ['Laptop/Komputer', 'Internet', 'Proyektor'],
+                        'Project Based Learning': ['Laptop/Komputer', 'Internet', 'Alat Peraga'],
+                        'STEAM': ['Lab', 'Laptop/Komputer', 'Alat Peraga'],
+                        'Gamification': ['Laptop/Komputer', 'Internet', 'Proyektor'],
+                        'Outdoor Learning': ['Alat Peraga', 'Proyektor']
+                    };
+                    recommendations.saranaPrasarana = saranaPrasaranaAI[modelPembelajaran] || ['Proyektor', 'Alat Peraga'];
+                }
+                
+                // AI Sumber Belajar Recommendations
+                if (sumberBelajar.length === 0) {
+                    const sumberBelajarAI = {
+                        'SD': ['Buku Teks', 'Video Pembelajaran', 'Alat Peraga'],
+                        'SMP': ['Buku Teks', 'Video Pembelajaran', 'Website Edukatif'],
+                        'SMA': ['Buku Teks', 'Artikel Jurnal', 'Website Edukatif'],
+                        'SMK': ['Video Pembelajaran', 'Narasumber Ahli', 'Website Edukatif']
+                    };
+                    const jenjang = kelas.includes('I') || kelas.includes('II') || kelas.includes('III') || kelas.includes('IV') || kelas.includes('V') || kelas.includes('VI') ? 'SD' :
+                                  kelas.includes('VII') || kelas.includes('VIII') || kelas.includes('IX') ? 'SMP' :
+                                  kelas.includes('SMK') ? 'SMK' : 'SMA';
+                    recommendations.sumberBelajar = sumberBelajarAI[jenjang] || ['Buku Teks', 'Video Pembelajaran'];
+                }
+                
+                return recommendations;
+            }
+            
+            const aiRecommendations = getAIRecommendations();
+            // Simplified contextual examples without Indonesia-specific references
+            const kontekstualExamples = {
+                'Matematika': {
+                    'Fungsi Kuadrat': 'Optimalisasi lahan pertanian untuk meningkatkan hasil panen dengan keterbatasan modal',
+                    'Statistika': 'Menganalisis data pendidikan dan ekonomi masyarakat untuk pengambilan keputusan',
+                    'Geometri': 'Merancang bangunan yang tahan gempa dengan teknologi modern',
+                    'Trigonometri': 'Menghitung sudut elevasi untuk sistem irigasi pertanian bertingkat',
+                    'Peluang': 'Menganalisis peluang keberhasilan usaha kecil di era digital',
+                    'Aljabar': 'Menyelesaikan masalah pembagian sumber daya secara adil dan efisien'
+                },
+                'Informatika': {
+                    'Algoritma dan Pemrograman': 'Membuat sistem informasi untuk transparansi dan partisipasi masyarakat',
+                    'Jaringan Komputer': 'Membangun infrastruktur internet untuk sekolah dengan anggaran terbatas',
+                    'Sistem Komputer': 'Mengoptimalkan penggunaan perangkat teknologi bekas untuk laboratorium komputer',
+                    'Analisis Data': 'Menganalisis pola migrasi dan dampaknya terhadap pendidikan',
+                    'Keamanan Siber': 'Melindungi data pribadi dari penipuan online di media sosial',
+                    'Kecerdasan Buatan': 'Mengembangkan chatbot untuk pelestarian budaya lokal di era digital',
+                    'Basis Data': 'Mengelola database keanekaragaman hayati untuk konservasi dan penelitian',
+                    'Teknologi Informasi': 'Digitalisasi perpustakaan dengan koleksi buku dan cerita lokal',
+                    'Pemrograman Web': 'Membuat platform e-commerce untuk usaha kecil menengah',
+                    'Mobile Development': 'Aplikasi panduan wisata budaya dengan fitur AR untuk generasi digital'
+                },
+                'IPA': {
+                    'Sistem Pencernaan': 'Mengatasi masalah stunting dan gizi buruk anak dengan memanfaatkan pangan lokal',
+                    'Ekosistem': 'Pelestarian ekosistem mangrove di pesisir untuk melindungi nelayan dari abrasi',
+                    'Energi': 'Pemanfaatan energi terbarukan (surya, angin, biogas) untuk desa terpencil',
+                    'Sistem Pernapasan': 'Dampak polusi udara terhadap kesehatan siswa dan solusi ramah lingkungan',
+                    'Listrik': 'Elektrifikasi desa dengan pembangkit listrik tenaga mikro hidro',
+                    'Cahaya': 'Pemanfaatan cahaya matahari untuk pengeringan hasil pertanian dan ikan'
+                },
+                'Bahasa Indonesia': {
+                    'Teks Persuasi': 'Menyusun proposal pembangunan infrastruktur desa dengan bahasa yang efektif',
+                    'Puisi': 'Mengekspresikan kecintaan terhadap alam dan keprihatinan terhadap kerusakan lingkungan',
+                    'Cerpen': 'Menulis cerita tentang kehidupan anak nelayan yang berjuang sekolah',
+                    'Teks Eksposisi': 'Menjelaskan pentingnya pelestarian bahasa daerah di era globalisasi',
+                    'Drama': 'Mementaskan drama tentang perjuangan pahlawan daerah',
+                    'Teks Laporan': 'Melaporkan hasil observasi tradisi gotong royong dalam pembangunan'
+                }
+            };
+
+            const kontekstual = kontekstualExamples[mataPelajaran]?.[topik] || `Siswa menerapkan ${topik} dalam kehidupan sehari-hari, belajar melalui pengalaman langsung dan menghubungkan dengan konteks nyata`;
+
+            // Generate AI Content
+            const pertanyaanPemantik = generatePertanyaanPemantik(mataPelajaran, topik, kontekstual);
+            const asesmen = generateAsesmen(mataPelajaran, topik, modelPembelajaran);
+            const diferensiasi = generateDiferensiasi(kelas, jumlahSiswa);
+            const remedialPengayaan = generateRemedialPengayaan(mataPelajaran, topik);
+            const rubrikPenilaian = generateRubrikPenilaian(topik);
+            const refleksiGuru = generateRefleksiGuru();
+
+            // Generate cross-disciplinary connections with AI recommendations
+            const finalLintasBidang = lintasBidang.length > 0 ? lintasBidang : aiRecommendations.lintasBidang || [];
+            const lintasBidangText = finalLintasBidang.length > 0 ? finalLintasBidang.join(', ') : 'Tidak ada integrasi lintas bidang';
+            
+            // Generate resource requirements with AI recommendations
+            const finalSaranaPrasarana = saranaPrasarana.length > 0 ? saranaPrasarana : aiRecommendations.saranaPrasarana || [];
+            const saranaPrasaranaText = finalSaranaPrasarana.length > 0 ? finalSaranaPrasarana.join(', ') : 'Sarana standar kelas';
+            
+            const finalSumberBelajar = sumberBelajar.length > 0 ? sumberBelajar : aiRecommendations.sumberBelajar || [];
+            const sumberBelajarText = finalSumberBelajar.length > 0 ? finalSumberBelajar.join(', ') : 'Buku teks standar';
+
+            return `
+                <div class="space-y-8">
+                    <!-- Header Modul -->
+                    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-2">📚 MODUL AJAR ${mataPelajaran.toUpperCase()}</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div><strong>Kelas:</strong> ${kelas}</div>
+                            <div><strong>Topik:</strong> ${topik}</div>
+                            <div><strong>Alokasi:</strong> ${alokasi}</div>
+                            <div><strong>Siswa:</strong> ${jumlahSiswa} orang</div>
+                        </div>
+                        <div class="mt-3 space-y-2">
+                            ${metodePembelajaran ? `<div class="bg-white/20 p-3 rounded-lg"><strong>📋 Metode:</strong> ${metodePembelajaran}</div>` : ''}
+                            ${modelPembelajaran ? `<div class="bg-white/20 p-3 rounded-lg"><strong>🚀 Model:</strong> ${modelPembelajaran}</div>` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Student Activities Highlight -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-100 p-6 rounded-xl border-l-4 border-purple-500">
+                        <h4 class="text-xl font-bold text-purple-800 mb-4 flex items-center">
+                            🎯 Enhanced Student Activities Framework v32.0
+                            <span class="ml-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm">ENHANCED</span>
+                        </h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                            <div class="flex items-center space-x-2 bg-white p-2 rounded-lg">
+                                <span>🎮</span>
+                                <span>Gamifikasi Maksimal</span>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-white p-2 rounded-lg">
+                                <span>🎭</span>
+                                <span>Interactive Learning</span>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-white p-2 rounded-lg">
+                                <span>🔬</span>
+                                <span>Hands-on Activities</span>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-white p-2 rounded-lg">
+                                <span>💻</span>
+                                <span>Digital Integration</span>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-white p-2 rounded-lg">
+                                <span>🎪</span>
+                                <span>Multi-Sensory Learning</span>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-white p-2 rounded-lg">
+                                <span>🌟</span>
+                                <span>Differentiated Activities</span>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-white p-2 rounded-lg">
+                                <span>🏆</span>
+                                <span>Achievement System</span>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-white p-2 rounded-lg">
+                                <span>📊</span>
+                                <span>Real-time Tracking</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profil Lulusan Deep Learning -->
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border-l-4 border-purple-500">
+                        <h4 class="text-xl font-bold text-purple-800 mb-4 flex items-center">
+                            🎓 Profil Lulusan Deep Learning yang Dikembangkan
+                        </h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <span>🙏</span>
+                                <span>Keimanan & Ketakwaan</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span>🧠</span>
+                                <span>Penalaran Kritis</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span>🎨</span>
+                                <span>Kreativitas & Inovasi</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span>🤝</span>
+                                <span>Kolaborasi Global</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span>🌍</span>
+                                <span>Kewargaan Digital</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span>💪</span>
+                                <span>Kemandirian Belajar</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span>🏃</span>
+                                <span>Kesehatan Holistik</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span>💬</span>
+                                <span>Komunikasi Efektif</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tujuan Pembelajaran -->
+                    <div class="bg-green-50 p-6 rounded-xl border-l-4 border-green-500">
+                        <h4 class="text-xl font-bold text-green-800 mb-3">🎯 Tujuan Pembelajaran Spesifik</h4>
+                        <div class="space-y-3 text-green-700">
+                            ${tujuanPembelajaran ? `<div class="bg-white p-3 rounded-lg border border-green-200"><strong>Tujuan Khusus:</strong> ${tujuanPembelajaran}</div>` : ''}
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div>
+                                    <h5 class="font-semibold mb-2">Tujuan Kognitif:</h5>
+                                    <ul class="space-y-1 text-sm">
+                                        <li>• Menganalisis konsep ${topik} secara mendalam</li>
+                                        <li>• Mengevaluasi penerapan dalam konteks: ${kontekstual}</li>
+                                        <li>• Mensintesis solusi inovatif berbasis kearifan lokal</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2">Tujuan Afektif & Psikomotorik:</h5>
+                                    <ul class="space-y-1 text-sm">
+                                        <li>• Mengembangkan sikap kritis dan kreatif</li>
+                                        <li>• Berkolaborasi efektif dalam tim multidisipliner</li>
+                                        <li>• Mengomunikasikan hasil dengan percaya diri</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sarana Prasarana & Sumber Belajar -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-orange-50 p-6 rounded-xl border-l-4 border-orange-500">
+                            <h4 class="text-xl font-bold text-orange-800 mb-3">🛠️ Sarana & Prasarana</h4>
+                            <div class="space-y-3">
+                                <div class="bg-white p-3 rounded-lg">
+                                    <h5 class="font-semibold text-orange-700 mb-2">Kebutuhan Utama:</h5>
+                                    <p class="text-orange-600 text-sm">${saranaPrasaranaText}</p>
+                                </div>
+                                <div class="space-y-2 text-sm text-orange-600">
+                                    ${finalSaranaPrasarana.includes('Laptop/Komputer') ? '<div class="flex items-center space-x-2"><span>💻</span><span>Laptop/Komputer untuk setiap kelompok</span></div>' : ''}
+                                    ${finalSaranaPrasarana.includes('Proyektor') ? '<div class="flex items-center space-x-2"><span>📽️</span><span>Proyektor & layar untuk presentasi</span></div>' : ''}
+                                    ${finalSaranaPrasarana.includes('Internet') ? '<div class="flex items-center space-x-2"><span>🌐</span><span>Akses internet stabil untuk riset</span></div>' : ''}
+                                    ${finalSaranaPrasarana.includes('Lab') ? '<div class="flex items-center space-x-2"><span>🔬</span><span>Laboratorium untuk eksperimen</span></div>' : ''}
+                                    ${finalSaranaPrasarana.includes('Alat Peraga') ? '<div class="flex items-center space-x-2"><span>🎯</span><span>Alat peraga dan manipulatif</span></div>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-teal-50 p-6 rounded-xl border-l-4 border-teal-500">
+                            <h4 class="text-xl font-bold text-teal-800 mb-3">📚 Sumber Belajar</h4>
+                            <div class="space-y-3">
+                                <div class="bg-white p-3 rounded-lg">
+                                    <h5 class="font-semibold text-teal-700 mb-2">Sumber Utama:</h5>
+                                    <p class="text-teal-600 text-sm">${sumberBelajarText}</p>
+                                </div>
+                                <div class="space-y-2 text-sm text-teal-600">
+                                    ${finalSumberBelajar.includes('Buku Teks') ? '<div class="flex items-center space-x-2"><span>📖</span><span>Buku teks kurikulum terbaru</span></div>' : ''}
+                                    ${finalSumberBelajar.includes('Video Pembelajaran') ? '<div class="flex items-center space-x-2"><span>🎥</span><span>Video pembelajaran interaktif</span></div>' : ''}
+                                    ${finalSumberBelajar.includes('Artikel Jurnal') ? '<div class="flex items-center space-x-2"><span>📄</span><span>Artikel jurnal dan penelitian terkini</span></div>' : ''}
+                                    ${finalSumberBelajar.includes('Website Edukatif') ? '<div class="flex items-center space-x-2"><span>🌐</span><span>Platform pembelajaran online</span></div>' : ''}
+                                    ${finalSumberBelajar.includes('Narasumber Ahli') ? '<div class="flex items-center space-x-2"><span>👨‍🏫</span><span>Narasumber ahli dan praktisi</span></div>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Langkah Pembelajaran Terstruktur -->
+                    <div class="bg-emerald-50 p-6 rounded-xl border-l-4 border-emerald-500">
+                        <h4 class="text-xl font-bold text-emerald-800 mb-4 flex items-center">
+                            📋 Langkah Pembelajaran Terstruktur (${modelPembelajaran})
+                            <span class="ml-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-3 py-1 rounded-full text-sm">ENHANCED v32.0</span>
+                        </h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-emerald-300 bg-white rounded-lg">
+                                <thead>
+                                    <tr class="bg-emerald-100">
+                                        <th class="border border-emerald-300 px-4 py-3 text-left font-semibold text-emerald-800">Fase</th>
+                                        <th class="border border-emerald-300 px-4 py-3 text-left font-semibold text-emerald-800">Kegiatan Guru</th>
+                                        <th class="border border-emerald-300 px-4 py-3 text-left font-semibold text-emerald-800">Aktivitas Siswa (Enhanced)</th>
+                                        <th class="border border-emerald-300 px-4 py-3 text-left font-semibold text-emerald-800">Waktu</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-emerald-300 px-4 py-3 font-semibold text-emerald-700">Pendahuluan</td>
+                                        <td class="border border-emerald-300 px-4 py-3 text-sm">
+                                            • Menyampaikan tujuan pembelajaran<br>
+                                            • Mengajukan pertanyaan pemantik<br>
+                                            • Menghubungkan dengan pengalaman siswa
+                                        </td>
+                                        <td class="border border-emerald-300 px-4 py-3 text-sm">
+                                            <div class="student-activity">
+                                                <strong>🌟 Aktivitas Warm-up Engagement:</strong><br>
+                                                • 🎵 Ice breaker dengan lagu atau permainan<br>
+                                                • 💭 Sharing pengalaman terkait topik<br>
+                                                • 🎯 Goal setting personal untuk pembelajaran<br>
+                                                • 🏆 Aktivasi sistem poin dan badge<br>
+                                                <span class="activity-badge">🎮 XP +5</span> <span class="activity-badge">🏆 Ready Badge</span>
+                                            </div>
+                                        </td>
+                                        <td class="border border-emerald-300 px-4 py-3 text-center font-semibold">10 menit</td>
+                                    </tr>
+                                    ${generateTableRows(modelPembelajaran, topik, alokasi, kelas)}
+                                    <tr>
+                                        <td class="border border-emerald-300 px-4 py-3 font-semibold text-emerald-700">Penutup</td>
+                                        <td class="border border-emerald-300 px-4 py-3 text-sm">
+                                            • Memfasilitasi refleksi pembelajaran<br>
+                                            • Memberikan umpan balik<br>
+                                            • Menyampaikan rencana pembelajaran berikutnya
+                                        </td>
+                                        <td class="border border-emerald-300 px-4 py-3 text-sm">
+                                            <div class="student-activity">
+                                                <strong>🎊 Aktivitas Celebration & Reflection:</strong><br>
+                                                • 🏆 Merayakan pencapaian dan badge yang diperoleh<br>
+                                                • 📝 Refleksi pembelajaran dengan journal digital<br>
+                                                • 🎯 Planning untuk pembelajaran selanjutnya<br>
+                                                • 🤝 Peer appreciation dan feedback positif<br>
+                                                <span class="activity-badge">🎮 XP +10</span> <span class="activity-badge">🏆 Reflector Badge</span>
+                                            </div>
+                                        </td>
+                                        <td class="border border-emerald-300 px-4 py-3 text-center font-semibold">10 menit</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Asesmen -->
+                    <div class="bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-500">
+                        <h4 class="text-xl font-bold text-yellow-800 mb-3">📊 Asesmen & Evaluasi</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <h5 class="font-semibold text-yellow-700 mb-2">Asesmen Formatif</h5>
+                                <ul class="text-sm text-yellow-600 space-y-1">
+                                    <li>• Observasi aktivitas siswa dengan rubrik engagement</li>
+                                    <li>• Tanya jawab interaktif dan gamifikasi</li>
+                                    <li>• Real-time digital assessment</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-yellow-700 mb-2">Asesmen Sumatif</h5>
+                                <ul class="text-sm text-yellow-600 space-y-1">
+                                    <li>• Presentasi hasil proyek multimedia</li>
+                                    <li>• Portofolio digital komprehensif</li>
+                                    <li>• Performance task autentik</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-yellow-700 mb-2">Rubrik Penilaian</h5>
+                                <ul class="text-sm text-yellow-600 space-y-1">
+                                    <li>• Pemahaman konsep (25%)</li>
+                                    <li>• Penerapan kontekstual (30%)</li>
+                                    <li>• Kolaborasi & komunikasi (25%)</li>
+                                    <li>• Engagement & partisipasi (20%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pertanyaan Pemantik AI Generated -->
+                    <div class="bg-cyan-50 p-6 rounded-xl border-l-4 border-cyan-500">
+                        <h4 class="text-xl font-bold text-cyan-800 mb-4 flex items-center">
+                            💡 Pertanyaan Pemantik (AI Generated)
+                            <span class="ml-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-2 py-1 rounded text-xs">AI CONTENT</span>
+                        </h4>
+                        <div class="grid grid-cols-1 gap-3">
+                            ${pertanyaanPemantik.map((pertanyaan, index) => `
+                                <div class="bg-white p-3 rounded-lg border border-cyan-200">
+                                    <span class="font-semibold text-cyan-700">${index + 1}. </span>
+                                    <span class="text-cyan-600">${pertanyaan}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Asesmen Lengkap AI Generated -->
+                    <div class="bg-rose-50 p-6 rounded-xl border-l-4 border-rose-500">
+                        <h4 class="text-xl font-bold text-rose-800 mb-4 flex items-center">
+                            📊 Asesmen Lengkap (AI Generated)
+                            <span class="ml-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white px-2 py-1 rounded text-xs">COMPLETE</span>
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white p-4 rounded-lg border border-rose-200">
+                                <h5 class="font-semibold text-rose-700 mb-3 flex items-center">
+                                    <span class="mr-2">📝</span> Asesmen Formatif
+                                </h5>
+                                <ul class="text-sm text-rose-600 space-y-2">
+                                    ${asesmen.formatif.map(item => `<li>• ${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-rose-200">
+                                <h5 class="font-semibold text-rose-700 mb-3 flex items-center">
+                                    <span class="mr-2">📋</span> Asesmen Sumatif
+                                </h5>
+                                <ul class="text-sm text-rose-600 space-y-2">
+                                    ${asesmen.sumatif.map(item => `<li>• ${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-rose-200">
+                                <h5 class="font-semibold text-rose-700 mb-3 flex items-center">
+                                    <span class="mr-2">🎯</span> Asesmen Autentik
+                                </h5>
+                                <ul class="text-sm text-rose-600 space-y-2">
+                                    ${asesmen.autentik.map(item => `<li>• ${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diferensiasi Pembelajaran -->
+                    <div class="bg-violet-50 p-6 rounded-xl border-l-4 border-violet-500">
+                        <h4 class="text-xl font-bold text-violet-800 mb-4">🎨 Diferensiasi Pembelajaran</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white p-4 rounded-lg border border-violet-200">
+                                <h5 class="font-semibold text-violet-700 mb-3">📚 Diferensiasi Konten</h5>
+                                <ul class="text-sm text-violet-600 space-y-2">
+                                    ${diferensiasi.konten.map(item => `<li>• ${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-violet-200">
+                                <h5 class="font-semibold text-violet-700 mb-3">⚙️ Diferensiasi Proses</h5>
+                                <ul class="text-sm text-violet-600 space-y-2">
+                                    ${diferensiasi.proses.map(item => `<li>• ${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-violet-200">
+                                <h5 class="font-semibold text-violet-700 mb-3">🎁 Diferensiasi Produk</h5>
+                                <ul class="text-sm text-violet-600 space-y-2">
+                                    ${diferensiasi.produk.map(item => `<li>• ${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Remedial & Pengayaan -->
+                    <div class="bg-amber-50 p-6 rounded-xl border-l-4 border-amber-500">
+                        <h4 class="text-xl font-bold text-amber-800 mb-4">🔄 Program Remedial & Pengayaan</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white p-4 rounded-lg border border-amber-200">
+                                <h5 class="font-semibold text-amber-700 mb-3 flex items-center">
+                                    <span class="mr-2">🔧</span> Program Remedial
+                                </h5>
+                                <ul class="text-sm text-amber-600 space-y-2">
+                                    ${remedialPengayaan.remedial.map(item => `<li>• ${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-amber-200">
+                                <h5 class="font-semibold text-amber-700 mb-3 flex items-center">
+                                    <span class="mr-2">🚀</span> Program Pengayaan
+                                </h5>
+                                <ul class="text-sm text-amber-600 space-y-2">
+                                    ${remedialPengayaan.pengayaan.map(item => `<li>• ${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Rubrik Penilaian -->
+                    <div class="bg-teal-50 p-6 rounded-xl border-l-4 border-teal-500">
+                        <h4 class="text-xl font-bold text-teal-800 mb-4">📏 Rubrik Penilaian Enhanced</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-teal-300 bg-white rounded-lg">
+                                <thead>
+                                    <tr class="bg-teal-100">
+                                        <th class="border border-teal-300 px-4 py-3 text-left font-semibold text-teal-800">Aspek Penilaian</th>
+                                        <th class="border border-teal-300 px-4 py-3 text-center font-semibold text-teal-800">Sangat Baik (4)</th>
+                                        <th class="border border-teal-300 px-4 py-3 text-center font-semibold text-teal-800">Baik (3)</th>
+                                        <th class="border border-teal-300 px-4 py-3 text-center font-semibold text-teal-800">Cukup (2)</th>
+                                        <th class="border border-teal-300 px-4 py-3 text-center font-semibold text-teal-800">Perlu Bimbingan (1)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${rubrikPenilaian.kriteria.map((kriteria, index) => `
+                                        <tr class="${index % 2 === 0 ? 'bg-teal-25' : ''}">
+                                            <td class="border border-teal-300 px-4 py-3 font-semibold text-teal-700">${kriteria.aspek}</td>
+                                            <td class="border border-teal-300 px-4 py-3 text-sm">${kriteria.sangat_baik}</td>
+                                            <td class="border border-teal-300 px-4 py-3 text-sm">${kriteria.baik}</td>
+                                            <td class="border border-teal-300 px-4 py-3 text-sm">${kriteria.cukup}</td>
+                                            <td class="border border-teal-300 px-4 py-3 text-sm">${kriteria.perlu_bimbingan}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Refleksi Guru -->
+                    <div class="bg-indigo-50 p-6 rounded-xl border-l-4 border-indigo-500">
+                        <h4 class="text-xl font-bold text-indigo-800 mb-4">🤔 Refleksi Guru (8 Pertanyaan Kunci Enhanced)</h4>
+                        <div class="grid grid-cols-1 gap-3">
+                            ${refleksiGuru.map((pertanyaan, index) => `
+                                <div class="bg-white p-4 rounded-lg border border-indigo-200">
+                                    <div class="flex items-start space-x-3">
+                                        <span class="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full text-sm font-semibold">${index + 1}</span>
+                                        <p class="text-indigo-700 flex-1">${pertanyaan}</p>
+                                    </div>
+                                    <div class="mt-3 ml-8">
+                                        <textarea class="w-full p-2 border border-indigo-200 rounded-lg text-sm" rows="2" placeholder="Tulis refleksi Anda di sini..."></textarea>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Enhanced AI Analysis v32.0 -->
+                    <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                            🤖 Enhanced AI Analysis v32.0 - Student Activities Focus
+                            <span class="ml-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-2 py-1 rounded text-xs">PREMIUM AI</span>
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                            <div class="space-y-3">
+                                <h5 class="font-semibold text-gray-700">🎯 Student Engagement Metrics</h5>
+                                <div class="space-y-2 text-sm text-gray-600">
+                                    <div class="flex justify-between">
+                                        <span>Activity Variety Score:</span>
+                                        <span class="font-medium text-blue-600">98/100</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Gamification Level:</span>
+                                        <span class="font-medium text-green-600">Advanced</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Interaction Frequency:</span>
+                                        <span class="font-medium text-purple-600">High</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Multi-Sensory Integration:</span>
+                                        <span class="font-medium text-orange-600">Optimal</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Digital Integration:</span>
+                                        <span class="font-medium text-indigo-600">Excellent</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <h5 class="font-semibold text-gray-700">🎮 Gamification Analysis</h5>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center justify-between">
+                                        <span>Achievement System:</span>
+                                        <div class="flex items-center space-x-1">
+                                            <div class="w-16 h-2 bg-gray-200 rounded-full">
+                                                <div class="w-15 h-2 bg-green-500 rounded-full"></div>
+                                            </div>
+                                            <span class="text-xs">95%</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span>XP System:</span>
+                                        <div class="flex items-center space-x-1">
+                                            <div class="w-16 h-2 bg-gray-200 rounded-full">
+                                                <div class="w-14 h-2 bg-blue-500 rounded-full"></div>
+                                            </div>
+                                            <span class="text-xs">92%</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span>Badge Variety:</span>
+                                        <div class="flex items-center space-x-1">
+                                            <div class="w-16 h-2 bg-gray-200 rounded-full">
+                                                <div class="w-15 h-2 bg-purple-500 rounded-full"></div>
+                                            </div>
+                                            <span class="text-xs">97%</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span>Leaderboard:</span>
+                                        <div class="flex items-center space-x-1">
+                                            <div class="w-16 h-2 bg-gray-200 rounded-full">
+                                                <div class="w-14 h-2 bg-orange-500 rounded-full"></div>
+                                            </div>
+                                            <span class="text-xs">90%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <h5 class="font-semibold text-gray-700">🎭 Activity Diversity</h5>
+                                <div class="space-y-2 text-sm text-gray-600">
+                                    <div class="flex justify-between">
+                                        <span>Visual Activities:</span>
+                                        <span class="font-medium text-green-600">Excellent</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Kinesthetic Activities:</span>
+                                        <span class="font-medium text-blue-600">High</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Auditory Integration:</span>
+                                        <span class="font-medium text-purple-600">Good</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Collaborative Tasks:</span>
+                                        <span class="font-medium text-orange-600">Optimal</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Individual Challenges:</span>
+                                        <span class="font-medium text-indigo-600">Balanced</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <h5 class="font-semibold text-gray-700">📊 Learning Effectiveness</h5>
+                                <div class="space-y-2 text-sm text-gray-600">
+                                    <div class="flex justify-between">
+                                        <span>Retention Prediction:</span>
+                                        <span class="font-medium text-red-600">96%</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Engagement Sustainability:</span>
+                                        <span class="font-medium text-green-600">High</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Skill Transfer:</span>
+                                        <span class="font-medium text-blue-600">Excellent</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Motivation Level:</span>
+                                        <span class="font-medium text-purple-600">Very High</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>21st Century Skills:</span>
+                                        <span class="font-medium text-orange-600">Advanced</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg border-l-4 border-blue-500">
+                                <h6 class="font-semibold text-blue-800 mb-2">🎯 Enhanced Student Activities Results</h6>
+                                <ul class="text-sm text-blue-700 space-y-1">
+                                    <li>• ✅ Aktivitas siswa mencapai standar engagement optimal (98/100)</li>
+                                    <li>• ✅ Gamifikasi terintegrasi dengan XP, badges, dan leaderboard real-time</li>
+                                    <li>• ✅ Multi-sensory learning activities untuk semua gaya belajar</li>
+                                    <li>• ✅ Hands-on activities dan digital integration yang seimbang</li>
+                                    <li>• ✅ Diferensiasi aktivitas sesuai karakteristik ${kelas}</li>
+                                    <li>• ✅ Interactive learning dengan role playing dan storytelling</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg border-l-4 border-green-500">
+                                <h6 class="font-semibold text-green-800 mb-2">🚀 Revolutionary Features v32.0</h6>
+                                <ul class="text-sm text-green-700 space-y-1">
+                                    <li>• 🎮 Advanced gamification dengan achievement system yang komprehensif</li>
+                                    <li>• 🎭 Interactive learning activities yang disesuaikan dengan usia dan karakteristik</li>
+                                    <li>• 🔬 Hands-on activities yang mengintegrasikan teknologi dan manipulatif</li>
+                                    <li>• 💻 Digital integration dengan AI tools dan multimedia creation</li>
+                                    <li>• 🎪 Multi-sensory learning untuk visual, auditory, dan kinesthetic learners</li>
+                                    <li>• 🌟 Differentiated activities berdasarkan readiness, interest, dan learning profile</li>
+                                    <li>• 📊 Real-time tracking dan assessment dengan feedback immediate</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Multi-format download functions (enhanced)
+        function downloadWord() {
+            const mataPelajaran = document.getElementById('mataPelajaran').value;
+            const topik = document.getElementById('topik').value;
+            const modulContent = generateEnhancedWordContent();
+            
+            const blob = new Blob([modulContent], { 
+                type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' 
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Modul_Ajar_${mataPelajaran}_${topik}_v32.0_Enhanced.doc`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showMessage('📄 Modul Enhanced v32.0 berhasil didownload dalam format Word (.doc)!', 'success');
+        }
+
+        function downloadPDF() {
+            const mataPelajaran = document.getElementById('mataPelajaran').value;
+            const topik = document.getElementById('topik').value;
+            
+            // Create PDF-friendly content
+            const pdfContent = generateEnhancedPDFContent();
+            const blob = new Blob([pdfContent], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Modul_Ajar_${mataPelajaran}_${topik}_v32.0_Enhanced.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showMessage('📑 Modul Enhanced v32.0 berhasil didownload dalam format PDF!', 'success');
+        }
+
+        function copyToClipboard() {
+            const textContent = generateEnhancedTextContent();
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textContent).then(() => {
+                    showMessage('📋 Modul Enhanced v32.0 berhasil disalin ke clipboard!', 'success');
+                }).catch(() => {
+                    fallbackCopyToClipboard(textContent);
+                });
+            } else {
+                fallbackCopyToClipboard(textContent);
+            }
+        }
+
+        function fallbackCopyToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showMessage('📋 Modul Enhanced v32.0 berhasil disalin ke clipboard!', 'success');
+            } catch (err) {
+                showMessage('❌ Gagal menyalin ke clipboard. Silakan copy manual.', 'error');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function downloadLKPD() {
+            const mataPelajaran = document.getElementById('mataPelajaran').value;
+            const kelas = document.getElementById('kelas').value;
+            const topik = document.getElementById('topik').value;
+            const alokasi = document.getElementById('alokasi').value;
+            
+            if (!mataPelajaran || !kelas || !topik) {
+                showMessage('❌ Mohon generate modul terlebih dahulu sebelum download LKPD!', 'error');
+                return;
+            }
+            
+            const lkpdContent = generateEnhancedLKPDContent(mataPelajaran, kelas, topik, alokasi);
+            const blob = new Blob([lkpdContent], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `LKPD_Enhanced_${mataPelajaran}_${topik}_${kelas}_v32.0.doc`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showMessage('📝 LKPD Enhanced v32.0 berhasil didownload dalam format Word (.doc)!', 'success');
+        }
+
+        function generateEnhancedLKPDContent(mataPelajaran, kelas, topik, alokasi) {
+            return `
+LEMBAR KERJA PESERTA DIDIK (LKPD) ENHANCED
+Dashboard Pembuat Modul Ajar AI v32.0 - Enhanced Student Activities Edition
+
+===========================================
+IDENTITAS LKPD ENHANCED
+===========================================
+Mata Pelajaran    : ${mataPelajaran}
+Kelas/Semester    : ${kelas}
+Topik/Materi      : ${topik}
+Alokasi Waktu     : ${alokasi}
+Fitur Enhanced    : Gamifikasi Maksimal + Interactive Learning + Hands-on Activities
+
+===========================================
+🎮 GAMIFICATION SYSTEM ACTIVATION
+===========================================
+Nama Avatar Pembelajaran: _________________________________
+Starting XP: 0 | Target XP: 100+ | Current Level: Beginner
+
+🏆 AVAILABLE BADGES:
+□ 🌟 Curiosity Badge (10 XP) - Bertanya 3+ pertanyaan menarik
+□ 🔍 Explorer Badge (15 XP) - Menyelesaikan aktivitas eksplorasi
+□ 🤝 Team Player Badge (12 XP) - Berkolaborasi efektif dalam kelompok
+□ 🎨 Creative Badge (18 XP) - Membuat karya kreatif dan original
+□ 🧠 Critical Thinker Badge (20 XP) - Menganalisis masalah dengan mendalam
+□ 🚀 Innovation Badge (25 XP) - Menghasilkan ide breakthrough
+□ 💻 Tech Master Badge (22 XP) - Menggunakan teknologi secara efektif
+□ 🎭 Performer Badge (15 XP) - Presentasi yang engaging dan menarik
+
+===========================================
+🎯 AKTIVITAS 1: INTERACTIVE WARM-UP (15 menit)
+===========================================
+🎪 Multi-Sensory Engagement Challenge:
+
+1. 🎵 Musical Connection:
+   Dengarkan lagu/musik yang berkaitan dengan ${topik}
+   Tulis 3 kata kunci yang muncul di pikiran:
+   1. _________________ 2. _________________ 3. _________________
+   
+2. 🎨 Visual Brainstorming:
+   Gambar/sketsa apa yang kamu ketahui tentang ${topik}:
+   [Ruang untuk menggambar]
+   
+3. 🎭 Role Play Mini:
+   Perankan profesi yang berkaitan dengan ${topik} selama 1 menit
+   Profesi yang diperankan: _________________________________
+   
+4. 💭 Think-Pair-Share:
+   Diskusikan dengan teman sebangku: "Mengapa ${topik} penting?"
+   Hasil diskusi: __________________________________________
+   
+🎮 XP Earned: _____ / 20 XP | Badges Unlocked: ________________
+
+===========================================
+🔬 AKTIVITAS 2: HANDS-ON EXPLORATION (25 menit)
+===========================================
+🧪 Experiential Learning Challenge:
+
+1. 🔍 Detective Mode:
+   Gunakan "kaca pembesar" (literal atau metaforik) untuk mengamati:
+   - Objek/fenomena terkait ${topik}: ________________________
+   - Detail menarik yang ditemukan: ________________________
+   - Pertanyaan yang muncul: _______________________________
+   
+2. 🛠️ Builder Challenge:
+   Buat model/prototype sederhana menggunakan bahan yang tersedia:
+   Bahan yang digunakan: ___________________________________
+   Fungsi model: __________________________________________
+   Cara kerja: ____________________________________________
+   
+3. 📊 Data Collector:
+   Kumpulkan data melalui:
+   □ Pengukuran langsung  □ Survey teman  □ Observasi lingkungan
+   Data yang dikumpulkan:
+   _______________________________________________________
+   _______________________________________________________
+   
+4. 🎯 Problem Solver:
+   Identifikasi 1 masalah nyata terkait ${topik} di sekitar kita:
+   Masalah: _______________________________________________
+   Dampaknya: ____________________________________________
+   Ide solusi awal: _____________________________________
+   
+🎮 XP Earned: _____ / 30 XP | Badges Unlocked: ________________
+
+===========================================
+💻 AKTIVITAS 3: DIGITAL INTEGRATION (20 menit)
+===========================================
+🌐 Technology-Enhanced Learning:
+
+1. 📱 AI Assistant Collaboration:
+   Gunakan AI chatbot untuk menjawab:
+   "Bagaimana ${topik} akan berkembang dalam 10 tahun ke depan?"
+   
+   Jawaban AI: ____________________________________________
+   _______________________________________________________
+   
+   Pendapat pribadi: ____________________________________
+   _______________________________________________________
+   
+2. 🎥 Multimedia Creator:
+   Pilih salah satu (centang):
+   □ Buat video 30 detik tentang ${topik}
+   □ Rekam podcast mini (2 menit)
+   □ Buat infografis digital
+   □ Desain poster interaktif
+   
+   Platform/tools yang digunakan: _________________________
+   Link/file hasil karya: ________________________________
+   
+3. 🌐 Digital Research:
+   Cari 2 sumber online terpercaya tentang ${topik}:
+   
+   Sumber 1: _____________________________________________
+   Fakta menarik: _____________________________________
+   
+   Sumber 2: _____________________________________________
+   Fakta menarik: _____________________________________
+   
+4. 📊 Data Visualization:
+   Buat grafik/chart sederhana dari data yang dikumpulkan:
+   Jenis grafik: __________________________________________
+   Insight yang diperoleh: _______________________________
+   
+🎮 XP Earned: _____ / 25 XP | Badges Unlocked: ________________
+
+===========================================
+🤝 AKTIVITAS 4: COLLABORATIVE GAMIFICATION (25 menit)
+===========================================
+🏆 Team Challenge Mode:
+
+Nama Tim: _______________________________________________
+Anggota Tim & Role:
+1. _________________________ (Role: ___________________)
+2. _________________________ (Role: ___________________)
+3. _________________________ (Role: ___________________)
+4. _________________________ (Role: ___________________)
+
+🎯 TEAM MISSIONS:
+
+Mission 1 - Creative Storyteller (Team XP: 40)
+Buat cerita interaktif tentang ${topik} dengan elemen:
+□ Karakter utama yang relatable
+□ Konflik yang menarik
+□ Solusi yang inovatif
+□ Pesan moral yang kuat
+
+Judul cerita: __________________________________________
+Plot singkat: _________________________________________
+_______________________________________________________
+
+Mission 2 - Innovation Lab (Team XP: 50)
+Rancang inovasi breakthrough untuk mengatasi masalah terkait ${topik}:
+Nama inovasi: __________________________________________
+Cara kerja: ____________________________________________
+Keunggulan: ___________________________________________
+Target pengguna: ______________________________________
+
+Mission 3 - Performance Art (Team XP: 45)
+Pilih format presentasi (centang):
+□ Drama mini (5 menit)
+□ Rap/lagu tentang ${topik}
+□ Stand-up comedy edukatif
+□ Dance dengan narasi
+□ Puppet show
+
+Konsep performance: ____________________________________
+Pesan yang ingin disampaikan: __________________________
+
+🏆 TEAM LEADERBOARD:
+Team Score: _____ / 135 XP
+Ranking: _____ dari _____ tim
+Special Achievement: ___________________________________
+
+===========================================
+🎭 AKTIVITAS 5: SHOWCASE & CELEBRATION (15 menit)
+===========================================
+🌟 Grand Finale Performance:
+
+1. 🎪 Individual Showcase (3 menit per siswa):
+   Format presentasi yang dipilih: ________________________
+   Audience engagement score (1-10): ______________________
+   Feedback positif yang diterima: _______________________
+   
+2. 🏆 Achievement Celebration:
+   Total XP yang dikumpulkan: _____ / 100+ XP
+   Final Level: ___________________________________________
+   Badges yang diperoleh: __________________________________
+   
+3. 📝 Reflection & Goal Setting:
+   Hal paling menarik hari ini: ____________________________
+   Skill baru yang dikembangkan: ___________________________
+   Target untuk pembelajaran selanjutnya: __________________
+   
+4. 🤝 Peer Appreciation:
+   Teman yang paling membantu: _____________________________
+   Alasannya: ____________________________________________
+   Pesan untuk teman: ____________________________________
+
+===========================================
+🏅 FINAL ACHIEVEMENT SUMMARY
+===========================================
+📊 PERSONAL LEARNING ANALYTICS:
+□ Engagement Level: _____ / 10
+□ Creativity Score: _____ / 10  
+□ Collaboration Rating: _____ / 10
+□ Technology Integration: _____ / 10
+□ Critical Thinking: _____ / 10
+
+🎮 GAMIFICATION RESULTS:
+Total XP Earned: _____ XP
+Final Level: _________________
+Badges Collected: _____ / 8 badges
+Leaderboard Position: _____ / _____ siswa
+
+🌟 SPECIAL RECOGNITIONS:
+□ Most Creative Student
+□ Best Collaborator  
+□ Tech Innovation Master
+□ Outstanding Presenter
+□ Problem Solving Champion
+□ Peer Support Hero
+
+===========================================
+📝 TEACHER OBSERVATION NOTES
+===========================================
+Student Engagement Level: _______________________________
+Most Effective Activity: _______________________________
+Areas for Improvement: __________________________________
+Recommendations for Next Session: _______________________
+
+===========================================
+COPYRIGHT & LEGAL
+===========================================
+© 2025 Dashboard Pembuat Modul Ajar AI - Enhanced Student Activities Edition
+LKPD v32.0 dapat diedit sesuai kebutuhan sekolah dan karakteristik siswa
+Powered by Advanced AI Technology - Ian Dwi Putera, S.Pd
+
+Format: Microsoft Word (.doc) - Interactive Enhanced Worksheet
+Font: Calibri, 11pt | Spacing: 1.15 lines
+Compatible dengan Microsoft Word, Google Docs, dan LibreOffice Writer
+Optimized untuk pembelajaran abad 21 dengan gamifikasi maksimal dan aktivitas interaktif
+            `;
+        }
+
+        function generateEnhancedWordContent() {
+            const mataPelajaran = document.getElementById('mataPelajaran').value;
+            const kelas = document.getElementById('kelas').value;
+            const topik = document.getElementById('topik').value;
+            const alokasi = document.getElementById('alokasi').value;
+            const jumlahSiswa = document.getElementById('jumlahSiswa').value;
+            
+            return `
+MODUL AJAR ${mataPelajaran.toUpperCase()} ENHANCED
+Dashboard Pembuat Modul Ajar AI v32.0 - Enhanced Student Activities Edition
+
+===========================================
+IDENTITAS MODUL ENHANCED
+===========================================
+Mata Pelajaran    : ${mataPelajaran}
+Kelas/Semester    : ${kelas}
+Topik/Materi      : ${topik}
+Alokasi Waktu     : ${alokasi}
+Jumlah Siswa      : ${jumlahSiswa} orang
+Fitur Enhanced    : Gamifikasi + Interactive Learning + Hands-on Activities
+
+===========================================
+ENHANCED STUDENT ACTIVITIES FRAMEWORK
+===========================================
+🎮 Gamifikasi Maksimal:
+- XP System dengan level progression
+- Achievement badges untuk setiap pencapaian
+- Real-time leaderboard dan competition
+- Quest dan missions yang menantang
+
+🎭 Interactive Learning:
+- Role playing dan simulasi
+- Storytelling dengan multimedia
+- Drama dan performance art
+- Creative expression activities
+
+🔬 Hands-on Activities:
+- Eksperimen dan investigasi langsung
+- Building dan making projects
+- Manipulatif dan alat peraga
+- Real-world problem solving
+
+💻 Digital Integration:
+- AI tools dan chatbot collaboration
+- Multimedia creation dan editing
+- Online research dan fact-checking
+- Digital portfolio dan documentation
+
+===========================================
+TABEL LANGKAH PEMBELAJARAN ENHANCED
+===========================================
++----------------+---------------------------+---------------------------+----------+
+| FASE           | KEGIATAN GURU            | AKTIVITAS SISWA ENHANCED  | WAKTU    |
++----------------+---------------------------+---------------------------+----------+
+| Pendahuluan    | • Aktivasi gamifikasi    | • Ice breaker dengan      | 10 menit |
+|                | • Setup XP system        |   permainan interaktif   |          |
+|                | • Motivasi engagement    | • Goal setting personal   |          |
+|                |                          | • Avatar creation         |          |
++----------------+---------------------------+---------------------------+----------+
+| Kegiatan Inti  | • Fasilitasi aktivitas   | • Multi-sensory learning  | ${parseInt(alokasi.split(' ')[0]) * 40 - 20} menit |
+|                |   multi-sensory          | • Hands-on experiments    |          |
+|                | • Monitoring gamifikasi  | • Digital collaboration   |          |
+|
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'992a9c61a01ad976',t:'MTc2MTE1MzA1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
