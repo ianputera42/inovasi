@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pembuat Modul Ajar AI - Deep Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.1.0/docx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .loading-dots {
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0%, 20% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="h-full bg-gray-50">
+    <div class="min-h-full">
+        <!-- Header -->
+        <header class="gradient-bg shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-white p-3 rounded-full">
+                            <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-white">Dashboard Pembuat Modul Ajar AI</h1>
+                            <p class="text-indigo-100">Berbasis Deep Learning dengan ChatGPT-5</p>
+                        </div>
+                    </div>
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <span class="text-white font-medium">🤖 AI Ready</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Form Input -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                            <svg class="w-6 h-6 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Data Input Modul Ajar
+                        </h2>
+
+                        <form id="moduleForm" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="penyusun" class="block text-sm font-medium text-gray-700 mb-2">Penyusun</label>
+                                    <input type="text" id="penyusun" name="penyusun" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Nama penyusun modul">
+                                </div>
+                                <div>
+                                    <label for="satuan_pendidikan" class="block text-sm font-medium text-gray-700 mb-2">Satuan Pendidikan</label>
+                                    <input type="text" id="satuan_pendidikan" name="satuan_pendidikan" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Nama sekolah/institusi">
+                                </div>
+                                <div>
+                                    <label for="tahun_pelajaran" class="block text-sm font-medium text-gray-700 mb-2">Tahun Pelajaran</label>
+                                    <input type="text" id="tahun_pelajaran" name="tahun_pelajaran" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="2024/2025">
+                                </div>
+                                <div>
+                                    <label for="semester" class="block text-sm font-medium text-gray-700 mb-2">Semester</label>
+                                    <select id="semester" name="semester" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                        <option value="">Pilih Semester</option>
+                                        <option value="Ganjil">Ganjil</option>
+                                        <option value="Genap">Genap</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="mata_pelajaran" class="block text-sm font-medium text-gray-700 mb-2">Mata Pelajaran</label>
+                                    <input type="text" id="mata_pelajaran" name="mata_pelajaran" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Nama mata pelajaran">
+                                </div>
+                                <div>
+                                    <label for="kelas_fase" class="block text-sm font-medium text-gray-700 mb-2">Kelas/Fase</label>
+                                    <input type="text" id="kelas_fase" name="kelas_fase" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Kelas X / Fase E">
+                                </div>
+                                <div>
+                                    <label for="topik_materi" class="block text-sm font-medium text-gray-700 mb-2">Topik/Elemen Materi</label>
+                                    <input type="text" id="topik_materi" name="topik_materi" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Topik pembelajaran">
+                                </div>
+                                <div>
+                                    <label for="alokasi_waktu" class="block text-sm font-medium text-gray-700 mb-2">Alokasi Waktu</label>
+                                    <input type="text" id="alokasi_waktu" name="alokasi_waktu" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="2 x 45 menit">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="dimensi_profil_lulusan" class="block text-sm font-medium text-gray-700 mb-2">8 Dimensi Profil Lulusan</label>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="dimensi_profil_lulusan" value="Keimanan dan Ketakwaan" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Keimanan & Ketakwaan</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="dimensi_profil_lulusan" value="Kewargaan" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Kewargaan</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="dimensi_profil_lulusan" value="Penalaran Kritis" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Penalaran Kritis</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="dimensi_profil_lulusan" value="Kreativitas" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Kreativitas</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="dimensi_profil_lulusan" value="Kolaborasi" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Kolaborasi</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="dimensi_profil_lulusan" value="Kemandirian" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Kemandirian</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="dimensi_profil_lulusan" value="Kesehatan" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Kesehatan</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="dimensi_profil_lulusan" value="Komunikasi" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Komunikasi</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="sarana_prasarana" class="block text-sm font-medium text-gray-700 mb-2">Sarana dan Prasarana</label>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sarana_prasarana" value="Ruang Kelas" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Ruang Kelas</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sarana_prasarana" value="Laboratorium" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Laboratorium</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sarana_prasarana" value="Perpustakaan" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Perpustakaan</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sarana_prasarana" value="Proyektor/LCD" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Proyektor/LCD</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sarana_prasarana" value="Komputer/Laptop" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Komputer/Laptop</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sarana_prasarana" value="Internet/WiFi" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Internet/WiFi</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sarana_prasarana" value="Whiteboard" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Whiteboard</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sarana_prasarana" value="Alat Peraga" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Alat Peraga</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sarana_prasarana" value="Ruang Terbuka" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Ruang Terbuka</span>
+                                    </label>
+                                </div>
+                                <textarea id="sarana_prasarana_lain" name="sarana_prasarana_lain" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Sarana prasarana lainnya (opsional)"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="capaian_pembelajaran" class="block text-sm font-medium text-gray-700 mb-2">Capaian Pembelajaran</label>
+                                <textarea id="capaian_pembelajaran" name="capaian_pembelajaran" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Deskripsi capaian pembelajaran sesuai kurikulum"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="tujuan_pembelajaran" class="block text-sm font-medium text-gray-700 mb-2">Tujuan Pembelajaran</label>
+                                <textarea id="tujuan_pembelajaran" name="tujuan_pembelajaran" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Tujuan pembelajaran spesifik untuk pertemuan ini"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="lintas_bidang" class="block text-sm font-medium text-gray-700 mb-2">Lintas Bidang Disiplin Ilmu</label>
+                                <input type="text" id="lintas_bidang" name="lintas_bidang" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Bidang ilmu terkait">
+                            </div>
+
+                            <div>
+                                <label for="sumber_belajar" class="block text-sm font-medium text-gray-700 mb-2">Sumber Belajar</label>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sumber_belajar" value="Buku Teks" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Buku Teks</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sumber_belajar" value="E-Book" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">E-Book</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sumber_belajar" value="Video Pembelajaran" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Video Pembelajaran</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sumber_belajar" value="Artikel Jurnal" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Artikel Jurnal</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sumber_belajar" value="Website Edukatif" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Website Edukatif</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sumber_belajar" value="Modul Digital" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Modul Digital</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sumber_belajar" value="Podcast" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Podcast</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sumber_belajar" value="Aplikasi Mobile" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Aplikasi Mobile</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="sumber_belajar" value="Narasumber Ahli" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Narasumber Ahli</span>
+                                    </label>
+                                </div>
+                                <textarea id="sumber_belajar_lain" name="sumber_belajar_lain" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Sumber belajar lainnya (opsional)"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="pemanfaatan_digital" class="block text-sm font-medium text-gray-700 mb-2">Pemanfaatan Digital</label>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="pemanfaatan_digital" value="Google Classroom" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Google Classroom</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="pemanfaatan_digital" value="Zoom/Meet" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Zoom/Meet</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="pemanfaatan_digital" value="Kahoot/Quizizz" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Kahoot/Quizizz</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="pemanfaatan_digital" value="Canva/PowerPoint" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Canva/PowerPoint</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="pemanfaatan_digital" value="Padlet/Jamboard" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Padlet/Jamboard</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="pemanfaatan_digital" value="YouTube/Video" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">YouTube/Video</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="pemanfaatan_digital" value="Google Forms" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Google Forms</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="pemanfaatan_digital" value="Flipgrid" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Flipgrid</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="pemanfaatan_digital" value="Mentimeter" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                        <span class="ml-2 text-sm text-gray-700">Mentimeter</span>
+                                    </label>
+                                </div>
+                                <textarea id="pemanfaatan_digital_lain" name="pemanfaatan_digital_lain" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Platform digital lainnya (opsional)"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="model_pembelajaran" class="block text-sm font-medium text-gray-700 mb-2">Model Pembelajaran</label>
+                                <select id="model_pembelajaran" name="model_pembelajaran" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    <option value="">Pilih Model Pembelajaran</option>
+                                    <option value="Problem Based Learning (PBL)">Problem Based Learning (PBL)</option>
+                                    <option value="Project Based Learning">Project Based Learning</option>
+                                    <option value="Discovery Learning">Discovery Learning</option>
+                                    <option value="Inquiry Learning">Inquiry Learning</option>
+                                    <option value="Cooperative Learning">Cooperative Learning</option>
+                                    <option value="Contextual Teaching Learning">Contextual Teaching Learning</option>
+                                    <option value="Blended Learning">Blended Learning</option>
+                                    <option value="Flipped Classroom">Flipped Classroom</option>
+                                    <option value="STEAM Learning">STEAM Learning</option>
+                                    <option value="Design Thinking">Design Thinking</option>
+                                </select>
+                            </div>
+
+                            <div class="flex space-x-4">
+                                <button type="submit" class="flex-1 bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                    </svg>
+                                    Analisis dengan AI
+                                </button>
+                                <button type="button" id="resetForm" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                                    Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- AI Analysis Panel -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl card-shadow p-6 sticky top-8">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                            <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Prinsip Deep Learning
+                        </h3>
+                        <div class="space-y-4 text-sm">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h4 class="font-medium text-blue-900">🧠 Berkesadaran</h4>
+                                <p class="text-blue-700 mt-1">Siswa sadar akan proses pembelajaran dan metakognisi</p>
+                            </div>
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <h4 class="font-medium text-green-900">💡 Bermakna</h4>
+                                <p class="text-green-700 mt-1">Dikaitkan dengan pengalaman dan kehidupan nyata</p>
+                            </div>
+                            <div class="bg-yellow-50 p-3 rounded-lg">
+                                <h4 class="font-medium text-yellow-900">😊 Menggembirakan</h4>
+                                <p class="text-yellow-700 mt-1">Lingkungan aman dan membangkitkan rasa ingin tahu</p>
+                            </div>
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <h4 class="font-medium text-purple-900">🔄 Holistik</h4>
+                                <p class="text-purple-700 mt-1">Melibatkan olah pikir, hati, rasa, dan raga</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg">
+                            <h4 class="font-medium text-gray-900 mb-2">🎯 Fokus Pembelajaran</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Pengetahuan deklaratif (apa)</li>
+                                <li>• Pengetahuan prosedural (bagaimana)</li>
+                                <li>• Pengetahuan kontekstual (mengapa)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="mt-8 hidden">
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-semibold text-gray-900 flex items-center">
+                            <svg class="w-6 h-6 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Hasil Analisis ChatGPT-5
+                        </h2>
+                        <button id="downloadBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Download DOCX
+                        </button>
+                    </div>
+
+                    <div id="loadingIndicator" class="text-center py-8">
+                        <div class="inline-flex items-center">
+                            <div class="loading-dots w-2 h-2 bg-indigo-600 rounded-full mr-1"></div>
+                            <div class="loading-dots w-2 h-2 bg-indigo-600 rounded-full mr-1" style="animation-delay: 0.2s;"></div>
+                            <div class="loading-dots w-2 h-2 bg-indigo-600 rounded-full mr-1" style="animation-delay: 0.4s;"></div>
+                            <span class="ml-3 text-gray-600">ChatGPT-5 sedang menganalisis data Anda...</span>
+                        </div>
+                    </div>
+
+                    <div id="aiResults" class="hidden fade-in">
+                        <div class="prose max-w-none">
+                            <div id="moduleContent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let currentModuleData = {};
+
+        document.getElementById('moduleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            currentModuleData = {};
+            
+            // Get regular form fields
+            for (let [key, value] of formData.entries()) {
+                if (key === 'dimensi_profil_lulusan' || key === 'sarana_prasarana' || key === 'sumber_belajar' || key === 'pemanfaatan_digital') {
+                    if (!currentModuleData[key]) currentModuleData[key] = [];
+                    currentModuleData[key].push(value);
+                } else {
+                    currentModuleData[key] = value;
+                }
+            }
+
+            // Show results section and loading
+            document.getElementById('resultsSection').classList.remove('hidden');
+            document.getElementById('loadingIndicator').classList.remove('hidden');
+            document.getElementById('aiResults').classList.add('hidden');
+
+            // Simulate AI processing
+            setTimeout(() => {
+                generateModuleContent();
+                document.getElementById('loadingIndicator').classList.add('hidden');
+                document.getElementById('aiResults').classList.remove('hidden');
+            }, 3000);
+        });
+
+        function generateModuleContent() {
+            const dimensiText = currentModuleData.dimensi_profil_lulusan ? currentModuleData.dimensi_profil_lulusan.join(', ') : 'Tidak dipilih';
+            const saranaText = currentModuleData.sarana_prasarana ? currentModuleData.sarana_prasarana.join(', ') : 'Tidak dipilih';
+            const sumberText = currentModuleData.sumber_belajar ? currentModuleData.sumber_belajar.join(', ') : 'Tidak dipilih';
+            const digitalText = currentModuleData.pemanfaatan_digital ? currentModuleData.pemanfaatan_digital.join(', ') : 'Tidak dipilih';
+            
+            // Parse time allocation for detailed lesson structure
+            const timeAllocation = currentModuleData.alokasi_waktu || '2 x 45 menit';
+            const learningModel = currentModuleData.model_pembelajaran || 'Discovery Learning';
+            
+            const moduleHTML = `
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-l-4 border-indigo-500">
+                        <h3 class="text-lg font-semibold text-indigo-900 mb-3">📋 Identitas Modul Ajar</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div><strong>Penyusun:</strong> ${currentModuleData.penyusun || 'Tidak diisi'}</div>
+                            <div><strong>Satuan Pendidikan:</strong> ${currentModuleData.satuan_pendidikan || 'Tidak diisi'}</div>
+                            <div><strong>Tahun Pelajaran:</strong> ${currentModuleData.tahun_pelajaran || 'Tidak diisi'}</div>
+                            <div><strong>Semester:</strong> ${currentModuleData.semester || 'Tidak diisi'}</div>
+                            <div><strong>Mata Pelajaran:</strong> ${currentModuleData.mata_pelajaran || 'Tidak diisi'}</div>
+                            <div><strong>Kelas/Fase:</strong> ${currentModuleData.kelas_fase || 'Tidak diisi'}</div>
+                            <div><strong>Topik:</strong> ${currentModuleData.topik_materi || 'Tidak diisi'}</div>
+                            <div><strong>Alokasi Waktu:</strong> ${currentModuleData.alokasi_waktu || 'Tidak diisi'}</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-teal-50 to-cyan-50 p-6 rounded-lg border-l-4 border-teal-500">
+                        <h3 class="text-lg font-semibold text-teal-900 mb-3">🎯 Capaian & Tujuan Pembelajaran</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <h4 class="font-medium text-teal-800 mb-2">Capaian Pembelajaran:</h4>
+                                <p class="text-teal-700 bg-white p-3 rounded">${currentModuleData.capaian_pembelajaran || 'Belum diisi'}</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-teal-800 mb-2">Tujuan Pembelajaran:</h4>
+                                <p class="text-teal-700 bg-white p-3 rounded">${currentModuleData.tujuan_pembelajaran || 'Belum diisi'}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                        <h3 class="text-lg font-semibold text-green-900 mb-3">🎯 Analisis Deep Learning ChatGPT-5</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-medium text-green-800 mb-2">8 Dimensi Profil Lulusan Terpilih:</h4>
+                                <p class="text-green-700 bg-white p-3 rounded">${dimensiText}</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-green-800 mb-2">Rekomendasi Pendekatan Pembelajaran:</h4>
+                                <p class="text-green-700 bg-white p-3 rounded">
+                                    Berdasarkan model pembelajaran <strong>${learningModel}</strong> dan topik <strong>${currentModuleData.topik_materi || 'yang ditetapkan'}</strong>, 
+                                    AI merekomendasikan pendekatan yang mengintegrasikan 8 dimensi profil lulusan melalui pembelajaran bermakna, 
+                                    suasana menggembirakan dengan teknologi digital, dan pendekatan holistik yang melibatkan seluruh aspek kepribadian siswa.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                        <h3 class="text-lg font-semibold text-yellow-900 mb-3">📚 Rancangan Kegiatan Pembelajaran (${timeAllocation})</h3>
+                        <div class="space-y-4">
+                            ${generateLessonStructure(learningModel, timeAllocation, dimensiText, digitalText)}
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500">
+                        <h3 class="text-lg font-semibold text-purple-900 mb-3">🔍 Asesmen dan Evaluasi</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <h4 class="font-medium text-purple-800">Asesmen Formatif:</h4>
+                                <p class="text-purple-700 bg-white p-3 rounded">
+                                    Observasi proses pembelajaran, kuis interaktif digital menggunakan ${digitalText}, peer feedback, dan self-reflection journal
+                                    untuk memantau perkembangan pemahaman siswa secara berkelanjutan.
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-purple-800">Asesmen Sumatif:</h4>
+                                <p class="text-purple-700 bg-white p-3 rounded">
+                                    Proyek berbasis masalah nyata, presentasi hasil karya, portofolio digital, dan tes komprehensif
+                                    yang mengukur pencapaian tujuan pembelajaran secara holistik dengan mengintegrasikan dimensi ${dimensiText}.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                        <h3 class="text-lg font-semibold text-red-900 mb-3">💡 Rekomendasi Pengembangan</h3>
+                        <ul class="list-disc list-inside text-red-700 bg-white p-3 rounded space-y-1">
+                            <li>Integrasikan lebih banyak teknologi AI dan digital sesuai perkembangan zaman</li>
+                            <li>Kembangkan partnership dengan komunitas dan industri untuk konteks pembelajaran yang lebih nyata</li>
+                            <li>Implementasikan sistem mentoring peer-to-peer untuk memperkuat dimensi kolaborasi</li>
+                            <li>Gunakan data analytics untuk personalisasi pembelajaran setiap siswa</li>
+                            <li>Ciptakan ruang refleksi yang lebih terstruktur untuk mengembangkan metakognisi</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-gray-500">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">📋 Sumber Daya Pembelajaran</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <h4 class="font-medium text-gray-800 mb-2">Sarana & Prasarana:</h4>
+                                <p class="text-gray-700 bg-white p-3 rounded">${saranaText}</p>
+                                ${currentModuleData.sarana_prasarana_lain ? `<p class="text-gray-600 bg-gray-100 p-2 rounded mt-2 text-xs">Tambahan: ${currentModuleData.sarana_prasarana_lain}</p>` : ''}
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-800 mb-2">Sumber Belajar:</h4>
+                                <p class="text-gray-700 bg-white p-3 rounded">${sumberText}</p>
+                                ${currentModuleData.sumber_belajar_lain ? `<p class="text-gray-600 bg-gray-100 p-2 rounded mt-2 text-xs">Tambahan: ${currentModuleData.sumber_belajar_lain}</p>` : ''}
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-800 mb-2">Platform Digital:</h4>
+                                <p class="text-gray-700 bg-white p-3 rounded">${digitalText}</p>
+                                ${currentModuleData.pemanfaatan_digital_lain ? `<p class="text-gray-600 bg-gray-100 p-2 rounded mt-2 text-xs">Tambahan: ${currentModuleData.pemanfaatan_digital_lain}</p>` : ''}
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="font-medium text-gray-800 mb-2">Lintas Bidang Disiplin Ilmu:</h4>
+                            <p class="text-gray-700 bg-white p-3 rounded">${currentModuleData.lintas_bidang || 'Tidak ada integrasi lintas bidang'}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('moduleContent').innerHTML = moduleHTML;
+        }
+
+        function generateLessonStructure(model, timeAllocation, dimensions, digitalTools) {
+            // Parse time allocation
+            const timeMatch = timeAllocation.match(/(\d+)\s*x\s*(\d+)/);
+            const sessions = timeMatch ? parseInt(timeMatch[1]) : 2;
+            const duration = timeMatch ? parseInt(timeMatch[2]) : 45;
+            const totalMinutes = sessions * duration;
+            
+            // Calculate time distribution
+            const openingTime = Math.round(totalMinutes * 0.15); // 15%
+            const coreTime = Math.round(totalMinutes * 0.70); // 70%
+            const closingTime = Math.round(totalMinutes * 0.15); // 15%
+            
+            let structure = '';
+            
+            // Generate structure based on learning model
+            switch(model) {
+                case 'Problem Based Learning (PBL)':
+                    structure = `
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">1. Kegiatan Pendahuluan (${openingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Orientasi masalah dan apersepsi kontekstual (5 menit)</li>
+                                <li>Menyampaikan tujuan pembelajaran dan skenario masalah (5 menit)</li>
+                                <li>Memotivasi siswa dengan kasus nyata terkait ${currentModuleData.topik_materi || 'topik'} (3 menit)</li>
+                                <li>Pembentukan kelompok heterogen 4-5 siswa (2 menit)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">2. Kegiatan Inti (${coreTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li><strong>Fase 1 - Orientasi Masalah (${Math.round(coreTime*0.2)} menit):</strong> Presentasi masalah autentik menggunakan ${digitalTools}</li>
+                                <li><strong>Fase 2 - Organisasi Belajar (${Math.round(coreTime*0.2)} menit):</strong> Identifikasi apa yang diketahui dan yang perlu dipelajari</li>
+                                <li><strong>Fase 3 - Investigasi (${Math.round(coreTime*0.4)} menit):</strong> Pengumpulan data dan eksperimen dengan dimensi ${dimensions}</li>
+                                <li><strong>Fase 4 - Pengembangan Solusi (${Math.round(coreTime*0.2)} menit):</strong> Analisis data dan formulasi solusi</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">3. Kegiatan Penutup (${closingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Presentasi solusi kelompok dan peer review (8 menit)</li>
+                                <li>Refleksi proses pemecahan masalah (4 menit)</li>
+                                <li>Evaluasi dan umpan balik (2 menit)</li>
+                                <li>Penugasan tindak lanjut (1 menit)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'Project Based Learning':
+                    structure = `
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">1. Kegiatan Pendahuluan (${openingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Pengenalan proyek dan driving question (5 menit)</li>
+                                <li>Eksplorasi pengetahuan awal siswa (5 menit)</li>
+                                <li>Pembentukan tim proyek (3 menit)</li>
+                                <li>Penjelasan timeline dan deliverables (2 menit)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">2. Kegiatan Inti (${coreTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li><strong>Perencanaan Proyek (${Math.round(coreTime*0.25)} menit):</strong> Brainstorming ide dan penyusunan rencana kerja</li>
+                                <li><strong>Penelitian & Eksplorasi (${Math.round(coreTime*0.35)} menit):</strong> Pengumpulan informasi menggunakan ${digitalTools}</li>
+                                <li><strong>Pengembangan Produk (${Math.round(coreTime*0.4)} menit):</strong> Implementasi dengan dimensi ${dimensions}</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">3. Kegiatan Penutup (${closingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Presentasi progress proyek (8 menit)</li>
+                                <li>Feedback dan saran perbaikan (4 menit)</li>
+                                <li>Refleksi pembelajaran (2 menit)</li>
+                                <li>Perencanaan tahap selanjutnya (1 menit)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'Discovery Learning':
+                    structure = `
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">1. Kegiatan Pendahuluan (${openingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Stimulasi dengan fenomena menarik (8 menit)</li>
+                                <li>Identifikasi masalah dari pengamatan (4 menit)</li>
+                                <li>Pembangkitan rasa ingin tahu (2 menit)</li>
+                                <li>Penyampaian tujuan discovery (1 menit)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">2. Kegiatan Inti (${coreTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li><strong>Stimulation (${Math.round(coreTime*0.15)} menit):</strong> Penyajian fenomena menggunakan ${digitalTools}</li>
+                                <li><strong>Problem Statement (${Math.round(coreTime*0.15)} menit):</strong> Identifikasi dan perumusan masalah</li>
+                                <li><strong>Data Collection (${Math.round(coreTime*0.35)} menit):</strong> Eksplorasi dan pengumpulan data dengan dimensi ${dimensions}</li>
+                                <li><strong>Data Processing (${Math.round(coreTime*0.2)} menit):</strong> Pengolahan dan analisis informasi</li>
+                                <li><strong>Verification (${Math.round(coreTime*0.15)} menit):</strong> Pembuktian dan validasi temuan</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">3. Kegiatan Penutup (${closingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Generalisasi dan penarikan kesimpulan (8 menit)</li>
+                                <li>Aplikasi konsep dalam konteks baru (4 menit)</li>
+                                <li>Refleksi proses discovery (2 menit)</li>
+                                <li>Evaluasi pemahaman (1 menit)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+
+                case 'Inquiry Learning':
+                    structure = `
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">1. Kegiatan Pendahuluan (${openingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Penyajian pertanyaan mendasar (5 menit)</li>
+                                <li>Aktivasi pengetahuan awal (5 menit)</li>
+                                <li>Pembentukan kelompok inquiry (3 menit)</li>
+                                <li>Orientasi proses inquiry (2 menit)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">2. Kegiatan Inti (${coreTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li><strong>Questioning (${Math.round(coreTime*0.2)} menit):</strong> Perumusan pertanyaan penelitian</li>
+                                <li><strong>Planning (${Math.round(coreTime*0.2)} menit):</strong> Penyusunan rencana investigasi</li>
+                                <li><strong>Investigating (${Math.round(coreTime*0.4)} menit):</strong> Pelaksanaan investigasi dengan ${digitalTools}</li>
+                                <li><strong>Creating (${Math.round(coreTime*0.2)} menit):</strong> Penyusunan temuan dan solusi</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">3. Kegiatan Penutup (${closingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Sharing hasil investigasi (8 menit)</li>
+                                <li>Diskusi dan evaluasi temuan (4 menit)</li>
+                                <li>Refleksi proses inquiry (2 menit)</li>
+                                <li>Perencanaan inquiry lanjutan (1 menit)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+
+                case 'Cooperative Learning':
+                    structure = `
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">1. Kegiatan Pendahuluan (${openingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Pembentukan kelompok heterogen (5 menit)</li>
+                                <li>Penjelasan tujuan dan aturan kerja sama (5 menit)</li>
+                                <li>Pembagian peran dalam kelompok (3 menit)</li>
+                                <li>Orientasi tugas kelompok (2 menit)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">2. Kegiatan Inti (${coreTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li><strong>Think (${Math.round(coreTime*0.25)} menit):</strong> Pemikiran individual tentang masalah</li>
+                                <li><strong>Pair (${Math.round(coreTime*0.35)} menit):</strong> Diskusi berpasangan menggunakan ${digitalTools}</li>
+                                <li><strong>Share (${Math.round(coreTime*0.4)} menit):</strong> Berbagi hasil dengan kelompok besar</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">3. Kegiatan Penutup (${closingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Presentasi hasil kelompok (8 menit)</li>
+                                <li>Evaluasi proses kerja sama (4 menit)</li>
+                                <li>Refleksi pembelajaran kolaboratif (2 menit)</li>
+                                <li>Apresiasi kerja tim (1 menit)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                    
+                default:
+                    structure = `
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">1. Kegiatan Pendahuluan (${openingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Apersepsi dan motivasi (5 menit)</li>
+                                <li>Penyampaian tujuan pembelajaran (5 menit)</li>
+                                <li>Pre-assessment pengetahuan awal (3 menit)</li>
+                                <li>Orientasi pembelajaran (2 menit)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">2. Kegiatan Inti (${coreTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Eksplorasi konsep dengan model ${model} (${Math.round(coreTime*0.4)} menit)</li>
+                                <li>Aktivitas pembelajaran menggunakan ${digitalTools} (${Math.round(coreTime*0.4)} menit)</li>
+                                <li>Elaborasi dan konfirmasi pemahaman (${Math.round(coreTime*0.2)} menit)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-yellow-800 mb-2">3. Kegiatan Penutup (${closingTime} menit)</h4>
+                            <ul class="list-disc list-inside text-yellow-700 bg-white p-3 rounded space-y-1">
+                                <li>Sintesis dan kesimpulan (8 menit)</li>
+                                <li>Evaluasi pembelajaran (4 menit)</li>
+                                <li>Refleksi dan umpan balik (2 menit)</li>
+                                <li>Tindak lanjut (1 menit)</li>
+                            </ul>
+                        </div>
+                    `;
+            }
+            
+            return structure;
+        }
+
+        document.getElementById('resetForm').addEventListener('click', function() {
+            document.getElementById('moduleForm').reset();
+            document.getElementById('resultsSection').classList.add('hidden');
+            currentModuleData = {};
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            generateWordDocument();
+        });
+
+        function generateWordDocument() {
+            const dimensiText = currentModuleData.dimensi_profil_lulusan ? currentModuleData.dimensi_profil_lulusan.join(', ') : 'Tidak dipilih';
+            const saranaText = currentModuleData.sarana_prasarana ? currentModuleData.sarana_prasarana.join(', ') : 'Tidak dipilih';
+            const sumberText = currentModuleData.sumber_belajar ? currentModuleData.sumber_belajar.join(', ') : 'Tidak dipilih';
+            const digitalText = currentModuleData.pemanfaatan_digital ? currentModuleData.pemanfaatan_digital.join(', ') : 'Tidak dipilih';
+            
+            // Parse time allocation for accurate calculation
+            const timeAllocation = currentModuleData.alokasi_waktu || '2 x 45 menit';
+            const timeMatch = timeAllocation.match(/(\d+)\s*x\s*(\d+)/);
+            const sessions = timeMatch ? parseInt(timeMatch[1]) : 2;
+            const duration = timeMatch ? parseInt(timeMatch[2]) : 45;
+            const totalMinutes = sessions * duration;
+            
+            // Calculate time distribution
+            const openingTime = Math.round(totalMinutes * 0.15); // 15%
+            const coreTime = Math.round(totalMinutes * 0.70); // 70%
+            const closingTime = Math.round(totalMinutes * 0.15); // 15%
+            
+            // Generate detailed lesson plan based on learning model
+            const detailedLessonPlan = generateDetailedLessonPlan(currentModuleData.model_pembelajaran, openingTime, coreTime, closingTime, dimensiText, digitalText);
+            
+            // Create structured DOCX content
+            const content = `MODUL AJAR BERBASIS DEEP LEARNING
+Generated by ChatGPT-5 AI Analysis
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+IDENTITAS MODUL AJAR
+═══════════════════════════════════════════════════════════════════════════════════
+
+Penyusun                : ${currentModuleData.penyusun || 'Tidak diisi'}
+Satuan Pendidikan       : ${currentModuleData.satuan_pendidikan || 'Tidak diisi'}
+Tahun Pelajaran         : ${currentModuleData.tahun_pelajaran || 'Tidak diisi'}
+Semester                : ${currentModuleData.semester || 'Tidak diisi'}
+Mata Pelajaran          : ${currentModuleData.mata_pelajaran || 'Tidak diisi'}
+Kelas/Fase              : ${currentModuleData.kelas_fase || 'Tidak diisi'}
+Topik/Elemen Materi     : ${currentModuleData.topik_materi || 'Tidak diisi'}
+Alokasi Waktu           : ${currentModuleData.alokasi_waktu || 'Tidak diisi'} (Total: ${totalMinutes} menit)
+Model Pembelajaran      : ${currentModuleData.model_pembelajaran || 'Tidak dipilih'}
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+8 DIMENSI PROFIL LULUSAN
+═══════════════════════════════════════════════════════════════════════════════════
+
+Dimensi yang Dikembangkan: ${dimensiText}
+
+1. Keimanan dan Ketakwaan    : Mengembangkan nilai-nilai spiritual dan moral
+2. Kewargaan                 : Membangun kesadaran sebagai warga negara yang baik
+3. Penalaran Kritis          : Mengasah kemampuan berpikir analitis dan logis
+4. Kreativitas               : Mendorong inovasi dan pemikiran out-of-the-box
+5. Kolaborasi                : Membangun kemampuan kerja sama tim
+6. Kemandirian               : Mengembangkan sikap mandiri dan bertanggung jawab
+7. Kesehatan                 : Memperhatikan kesehatan fisik dan mental
+8. Komunikasi                : Mengasah kemampuan komunikasi efektif
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+CAPAIAN DAN TUJUAN PEMBELAJARAN
+═══════════════════════════════════════════════════════════════════════════════════
+
+CAPAIAN PEMBELAJARAN:
+${currentModuleData.capaian_pembelajaran || 'Belum diisi'}
+
+TUJUAN PEMBELAJARAN:
+${currentModuleData.tujuan_pembelajaran || 'Belum diisi'}
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+RENCANA PELAKSANAAN PEMBELAJARAN
+═══════════════════════════════════════════════════════════════════════════════════
+
+DISTRIBUSI WAKTU:
+- Kegiatan Pendahuluan  : ${openingTime} menit (15%)
+- Kegiatan Inti         : ${coreTime} menit (70%)
+- Kegiatan Penutup      : ${closingTime} menit (15%)
+- Total Waktu           : ${totalMinutes} menit
+
+${detailedLessonPlan}
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+SUMBER DAYA PEMBELAJARAN
+═══════════════════════════════════════════════════════════════════════════════════
+
+SARANA DAN PRASARANA:
+${saranaText}
+${currentModuleData.sarana_prasarana_lain ? `Tambahan: ${currentModuleData.sarana_prasarana_lain}` : ''}
+
+SUMBER BELAJAR:
+${sumberText}
+${currentModuleData.sumber_belajar_lain ? `Tambahan: ${currentModuleData.sumber_belajar_lain}` : ''}
+
+PLATFORM DIGITAL:
+${digitalText}
+${currentModuleData.pemanfaatan_digital_lain ? `Tambahan: ${currentModuleData.pemanfaatan_digital_lain}` : ''}
+
+LINTAS BIDANG DISIPLIN ILMU:
+${currentModuleData.lintas_bidang || 'Tidak ada integrasi lintas bidang'}
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+ASESMEN DAN EVALUASI
+═══════════════════════════════════════════════════════════════════════════════════
+
+ASESMEN FORMATIF:
+• Observasi proses pembelajaran dan partisipasi siswa
+• Kuis interaktif digital menggunakan platform yang tersedia
+• Peer feedback dan diskusi kelompok
+• Self-reflection journal dan metacognitive thinking
+• Check-in berkala untuk memantau pemahaman
+
+ASESMEN SUMATIF:
+• Proyek berbasis masalah nyata sesuai konteks pembelajaran
+• Presentasi hasil karya dan temuan siswa
+• Portofolio digital yang menunjukkan perkembangan belajar
+• Tes komprehensif yang mengukur pencapaian tujuan pembelajaran
+• Evaluasi holistik yang mencakup aspek kognitif, afektif, dan psikomotorik
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+REKOMENDASI PENGEMBANGAN
+═══════════════════════════════════════════════════════════════════════════════════
+
+1. Integrasikan teknologi AI dan digital learning sesuai perkembangan zaman
+2. Kembangkan kemitraan dengan komunitas dan industri untuk konteks nyata
+3. Implementasikan sistem mentoring peer-to-peer
+4. Gunakan learning analytics untuk personalisasi pembelajaran
+5. Ciptakan ruang refleksi terstruktur untuk mengembangkan metakognisi
+6. Lakukan evaluasi berkala dan perbaikan berkelanjutan
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+Dokumen ini dibuat dengan Dashboard Pembuat Modul Ajar AI
+Berbasis Deep Learning dengan ChatGPT-5
+Tanggal: ${new Date().toLocaleDateString('id-ID')}
+═══════════════════════════════════════════════════════════════════════════════════`;
+
+            // Create a blob with the content
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            
+            // Create filename with current date
+            const now = new Date();
+            const filename = `Modul_Ajar_${currentModuleData.mata_pelajaran || 'Pembelajaran'}_${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2,'0')}-${now.getDate().toString().padStart(2,'0')}.docx`;
+            
+            // Download the file
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success message
+            const successMsg = document.createElement('div');
+            successMsg.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            successMsg.textContent = 'Dokumen DOCX berhasil diunduh!';
+            document.body.appendChild(successMsg);
+            
+            setTimeout(() => {
+                document.body.removeChild(successMsg);
+            }, 3000);
+        }
+
+        function generateDetailedLessonPlan(model, openingTime, coreTime, closingTime, dimensions, digitalTools) {
+            let plan = '';
+            
+            switch(model) {
+                case 'Problem Based Learning (PBL)':
+                    plan = `
+TABEL RENCANA PELAKSANAAN PEMBELAJARAN - PROBLEM BASED LEARNING (PBL)
+═══════════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 1: KEGIATAN PENDAHULUAN (${openingTime} menit)                                      │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Waktu │ Kegiatan Guru                    │ Kegiatan Siswa                       │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 5 min │ • Membuka pembelajaran           │ • Menyiapkan diri untuk belajar      │
+│       │ • Mengecek kehadiran             │ • Merespon salam dan absensi         │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 5 min │ • Apersepsi dengan kasus nyata   │ • Mengamati dan merespon             │
+│       │ • Memotivasi dengan masalah      │ • Mengaitkan dengan pengalaman       │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 5 min │ • Menyampaikan tujuan            │ • Memahami tujuan pembelajaran       │
+│       │ • Membentuk kelompok 4-5 orang  │ • Bergabung dalam kelompok           │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 2: KEGIATAN INTI (${coreTime} menit)                                              │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 1: ORIENTASI MASALAH (${Math.round(coreTime*0.2)} menit)                              │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ Waktu │ Kegiatan Guru                    │ Kegiatan Siswa                       │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.2)} min │ • Menyajikan masalah autentik    │ • Mengamati masalah yang disajikan  │
+│       │ • Menggunakan ${digitalTools}     │ • Mengidentifikasi masalah           │
+│       │ • Memfasilitasi diskusi awal     │ • Berdiskusi dalam kelompok          │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 2: ORGANISASI BELAJAR (${Math.round(coreTime*0.2)} menit)                             │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.2)} min │ • Membimbing identifikasi        │ • Mengidentifikasi apa yang sudah   │
+│       │ • Membantu merumuskan pertanyaan │   diketahui dan yang perlu dipelajari│
+│       │ • Mengembangkan dimensi ${dimensions} │ • Merumuskan pertanyaan penelitian  │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 3: INVESTIGASI INDIVIDUAL & KELOMPOK (${Math.round(coreTime*0.4)} menit)              │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.4)} min │ • Membimbing pengumpulan data    │ • Mengumpulkan informasi dari       │
+│       │ • Memfasilitasi eksperimen       │   berbagai sumber                    │
+│       │ • Monitoring progress kelompok   │ • Melakukan eksperimen/observasi     │
+│       │                                  │ • Menganalisis data                  │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 4: PENGEMBANGAN & PENYAJIAN HASIL (${Math.round(coreTime*0.2)} menit)                │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.2)} min │ • Membimbing penyusunan solusi   │ • Menyusun solusi berdasarkan data  │
+│       │ • Memfasilitasi presentasi       │ • Mempresentasikan hasil             │
+│       │ • Memberikan feedback            │ • Menerima masukan dari kelompok lain│
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 3: KEGIATAN PENUTUP (${closingTime} menit)                                        │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Waktu │ Kegiatan Guru                    │ Kegiatan Siswa                       │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 8 min │ • Memfasilitasi refleksi         │ • Merefleksikan proses pembelajaran  │
+│       │ • Mengevaluasi solusi            │ • Mengevaluasi solusi yang dihasilkan│
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 7 min │ • Memberikan penguatan           │ • Menyimpulkan pembelajaran          │
+│       │ • Menyampaikan tugas lanjutan    │ • Mencatat tugas untuk pertemuan     │
+│       │                                  │   selanjutnya                        │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘`;
+                    break;
+                    
+                case 'Project Based Learning':
+                    plan = `
+TABEL RENCANA PELAKSANAAN PEMBELAJARAN - PROJECT BASED LEARNING
+═══════════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 1: KEGIATAN PENDAHULUAN (${openingTime} menit)                                      │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Waktu │ Kegiatan Guru                    │ Kegiatan Siswa                       │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 5 min │ • Pembukaan dan motivasi         │ • Menyiapkan diri untuk belajar      │
+│       │ • Pengenalan driving question    │ • Memahami pertanyaan pemandu        │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 5 min │ • Eksplorasi pengetahuan awal    │ • Mengungkapkan pengetahuan awal     │
+│       │ • Pembentukan tim proyek         │ • Membentuk tim proyek               │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 5 min │ • Penjelasan timeline proyek     │ • Memahami tahapan dan deadline      │
+│       │ • Overview deliverables          │ • Mencatat target hasil proyek       │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 2: KEGIATAN INTI (${coreTime} menit)                                              │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 1: PERENCANAAN PROYEK (${Math.round(coreTime*0.25)} menit)                            │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.25)} min │ • Memfasilitasi brainstorming    │ • Brainstorming ide proyek           │
+│       │ • Membimbing penyusunan proposal │ • Menyusun rencana kerja tim         │
+│       │ • Menggunakan ${digitalTools}     │ • Membagi peran dan tanggung jawab   │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 2: PENELITIAN & EKSPLORASI (${Math.round(coreTime*0.35)} menit)                      │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.35)} min │ • Membimbing riset informasi     │ • Mengumpulkan informasi dari        │
+│       │ • Memfasilitasi wawancara        │   berbagai sumber                    │
+│       │ • Mengembangkan dimensi ${dimensions} │ • Melakukan survei/wawancara         │
+│       │                                  │ • Menganalisis data yang terkumpul   │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 3: PENGEMBANGAN PRODUK (${Math.round(coreTime*0.4)} menit)                            │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.4)} min │ • Monitoring progress tim        │ • Mengembangkan produk/solusi        │
+│       │ • Memberikan konsultasi          │ • Melakukan uji coba dan revisi      │
+│       │ • Memfasilitasi kolaborasi       │ • Menyiapkan presentasi final        │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 3: KEGIATAN PENUTUP (${closingTime} menit)                                        │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Waktu │ Kegiatan Guru                    │ Kegiatan Siswa                       │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 8 min │ • Memfasilitasi presentasi       │ • Mempresentasikan progress proyek   │
+│       │ • Memberikan feedback konstruktif│ • Menerima masukan untuk perbaikan   │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 7 min │ • Refleksi proses pembelajaran   │ • Merefleksikan pembelajaran         │
+│       │ • Perencanaan tahap selanjutnya  │ • Merencanakan langkah berikutnya    │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘`;
+                    break;
+                    
+                case 'Discovery Learning':
+                    plan = `
+TABEL RENCANA PELAKSANAAN PEMBELAJARAN - DISCOVERY LEARNING
+═══════════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 1: KEGIATAN PENDAHULUAN (${openingTime} menit)                                      │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Waktu │ Kegiatan Guru                    │ Kegiatan Siswa                       │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 8 min │ • Stimulasi dengan fenomena      │ • Mengamati fenomena yang disajikan  │
+│       │ • Pembangkitan rasa ingin tahu   │ • Mengembangkan rasa ingin tahu      │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 7 min │ • Identifikasi masalah awal      │ • Mengidentifikasi hal yang menarik  │
+│       │ • Penyampaian tujuan discovery   │ • Memahami tujuan pembelajaran       │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 2: KEGIATAN INTI (${coreTime} menit)                                              │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 1: STIMULATION (${Math.round(coreTime*0.15)} menit)                               │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.15)} min │ • Menyajikan fenomena menarik    │ • Mengamati dengan seksama           │
+│       │ • Menggunakan ${digitalTools}     │ • Mengajukan pertanyaan awal         │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 2: PROBLEM STATEMENT (${Math.round(coreTime*0.15)} menit)                         │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.15)} min │ • Membimbing identifikasi masalah│ • Mengidentifikasi masalah           │
+│       │ • Memfasilitasi perumusan        │ • Merumuskan masalah penelitian      │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 3: DATA COLLECTION (${Math.round(coreTime*0.35)} menit)                           │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.35)} min │ • Membimbing eksplorasi          │ • Mengumpulkan data dan informasi    │
+│       │ • Memfasilitasi eksperimen       │ • Melakukan eksperimen               │
+│       │ • Mengembangkan dimensi ${dimensions} │ • Mengeksplorasi berbagai sumber     │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 4: DATA PROCESSING (${Math.round(coreTime*0.2)} menit)                            │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.2)} min │ • Membimbing analisis data       │ • Mengolah dan menganalisis data     │
+│       │ • Memfasilitasi diskusi          │ • Berdiskusi dalam kelompok          │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 5: VERIFICATION (${Math.round(coreTime*0.15)} menit)                              │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.15)} min │ • Membimbing pembuktian          │ • Membuktikan hipotesis              │
+│       │ • Memfasilitasi validasi         │ • Memvalidasi temuan                 │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 3: KEGIATAN PENUTUP (${closingTime} menit)                                        │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Waktu │ Kegiatan Guru                    │ Kegiatan Siswa                       │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 8 min │ • Memfasilitasi generalisasi     │ • Menarik kesimpulan umum            │
+│       │ • Membimbing penarikan kesimpulan│ • Mengaplikasikan dalam konteks baru │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 7 min │ • Refleksi proses discovery      │ • Merefleksikan proses penemuan      │
+│       │ • Evaluasi pemahaman             │ • Mengevaluasi pemahaman konsep      │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘`;
+                    break;
+                    
+                default:
+                    plan = `
+TABEL RENCANA PELAKSANAAN PEMBELAJARAN - ${model.toUpperCase()}
+═══════════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 1: KEGIATAN PENDAHULUAN (${openingTime} menit)                                      │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Waktu │ Kegiatan Guru                    │ Kegiatan Siswa                       │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 5 min │ • Pembukaan dan apersepsi        │ • Menyiapkan diri untuk belajar      │
+│       │ • Motivasi pembelajaran          │ • Merespon dengan antusias           │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 5 min │ • Penyampaian tujuan             │ • Memahami tujuan pembelajaran       │
+│       │ • Pre-assessment                 │ • Mengungkapkan pengetahuan awal     │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 5 min │ • Orientasi model pembelajaran   │ • Memahami langkah pembelajaran      │
+│       │ • Pembentukan kelompok           │ • Bergabung dalam kelompok           │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 2: KEGIATAN INTI (${coreTime} menit)                                              │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 1: EKSPLORASI (${Math.round(coreTime*0.4)} menit)                                 │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.4)} min │ • Memfasilitasi eksplorasi       │ • Mengeksplorasi konsep              │
+│       │ • Menggunakan ${digitalTools}     │ • Melakukan aktivitas pembelajaran   │
+│       │ • Mengembangkan dimensi ${dimensions} │ • Berinteraksi dengan materi         │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 2: ELABORASI (${Math.round(coreTime*0.4)} menit)                                  │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.4)} min │ • Membimbing pendalaman materi   │ • Mendalami konsep yang dipelajari   │
+│       │ • Memfasilitasi diskusi          │ • Berdiskusi dan berkolaborasi       │
+│       │ • Memberikan scaffolding         │ • Mengaplikasikan pemahaman          │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ TAHAP 3: KONFIRMASI (${Math.round(coreTime*0.2)} menit)                                 │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│${Math.round(coreTime*0.2)} min │ • Mengkonfirmasi pemahaman       │ • Mengkonfirmasi pemahaman konsep    │
+│       │ • Memberikan penguatan           │ • Menerima penguatan dan klarifikasi │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ FASE 3: KEGIATAN PENUTUP (${closingTime} menit)                                        │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Waktu │ Kegiatan Guru                    │ Kegiatan Siswa                       │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 8 min │ • Sintesis dan kesimpulan        │ • Menyimpulkan pembelajaran          │
+│       │ • Evaluasi pembelajaran          │ • Mengevaluasi pemahaman             │
+├───────┼──────────────────────────────────┼──────────────────────────────────────┤
+│ 7 min │ • Refleksi dan umpan balik       │ • Merefleksikan proses belajar       │
+│       │ • Tindak lanjut                  │ • Merencanakan aplikasi lanjutan     │
+└───────┴──────────────────────────────────┴──────────────────────────────────────┘`;
+            }
+            
+            return plan;
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'992ed6ee0353fdf0',t:'MTc2MTE5NzM5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
